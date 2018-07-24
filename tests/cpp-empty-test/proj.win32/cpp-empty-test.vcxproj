@@ -1,0 +1,1315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B8BF9E81-35FD-4582-BA1C-B85FA365BABB}</ProjectGuid>
+    <RootNamespace>cpp-empty-test-win32</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '10.0'">v100</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0'">v110</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v110_xp</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v120_xp</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '10.0'">v100</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0'">v110</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v110_xp</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v120_xp</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\cocos\2d\cocos2dx.props" />
+    <Import Project="..\..\..\cocos\2d\cocos2d_headers.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="..\..\..\cocos\2d\cocos2dx.props" />
+    <Import Project="..\..\..\cocos\2d\cocos2d_headers.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration).win32\cpp-empty-test\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration).win32\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration).win32\cpp-empty-test\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration).win32\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LibraryPath>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\Classes;..\Classes\core\utils;..\Classes\core\environ;..\Classes\core\external\onig;..\Classes\core\tjs2;..\Classes\core\visual;..\Classes\core\msg;..\Classes\core\external\zlib;..\Classes\core\msg\win32;..\Classes\core\base\win32;..\Classes\core\visual\win32;..\Classes\core\sound;..\Classes\core\sound\win32;..\Classes\core\utils\win32;..\Classes\core\environ\win32;..\Classes\core\extension;..\Classes\core\base;..\Classes\core\external\pthreads;..\Classes\core;..\Classes\core\external\jxrlib\jxrgluelib;..\..\..\external\png\include\win32;..\Classes\core\external\jxrlib\image\decode;..\Classes\core\external;..\..\..;..\..\..\extensions;..\Classes\plugins;..\Classes\core\external\freetype2;..\Classes\core\external\libjpeg-turbo;..\Classes\core\external\libjpeg-turbo\vcproj;..\Classes\core\external\opencv2\include;..\..\..\external;..\..\..\external\zlib\include;E:\boost_1_55_0;D:\boost_1_55_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;COCOS2D_DEBUG=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;TJS_TEXT_OUT_CRLF;__STDC_CONSTANT_MACROS;USE_UNICODE_FSTRING;_7ZIP_ST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)$(Configuration).win32;..\Classes\core\external\lib;..\Classes\core\external\onig\lib;..\Classes\core\external\pthreads;..\Classes\core\external\libjpeg-turbo\vcproj\lib\Win32;..\Classes\core\external\opencv2\lib;D:\boost_1_55_0\lib32-msvc-10.0;E:\boost_1_55_0\lib32-msvc-10.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>glew32.lib;onig_s_d.lib;pthreadVC2d.lib;turbojpeg-static_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>
+xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
+xcopy "$(OutDir)..\*.dll" "$(OutDir)" /D /Y</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Copy files</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\Classes;..\Classes\core\utils;..\Classes\core\environ;..\Classes\core\external\onig;..\Classes\core\tjs2;..\Classes\core\visual;..\Classes\core\msg;..\Classes\core\external\zlib;..\Classes\core\msg\win32;..\Classes\core\base\win32;..\Classes\core\visual\win32;..\Classes\core\sound;..\Classes\core\sound\win32;..\Classes\core\utils\win32;..\Classes\core\environ\win32;..\Classes\core\extension;..\Classes\core\base;..\Classes\core\external\pthreads;..\Classes\core;..\Classes\core\external\jxrlib\jxrgluelib;..\Classes\core\external\lpng;..\Classes\core\external\jxrlib\image\decode;..\Classes\core\external;..\Classes\core\external\cocos;..\Classes\core\external\cocos\extensions;..\Classes\plugins;..\Classes\core\external\freetype2;..\Classes\core\external\libjpeg-turbo;..\Classes\core\external\libjpeg-turbo\vcproj;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;TJS_TEXT_OUT_CRLF;__STDC_CONSTANT_MACROS;USE_UNICODE_FSTRING;_7ZIP_ST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)$(Configuration).win32;..\Classes\core\external\lib;..\Classes\core\external\onig\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>
+xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
+xcopy "$(OutDir)..\*.dll" "$(OutDir)" /D /Y</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Copy files</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Classes\AppDelegate_ori.cpp" />
+    <ClCompile Include="..\Classes\core\base\7zArchive.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\base\BinaryStream.cpp" />
+    <ClCompile Include="..\Classes\core\base\CharacterSet.cpp" />
+    <ClCompile Include="..\Classes\core\base\EventIntf.cpp" />
+    <ClCompile Include="..\Classes\core\base\PluginIntf.cpp" />
+    <ClCompile Include="..\Classes\core\base\ScriptMgnIntf.cpp" />
+    <ClCompile Include="..\Classes\core\base\StorageIntf.cpp" />
+    <ClCompile Include="..\Classes\core\base\SysInitIntf.cpp" />
+    <ClCompile Include="..\Classes\core\base\SystemIntf.cpp" />
+    <ClCompile Include="..\Classes\core\base\TARArchive.cpp" />
+    <ClCompile Include="..\Classes\core\base\TextStream.cpp" />
+    <ClCompile Include="..\Classes\core\base\UtilStreams.cpp" />
+    <ClCompile Include="..\Classes\core\base\win32\EventImpl.cpp" />
+    <ClCompile Include="..\Classes\core\base\win32\FileSelector.cpp" />
+    <ClCompile Include="..\Classes\core\base\win32\FuncStubs.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\base\win32\NativeEventQueue.cpp" />
+    <ClCompile Include="..\Classes\core\base\win32\PluginImpl.cpp" />
+    <ClCompile Include="..\Classes\core\base\win32\ScriptMgnImpl.cpp" />
+    <ClCompile Include="..\Classes\core\base\win32\StorageImpl.cpp" />
+    <ClCompile Include="..\Classes\core\base\win32\SusieArchive.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\base\win32\SysInitImpl.cpp" />
+    <ClCompile Include="..\Classes\core\base\win32\SystemImpl.cpp" />
+    <ClCompile Include="..\Classes\core\base\XP3Archive.cpp" />
+    <ClCompile Include="..\Classes\core\base\ZIPArchive.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\android\AndroidUtils.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\Application.cpp" />
+    <ClCompile Include="..\Classes\core\environ\cocos2d\AppDelegate.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\cocos2d\CustomFileUtils.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\cocos2d\MainScene.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\cocos2d\YUVSprite.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\ConfigManager\GlobalConfigManager.cpp" />
+    <ClCompile Include="..\Classes\core\environ\ConfigManager\IndividualConfigManager.cpp" />
+    <ClCompile Include="..\Classes\core\environ\ConfigManager\LocaleConfigManager.cpp" />
+    <ClCompile Include="..\Classes\core\environ\DetectCPU.cpp" />
+    <ClCompile Include="..\Classes\core\environ\DumpSend.cpp" />
+    <ClCompile Include="..\Classes\core\environ\linux\Platform.cpp" />
+    <ClCompile Include="..\Classes\core\environ\ui\BaseForm.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\ui\ConsoleWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\ui\DebugViewLayerForm.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\ui\extension\ActionExtension.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\ui\extension\UIExtension.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\ui\FileSelectorForm.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\ui\GameMainMenu.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\ui\GlobalPreferenceForm.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\ui\IndividualPreferenceForm.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\ui\InGameMenuForm.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\ui\MainFileSelectorForm.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\ui\MessageBox.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\ui\PreferenceForm.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\ui\SeletListForm.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\ui\SimpleMediaFilePlayer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\ui\TipsHelpForm.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\ui\XP3RepackForm.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\win32\CompatibleNativeFuncs.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\win32\ConfigFormUnit.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\win32\DetectCPU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\win32\EmergencyExit.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\win32\HintWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\win32\MainFormUnit.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\win32\MouseCursor.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\win32\my_HintWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\win32\Platform.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\win32\SystemControl.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\win32\TouchPoint.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\win32\TVPWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\win32\VersionFormUnit.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\win32\WindowFormUnit.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\win32\WindowsUtil.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\environ\XP3ArchiveRepack.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\extension\Extension.cpp" />
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\AEChannelInfo.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\AEFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\AEStreamInfo.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\AEUtil.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\AudioCodecFFmpeg.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\AudioCodecPassthrough.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\AudioDevice.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\BaseRenderer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\BitstreamStats.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\Clock.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\CodecUtils.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\Demux.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\DemuxFFmpeg.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\DemuxPacket.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\FactoryCodec.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\InputStream.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\krffmpeg.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\KRMovieLayer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\KRMoviePlayer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\Message.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\MessageQueue.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\ProcessInfo.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\RenderFlags.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\StreamInfo.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\Thread.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\Timer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\TimeUtils.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\TVPMediaDemux.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\VideoCodec.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\VideoCodecFFmpeg.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\VideoPlayer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\VideoPlayerAudio.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\VideoPlayerVideo.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\VideoReferenceClock.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\ffmpeg\VideoRenderer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\movie\krmovie.cpp" />
+    <ClCompile Include="..\Classes\core\msg\MsgIntf.cpp" />
+    <ClCompile Include="..\Classes\core\msg\win32\MsgImpl.cpp" />
+    <ClCompile Include="..\Classes\core\msg\win32\MsgLoad.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\msg\win32\OptionsDesc.cpp" />
+    <ClCompile Include="..\Classes\core\msg\win32\ReadOptionDesc.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\sound\CDDAIntf.cpp" />
+    <ClCompile Include="..\Classes\core\sound\FFWaveDecoder.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\sound\MathAlgorithms.cpp" />
+    <ClCompile Include="..\Classes\core\sound\MIDIIntf.cpp" />
+    <ClCompile Include="..\Classes\core\sound\PhaseVocoderDSP.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\sound\PhaseVocoderFilter.cpp" />
+    <ClCompile Include="..\Classes\core\sound\SoundBufferBaseIntf.cpp" />
+    <ClCompile Include="..\Classes\core\sound\VorbisWaveDecoder.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\sound\WaveFormatConverter.cpp" />
+    <ClCompile Include="..\Classes\core\sound\WaveFormatConverter_SSE.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\sound\WaveIntf.cpp" />
+    <ClCompile Include="..\Classes\core\sound\WaveLoopManager.cpp" />
+    <ClCompile Include="..\Classes\core\sound\WaveSegmentQueue.cpp" />
+    <ClCompile Include="..\Classes\core\sound\win32\CDDAImpl.cpp" />
+    <ClCompile Include="..\Classes\core\sound\win32\MIDIImpl.cpp" />
+    <ClCompile Include="..\Classes\core\sound\win32\SoundBufferBaseImpl.cpp" />
+    <ClCompile Include="..\Classes\core\sound\win32\tvpsnd.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\sound\win32\tvpsnd.cpp" />
+    <ClCompile Include="..\Classes\core\sound\win32\WaveImpl.cpp" />
+    <ClCompile Include="..\Classes\core\sound\win32\WaveMixer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\tjs2\tjs.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjs.tab.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsArray.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsBinarySerializer.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsByteCodeLoader.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsCompileControl.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsConfig.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsConstArrayData.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsDate.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsdate.tab.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsDateParser.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsDateWordMap.cc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\tjs2\tjsDebug.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsDictionary.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsDisassemble.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsError.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsException.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsGlobalStringMap.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsInterCodeExec.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsInterCodeGen.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsInterface.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsLex.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsMath.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsMessage.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsMT19937ar-cok.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsNamespace.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsNative.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsObject.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsObjectExtendable.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsOctPack.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjspp.tab.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsRandomGenerator.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsRegExp.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsScriptBlock.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsScriptCache.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsString.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsUtils.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsVariant.cpp" />
+    <ClCompile Include="..\Classes\core\tjs2\tjsVariantString.cpp" />
+    <ClCompile Include="..\Classes\core\utils\ClipboardIntf.cpp" />
+    <ClCompile Include="..\Classes\core\utils\DebugIntf.cpp" />
+    <ClCompile Include="..\Classes\core\utils\encoding\gbk2unicode.c" />
+    <ClCompile Include="..\Classes\core\utils\encoding\jis2unicode.c" />
+    <ClCompile Include="..\Classes\core\utils\KAGParser.cpp" />
+    <ClCompile Include="..\Classes\core\utils\MathAlgorithms_Default.cpp" />
+    <ClCompile Include="..\Classes\core\utils\md5.c" />
+    <ClCompile Include="..\Classes\core\utils\minizip\ioapi.cpp" />
+    <ClCompile Include="..\Classes\core\utils\minizip\unzip.c" />
+    <ClCompile Include="..\Classes\core\utils\minizip\zip.c" />
+    <ClCompile Include="..\Classes\core\utils\MiscUtility.cpp" />
+    <ClCompile Include="..\Classes\core\utils\PadIntf.cpp" />
+    <ClCompile Include="..\Classes\core\utils\Random.cpp" />
+    <ClCompile Include="..\Classes\core\utils\RealFFT_Default.cpp" />
+    <ClCompile Include="..\Classes\core\utils\ThreadIntf.cpp" />
+    <ClCompile Include="..\Classes\core\utils\TickCount.cpp" />
+    <ClCompile Include="..\Classes\core\utils\TimerIntf.cpp" />
+    <ClCompile Include="..\Classes\core\utils\VelocityTracker.cpp" />
+    <ClCompile Include="..\Classes\core\utils\win32\ClipboardImpl.cpp" />
+    <ClCompile Include="..\Classes\core\utils\win32\DebugImpl.cpp" />
+    <ClCompile Include="..\Classes\core\utils\win32\PadImpl.cpp" />
+    <ClCompile Include="..\Classes\core\utils\win32\ThreadImpl.cpp" />
+    <ClCompile Include="..\Classes\core\utils\win32\TimerImpl.cpp" />
+    <ClCompile Include="..\Classes\core\utils\win32\TVPTimer.cpp" />
+    <ClCompile Include="..\Classes\core\visual\argb.cpp" />
+    <ClCompile Include="..\Classes\core\visual\ARM\tvpgl_arm.cpp" />
+    <ClCompile Include="..\Classes\core\visual\BitmapIntf.cpp" />
+    <ClCompile Include="..\Classes\core\visual\BitmapLayerTreeOwner.cpp" />
+    <ClCompile Include="..\Classes\core\visual\CharacterData.cpp" />
+    <ClCompile Include="..\Classes\core\visual\ComplexRect.cpp" />
+    <ClCompile Include="..\Classes\core\visual\FontImpl.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\visual\FontSystem.cpp" />
+    <ClCompile Include="..\Classes\core\visual\FreeType.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\visual\FreeTypeFontRasterizer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\visual\gl\blend_function.cpp" />
+    <ClCompile Include="..\Classes\core\visual\gl\ResampleImage.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\visual\gl\WeightFunctor.cpp" />
+    <ClCompile Include="..\Classes\core\visual\GraphicsLoaderIntf.cpp" />
+    <ClCompile Include="..\Classes\core\visual\GraphicsLoadThread.cpp" />
+    <ClCompile Include="..\Classes\core\visual\ImageFunction.cpp" />
+    <ClCompile Include="..\Classes\core\visual\LayerBitmapIntf.cpp" />
+    <ClCompile Include="..\Classes\core\visual\LayerIntf.cpp" />
+    <ClCompile Include="..\Classes\core\visual\LayerManager.cpp" />
+    <ClCompile Include="..\Classes\core\visual\LayerTreeOwnerImpl.cpp" />
+    <ClCompile Include="..\Classes\core\visual\LoadBPG.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\visual\LoadJPEG.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\visual\LoadJXR.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\visual\LoadPNG.cpp" />
+    <ClCompile Include="..\Classes\core\visual\LoadPVRv3.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\visual\LoadTLG.cpp" />
+    <ClCompile Include="..\Classes\core\visual\LoadWEBP.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\visual\MenuItemIntf.cpp" />
+    <ClCompile Include="..\Classes\core\visual\ogl\astcrt.cpp" />
+    <ClCompile Include="..\Classes\core\visual\ogl\etcpak.cpp" />
+    <ClCompile Include="..\Classes\core\visual\ogl\imagepacker.cpp" />
+    <ClCompile Include="..\Classes\core\visual\ogl\pvrtc.cpp" />
+    <ClCompile Include="..\Classes\core\visual\ogl\RenderManager_ogl.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\visual\PrerenderedFont.cpp" />
+    <ClCompile Include="..\Classes\core\visual\RectItf.cpp" />
+    <ClCompile Include="..\Classes\core\visual\RenderManager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\visual\SaveTLG5.cpp" />
+    <ClCompile Include="..\Classes\core\visual\SaveTLG6.cpp" />
+    <ClCompile Include="..\Classes\core\visual\TransIntf.cpp" />
+    <ClCompile Include="..\Classes\core\visual\tvpgl.cpp" />
+    <ClCompile Include="..\Classes\core\visual\VideoOvlIntf.cpp" />
+    <ClCompile Include="..\Classes\core\visual\win32\BasicDrawDevice.cpp" />
+    <ClCompile Include="..\Classes\core\visual\win32\BitmapBitsAlloc.cpp" />
+    <ClCompile Include="..\Classes\core\visual\win32\BitmapInfomation.cpp" />
+    <ClCompile Include="..\Classes\core\visual\win32\DInputMgn.cpp" />
+    <ClCompile Include="..\Classes\core\visual\win32\DrawDevice.cpp" />
+    <ClCompile Include="..\Classes\core\visual\win32\GDIFontRasterizer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\visual\win32\GraphicsLoaderImpl.cpp" />
+    <ClCompile Include="..\Classes\core\visual\win32\LayerBitmapImpl.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\visual\win32\LayerImpl.cpp" />
+    <ClCompile Include="..\Classes\core\visual\win32\MenuItemImpl.cpp" />
+    <ClCompile Include="..\Classes\core\visual\win32\NativeFreeTypeFace.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\visual\win32\PassThroughDrawDevice.cpp" />
+    <ClCompile Include="..\Classes\core\visual\win32\TVPScreen.cpp" />
+    <ClCompile Include="..\Classes\core\visual\win32\TVPSysFont.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\visual\win32\VideoOvlImpl.cpp" />
+    <ClCompile Include="..\Classes\core\visual\win32\VSyncTimingThread.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\visual\win32\WindowImpl.cpp" />
+    <ClCompile Include="..\Classes\core\visual\WindowIntf.cpp" />
+    <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\plugins\addFont.cpp" />
+    <ClCompile Include="..\Classes\plugins\csvParser.cpp" />
+    <ClCompile Include="..\Classes\plugins\dirlist.cpp" />
+    <ClCompile Include="..\Classes\plugins\fftgraph.cpp" />
+    <ClCompile Include="..\Classes\plugins\getabout.cpp" />
+    <ClCompile Include="..\Classes\plugins\getSample.cpp" />
+    <ClCompile Include="..\Classes\plugins\InternalPlugins.cpp" />
+    <ClCompile Include="..\Classes\plugins\LayerExBase.cpp" />
+    <ClCompile Include="..\Classes\plugins\layerExMovie.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\plugins\layerExPerspective.cpp" />
+    <ClCompile Include="..\Classes\plugins\ncbind\ncbind.cpp" />
+    <ClCompile Include="..\Classes\plugins\saveStruct.cpp" />
+    <ClCompile Include="..\Classes\plugins\varfile.cpp" />
+    <ClCompile Include="..\Classes\plugins\win32dialog.cpp" />
+    <ClCompile Include="..\Classes\plugins\wutcwf.cpp" />
+    <ClCompile Include="..\Classes\plugins\xp3filter.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\AppMacros.h" />
+    <ClInclude Include="..\Classes\core\base\BinaryStream.h" />
+    <ClInclude Include="..\Classes\core\base\CharacterSet.h" />
+    <ClInclude Include="..\Classes\core\base\common.h" />
+    <ClInclude Include="..\Classes\core\base\EventIntf.h" />
+    <ClInclude Include="..\Classes\core\base\PluginIntf.h" />
+    <ClInclude Include="..\Classes\core\base\ScriptMgnIntf.h" />
+    <ClInclude Include="..\Classes\core\base\StorageIntf.h" />
+    <ClInclude Include="..\Classes\core\base\SysInitIntf.h" />
+    <ClInclude Include="..\Classes\core\base\SystemIntf.h" />
+    <ClInclude Include="..\Classes\core\base\tar.h" />
+    <ClInclude Include="..\Classes\core\base\TextStream.h" />
+    <ClInclude Include="..\Classes\core\base\UserEvent.h" />
+    <ClInclude Include="..\Classes\core\base\UtilStreams.h" />
+    <ClInclude Include="..\Classes\core\base\win32\EventImpl.h" />
+    <ClInclude Include="..\Classes\core\base\win32\FileSelector.h" />
+    <ClInclude Include="..\Classes\core\base\win32\FuncStubs.h" />
+    <ClInclude Include="..\Classes\core\base\win32\NativeEventQueue.h" />
+    <ClInclude Include="..\Classes\core\base\win32\PluginImpl.h" />
+    <ClInclude Include="..\Classes\core\base\win32\ScriptMgnImpl.h" />
+    <ClInclude Include="..\Classes\core\base\win32\StorageImpl.h" />
+    <ClInclude Include="..\Classes\core\base\win32\SusieArchive.h" />
+    <ClInclude Include="..\Classes\core\base\win32\SysInitImpl.h" />
+    <ClInclude Include="..\Classes\core\base\win32\SystemImpl.h" />
+    <ClInclude Include="..\Classes\core\base\win32\win32io.h" />
+    <ClInclude Include="..\Classes\core\base\XP3Archive.h" />
+    <ClInclude Include="..\Classes\core\environ\android\AndroidUtils.h" />
+    <ClInclude Include="..\Classes\core\environ\Application.h" />
+    <ClInclude Include="..\Classes\core\environ\cocos2d\AppDelegate.h" />
+    <ClInclude Include="..\Classes\core\environ\cocos2d\CCKeyCodeConv.h" />
+    <ClInclude Include="..\Classes\core\environ\cocos2d\CustomFileUtils.h" />
+    <ClInclude Include="..\Classes\core\environ\cocos2d\MainScene.h" />
+    <ClInclude Include="..\Classes\core\environ\cocos2d\YUVSprite.h" />
+    <ClInclude Include="..\Classes\core\environ\combase.h" />
+    <ClInclude Include="..\Classes\core\environ\ConfigManager\GlobalConfigManager.h" />
+    <ClInclude Include="..\Classes\core\environ\ConfigManager\IndividualConfigManager.h" />
+    <ClInclude Include="..\Classes\core\environ\ConfigManager\LocaleConfigManager.h" />
+    <ClInclude Include="..\Classes\core\environ\cpu_types.h" />
+    <ClInclude Include="..\Classes\core\environ\DetectCPU.h" />
+    <ClInclude Include="..\Classes\core\environ\Platform.h" />
+    <ClInclude Include="..\Classes\core\environ\typedefine.h" />
+    <ClInclude Include="..\Classes\core\environ\ui\BaseForm.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\ui\ConsoleWindow.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\ui\DebugViewLayerForm.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\ui\extension\ActionExtension.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\ui\extension\UIExtension.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\ui\FileSelectorForm.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\ui\GameMainMenu.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\ui\GlobalPreferenceForm.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\ui\IndividualPreferenceForm.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\ui\InGameMenuForm.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\ui\MainFileSelectorForm.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\ui\MessageBox.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\ui\PreferenceConfig.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\ui\PreferenceForm.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\ui\SeletListForm.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\ui\SimpleMediaFilePlayer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\ui\TipsHelpForm.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\ui\XP3RepackForm.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\vkdefine.h" />
+    <ClInclude Include="..\Classes\core\environ\win32type.h" />
+    <ClInclude Include="..\Classes\core\environ\win32\ApplicationSpecialPath.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\win32\CompatibleNativeFuncs.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\win32\config.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\win32\ConfigFormUnit.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\win32\DetectCPU.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\win32\EmergencyExit.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\win32\HintWindow.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\win32\ImeControl.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\win32\MainFormUnit.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\win32\MouseCursor.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\win32\SystemControl.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\win32\TouchPoint.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\win32\TVPWindow.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\win32\VersionFormUnit.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\win32\WindowFormUnit.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\win32\WindowsUtil.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\environ\XP3ArchiveRepack.h" />
+    <ClInclude Include="..\Classes\core\extension\Extension.h" />
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\AE.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\AEAudioFormat.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\AEChannelData.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\AEChannelInfo.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\AEFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\AEStream.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\AEStreamData.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\AEStreamInfo.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\AEUtil.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\AudioCodec.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\AudioCodecFFmpeg.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\AudioCodecPassthrough.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\AudioDevice.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\BaseRenderer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\BitstreamStats.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\Clock.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\Codecs.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\CodecUtils.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\config.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\Demux.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\DemuxFFmpeg.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\DemuxPacket.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\FactoryCodec.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\Geometry.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\IAudioCallback.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\InputStream.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\IVideoPlayer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\KRMovieDef.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\KRMovieLayer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\KRMoviePlayer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\MathUtils.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\Message.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\MessageQueue.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\OptionInfo.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\ProcessInfo.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\Ref.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\RenderFlags.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\RenderFormats.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\StreamInfo.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\Thread.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\Timer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\TimeUtils.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\TVPMediaDemux.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\VideoCodec.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\VideoCodecFFmpeg.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\VideoPlayer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\VideoPlayerAudio.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\VideoPlayerVideo.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\VideoReferenceClock.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\movie\ffmpeg\VideoRenderer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\msg\MsgIntf.h" />
+    <ClInclude Include="..\Classes\core\msg\MsgIntfInc.h" />
+    <ClInclude Include="..\Classes\core\msg\win32\MsgImpl.h" />
+    <ClInclude Include="..\Classes\core\msg\win32\OptionsDesc.h" />
+    <ClInclude Include="..\Classes\core\msg\win32\ReadOptionDesc.h" />
+    <ClInclude Include="..\Classes\core\sound\CDDAIntf.h" />
+    <ClInclude Include="..\Classes\core\sound\FFWaveDecoder.h" />
+    <ClInclude Include="..\Classes\core\sound\MathAlgorithms.h" />
+    <ClInclude Include="..\Classes\core\sound\MIDIIntf.h" />
+    <ClInclude Include="..\Classes\core\sound\PhaseVocoderDSP.h" />
+    <ClInclude Include="..\Classes\core\sound\PhaseVocoderFilter.h" />
+    <ClInclude Include="..\Classes\core\sound\RingBuffer.h" />
+    <ClInclude Include="..\Classes\core\sound\SoundBufferBaseIntf.h" />
+    <ClInclude Include="..\Classes\core\sound\VorbisWaveDecoder.h" />
+    <ClInclude Include="..\Classes\core\sound\WaveIntf.h" />
+    <ClInclude Include="..\Classes\core\sound\WaveLoopManager.h" />
+    <ClInclude Include="..\Classes\core\sound\WaveSegmentQueue.h" />
+    <ClInclude Include="..\Classes\core\sound\win32\CDDAImpl.h" />
+    <ClInclude Include="..\Classes\core\sound\win32\kmp_pi.h" />
+    <ClInclude Include="..\Classes\core\sound\win32\MIDIImpl.h" />
+    <ClInclude Include="..\Classes\core\sound\win32\oldwaveunpacker.h" />
+    <ClInclude Include="..\Classes\core\sound\win32\SoundBufferBaseImpl.h" />
+    <ClInclude Include="..\Classes\core\sound\win32\tvpsnd.h" />
+    <ClInclude Include="..\Classes\core\sound\win32\WaveImpl.h" />
+    <ClInclude Include="..\Classes\core\sound\win32\WaveMixer.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjs.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjs.tab.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjs.tab.hpp" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsArray.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsBinarySerializer.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsByteCodeLoader.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsCommHead.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsCompileControl.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsConfig.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsConstArrayData.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsDate.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsdate.tab.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsdate.tab.hpp" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsDateParser.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsDebug.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsDictionary.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsError.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsErrorDefs.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsErrorInc.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsError_jp.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsException.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsGlobalStringMap.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsHashSearch.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsInterCodeExec.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsInterCodeGen.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsInterface.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsLex.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsMath.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsMessage.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsMT19937ar-cok.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsNamespace.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsNative.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsObject.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsObjectExtendable.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsOctPack.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjspp.tab.hpp" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsRandomGenerator.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsRegExp.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsScriptBlock.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsScriptCache.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsString.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsTypes.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsUtils.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsVariant.h" />
+    <ClInclude Include="..\Classes\core\tjs2\tjsVariantString.h" />
+    <ClInclude Include="..\Classes\core\utils\ClipboardIntf.h" />
+    <ClInclude Include="..\Classes\core\utils\Debugger.h" />
+    <ClInclude Include="..\Classes\core\utils\DebugIntf.h" />
+    <ClInclude Include="..\Classes\core\utils\Exception.h" />
+    <ClInclude Include="..\Classes\core\utils\FilePathUtil.h" />
+    <ClInclude Include="..\Classes\core\utils\KAGParser.h" />
+    <ClInclude Include="..\Classes\core\utils\MathAlgorithms.h" />
+    <ClInclude Include="..\Classes\core\utils\MathAlgorithms_Default.h" />
+    <ClInclude Include="..\Classes\core\utils\md5.h" />
+    <ClInclude Include="..\Classes\core\utils\minizip\crypt.h" />
+    <ClInclude Include="..\Classes\core\utils\minizip\ioapi.h" />
+    <ClInclude Include="..\Classes\core\utils\minizip\unzip.h" />
+    <ClInclude Include="..\Classes\core\utils\minizip\zip.h" />
+    <ClInclude Include="..\Classes\core\utils\ObjectList.h" />
+    <ClInclude Include="..\Classes\core\utils\PadIntf.h" />
+    <ClInclude Include="..\Classes\core\utils\Random.h" />
+    <ClInclude Include="..\Classes\core\utils\RealFFT.h" />
+    <ClInclude Include="..\Classes\core\utils\StringUtil.h" />
+    <ClInclude Include="..\Classes\core\utils\ThreadIntf.h" />
+    <ClInclude Include="..\Classes\core\utils\TickCount.h" />
+    <ClInclude Include="..\Classes\core\utils\TimerIntf.h" />
+    <ClInclude Include="..\Classes\core\utils\VelocityTracker.h" />
+    <ClInclude Include="..\Classes\core\utils\win32\ClipboardImpl.h" />
+    <ClInclude Include="..\Classes\core\utils\win32\DebugImpl.h" />
+    <ClInclude Include="..\Classes\core\utils\win32\PadImpl.h" />
+    <ClInclude Include="..\Classes\core\utils\win32\ThreadImpl.h" />
+    <ClInclude Include="..\Classes\core\utils\win32\TimerImpl.h" />
+    <ClInclude Include="..\Classes\core\utils\win32\TVPTimer.h" />
+    <ClInclude Include="..\Classes\core\visual\argb.h" />
+    <ClInclude Include="..\Classes\core\visual\ARM\AlphaMovie_mjpeg.h" />
+    <ClInclude Include="..\Classes\core\visual\ARM\tvpgl_arm_intf.h" />
+    <ClInclude Include="..\Classes\core\visual\BitmapIntf.h" />
+    <ClInclude Include="..\Classes\core\visual\BitmapLayerTreeOwner.h" />
+    <ClInclude Include="..\Classes\core\visual\CharacterData.h" />
+    <ClInclude Include="..\Classes\core\visual\ComplexRect.h" />
+    <ClInclude Include="..\Classes\core\visual\drawable.h" />
+    <ClInclude Include="..\Classes\core\visual\FontImpl.h" />
+    <ClInclude Include="..\Classes\core\visual\FontRasterizer.h" />
+    <ClInclude Include="..\Classes\core\visual\FontSystem.h" />
+    <ClInclude Include="..\Classes\core\visual\FreeType.h" />
+    <ClInclude Include="..\Classes\core\visual\FreeTypeFace.h" />
+    <ClInclude Include="..\Classes\core\visual\FreeTypeFontRasterizer.h" />
+    <ClInclude Include="..\Classes\core\visual\gl\aligned_allocator.h" />
+    <ClInclude Include="..\Classes\core\visual\gl\blend_functor_c.h" />
+    <ClInclude Include="..\Classes\core\visual\gl\blend_util_func.h" />
+    <ClInclude Include="..\Classes\core\visual\gl\blend_variation.h" />
+    <ClInclude Include="..\Classes\core\visual\gl\ResampleImage.h" />
+    <ClInclude Include="..\Classes\core\visual\gl\ResampleImageInternal.h" />
+    <ClInclude Include="..\Classes\core\visual\gl\tvpgl_mathutil.h" />
+    <ClInclude Include="..\Classes\core\visual\gl\WeightFunctor.h" />
+    <ClInclude Include="..\Classes\core\visual\GraphicsLoaderIntf.h" />
+    <ClInclude Include="..\Classes\core\visual\GraphicsLoadThread.h" />
+    <ClInclude Include="..\Classes\core\visual\ImageFunction.h" />
+    <ClInclude Include="..\Classes\core\visual\LayerBitmapIntf.h" />
+    <ClInclude Include="..\Classes\core\visual\LayerIntf.h" />
+    <ClInclude Include="..\Classes\core\visual\LayerManager.h" />
+    <ClInclude Include="..\Classes\core\visual\LayerTreeOwner.h" />
+    <ClInclude Include="..\Classes\core\visual\LayerTreeOwnerImpl.h" />
+    <ClInclude Include="..\Classes\core\visual\LoadTLG.h" />
+    <ClInclude Include="..\Classes\core\visual\MenuItemIntf.h" />
+    <ClInclude Include="..\Classes\core\visual\ogl\astcrt.h" />
+    <ClInclude Include="..\Classes\core\visual\ogl\etcpak.h" />
+    <ClInclude Include="..\Classes\core\visual\ogl\imagepacker.h" />
+    <ClInclude Include="..\Classes\core\visual\ogl\ogl_common.h" />
+    <ClInclude Include="..\Classes\core\visual\ogl\pvr.h" />
+    <ClInclude Include="..\Classes\core\visual\ogl\pvrtc.h" />
+    <ClInclude Include="..\Classes\core\visual\ogl\RenderManager_ogl_test.hpp" />
+    <ClInclude Include="..\Classes\core\visual\PrerenderedFont.h" />
+    <ClInclude Include="..\Classes\core\visual\RectItf.h" />
+    <ClInclude Include="..\Classes\core\visual\RenderManager.h" />
+    <ClInclude Include="..\Classes\core\visual\RenderManager_software.h" />
+    <ClInclude Include="..\Classes\core\visual\SaveTLG.h" />
+    <ClInclude Include="..\Classes\core\visual\transhandler.h" />
+    <ClInclude Include="..\Classes\core\visual\TransIntf.h" />
+    <ClInclude Include="..\Classes\core\visual\tvpfontstruc.h" />
+    <ClInclude Include="..\Classes\core\visual\tvpgl.h" />
+    <ClInclude Include="..\Classes\core\visual\tvpgl_asm_init.h" />
+    <ClInclude Include="..\Classes\core\visual\tvphal.h" />
+    <ClInclude Include="..\Classes\core\visual\tvpinputdefs.h" />
+    <ClInclude Include="..\Classes\core\visual\VideoOvlIntf.h" />
+    <ClInclude Include="..\Classes\core\visual\voMode.h" />
+    <ClInclude Include="..\Classes\core\visual\win32\BasicDrawDevice.h" />
+    <ClInclude Include="..\Classes\core\visual\win32\BitmapBitsAlloc.h" />
+    <ClInclude Include="..\Classes\core\visual\win32\BitmapInfomation.h" />
+    <ClInclude Include="..\Classes\core\visual\win32\DInputMgn.h" />
+    <ClInclude Include="..\Classes\core\visual\win32\DrawDevice.h" />
+    <ClInclude Include="..\Classes\core\visual\win32\GDIFontRasterizer.h" />
+    <ClInclude Include="..\Classes\core\visual\win32\GraphicsLoaderImpl.h" />
+    <ClInclude Include="..\Classes\core\visual\win32\krmovie.h" />
+    <ClInclude Include="..\Classes\core\visual\win32\LayerBitmapImpl.h" />
+    <ClInclude Include="..\Classes\core\visual\win32\LayerImpl.h" />
+    <ClInclude Include="..\Classes\core\visual\win32\MenuItemImpl.h" />
+    <ClInclude Include="..\Classes\core\visual\win32\NativeFreeTypeFace.h" />
+    <ClInclude Include="..\Classes\core\visual\win32\PassThroughDrawDevice.h" />
+    <ClInclude Include="..\Classes\core\visual\win32\TVPColor.h" />
+    <ClInclude Include="..\Classes\core\visual\win32\TVPScreen.h" />
+    <ClInclude Include="..\Classes\core\visual\win32\TVPSysFont.h" />
+    <ClInclude Include="..\Classes\core\visual\win32\VideoOvlImpl.h" />
+    <ClInclude Include="..\Classes\core\visual\win32\VSyncTimingThread.h" />
+    <ClInclude Include="..\Classes\core\visual\win32\WindowImpl.h" />
+    <ClInclude Include="..\Classes\core\visual\WindowIntf.h" />
+    <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\plugins\LayerExBase.h" />
+    <ClInclude Include="..\Classes\plugins\layerExBase.hpp" />
+    <ClInclude Include="..\Classes\plugins\ncbind\ncbind.hpp" />
+    <ClInclude Include="..\Classes\plugins\ncbind\ncb_foreach.h" />
+    <ClInclude Include="..\Classes\plugins\ncbind\ncb_invoke.hpp" />
+    <ClInclude Include="..\Classes\plugins\PluginStub.h" />
+    <ClInclude Include="..\Classes\plugins\tp_stub.h" />
+    <ClInclude Include="..\Classes\plugins\xp3filter.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\cocos\2d\libcocos2d.vcxproj">
+      <Project>{98a51ba8-fc3a-415b-ac8f-8c7bd464e93e}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Classes\core\environ\cocos2d\CustomFileUtils.mm" />
+    <None Include="..\Classes\core\visual\tvpps.inc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="..\Classes\core\sound\win32\tvpsnd.idl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

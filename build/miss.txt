@@ -1,0 +1,19 @@
+msvcr110.dll
+	websockets.dll
+	libmpg123.dll
+	libvorbisfile.dll
+	openal32.dll
+
+libcocos2d.dll
+	msvcr100.dll
+	
+-----------------
+
+FileSelectorForm.cpp
+MainFileSelectorForm.cpp
+	
+GlobalPreferenceForm.cpp
+IndividualPreferenceForm.cpp
+
+SimpleMediaFilePlayer.cpp
+XP3RepackForm.cpp

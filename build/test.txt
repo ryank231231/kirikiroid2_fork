@@ -1,0 +1,346 @@
+    //for(const auto& child: node->getChildren())
+	auto& _children = node->getChildren();
+	for (auto p_child = _children.begin(); p_child != _children.end(); ++p_child)
+	{
+		const auto& child = *p_child;
+		
+
+	//for (auto& it : children)
+	for (auto p_it = children.begin(); p_it != children.end(); ++p_it)
+	{
+		const auto& it = *p_it;
+
+		
+	//for(auto& modeldata : modelNodeDatas)
+	for (auto p_modeldata = modelNodeDatas.begin(); p_modeldata != modelNodeDatas.end(); ++p_modeldata)
+	{
+		const auto& modeldata = *p_modeldata;
+		
+
+		
+	//for(const auto& attrib : attribs)
+	for (auto p_attrib = attribs.begin(); p_attrib != attribs.end(); ++p_attrib)
+	{
+		const auto& attrib = *p_attrib;
+		
+
+		
+	//for (const auto& iter : skinBoneNames)
+	for (auto p_iter = skinBoneNames.begin(); p_iter != skinBoneNames.end(); ++p_iter)
+	{
+		const auto& iter = *p_iter;
+
+		
+		
+	//for(const auto &obj : _data) {	
+	for (auto p_obj = _data.begin(); p_obj != _data.end(); ++p_obj)
+	{
+		const auto& obj = *p_obj;
+		
+
+		
+	//for(const auto &invocation : invocationList) {
+	for (auto p_invocation = invocationList.begin(); p_invocation != invocationList.end(); ++p_invocation)
+	{
+		const auto& invocation = *p_invocation;
+
+		
+		
+	//for(auto child : _children){
+	for (auto p_child = _children.begin(); p_child != _children.end(); ++p_child)
+	{
+		const auto& child = *p_child;
+	
+	
+	//for(const auto &cell : _cellsUsed) {
+	for (auto p_cell = _cellsUsed.begin(); p_cell != _cellsUsed.end(); ++p_cell)
+	{
+		const auto& cell = *p_cell;
+
+		
+	//for (const auto& key : keys)
+	for (auto p_key = keys.begin(); p_key != keys.end(); ++p_key)
+	{
+		const auto& key = *p_key;
+
+
+
+//for(const auto &layerInfo : layers) {
+	for (auto p_layerInfo = layers.begin(); p_layerInfo != layers.end(); ++p_layerInfo)
+	{
+		const auto& layerInfo = *p_layerInfo;
+
+		
+for (auto p_node = targetsToResume.begin(); p_node != targetsToResume.end(); ++p_node)
+	{
+		const auto& node = *p_node;
+
+		
+//for (auto& animFrame : _frames)
+    for (auto p_animFrame = _frames.begin(); p_animFrame != _frames.end(); ++p_animFrame)
+	{
+		const auto& animFrame = *p_animFrame;
+		
+for (auto p_frameName = frameNames.begin(); p_frameName != frameNames.end(); ++p_frameName)
+		{
+			const auto& frameName = *p_frameName;
+
+//for (auto& obj : frameArray)
+        for (auto p_obj = frameArray.begin(); p_obj != frameArray.end(); ++p_obj)
+		{
+			const auto& obj = *p_obj;
+			
+
+			
+for (auto p_value = spritesheets.begin(); p_value != spritesheets.end(); ++p_value)
+		{
+			const auto& value = *p_value;
+			
+
+			
+for (auto p_item = _atlasTextures.begin(); p_item != _atlasTextures.end(); ++p_item)
+	{
+		const auto& item = *p_item;
+
+		
+//for (const auto & tex : _atlasTextures)
+        for (auto p_tex = _atlasTextures.begin(); p_tex != _atlasTextures.end(); ++p_tex)
+		{
+			const auto& tex = *p_tex;
+			
+//for (auto & atlas:_atlasMap)
+    for (auto p_atlas = _atlasMap.begin(); p_atlas != _atlasMap.end(); ++p_atlas)
+	{
+		const auto& atlas = *p_atlas;
+
+		
+		
+//for (const auto& batchNode : _batchNodes)
+            for (auto p_batchNode = _batchNodes.begin(); p_batchNode != _batchNodes.end(); ++p_batchNode)
+			{
+				const auto& batchNode = *p_batchNode;
+				
+    //for(const auto &child: _children)
+    for (auto p_child = _children.begin(); p_child != _children.end(); ++p_child)
+	{
+		const auto& child = *p_child;
+        if(child->getTag() >= 0)
+            child->updateTransform();
+    }
+
+    //for (const auto& batchNode:_batchNodes)
+    for (auto p_batchNode = _batchNodes.begin(); p_batchNode != _batchNodes.end(); ++p_batchNode)
+	{
+		const auto& batchNode = *p_batchNode;
+		
+	
+//for(const auto &layer : _layers) {
+	for (auto p_layer = _layers.begin(); p_layer != _layers.end(); ++p_layer)
+	{
+		const auto& layer = *p_layer;
+
+
+		
+//for (const auto& camera : _cameras)
+    for (auto p_camera = _cameras.begin(); p_camera != _cameras.end(); ++p_camera)
+	{
+		const auto& camera = *p_camera;
+		
+for (auto p_sprite = _descendants.begin(); p_sprite != _descendants.end(); ++p_sprite)
+	{
+		const auto& sprite = *p_sprite;
+		
+for (auto p_mesh = _meshes.begin(); p_mesh != _meshes.end(); ++p_mesh)
+			{
+				const auto& mesh = *p_mesh;
+				
+
+				
+//for (const auto& pool : _releasePoolStack)
+    for (auto p_pool = _releasePoolStack.begin(); p_pool != _releasePoolStack.end(); ++p_pool)
+	{
+		const auto& pool = *p_pool;
+    
+	
+
+
+
+//for (auto& listener : _toAddedListeners)
+        for (auto p_listener = _toAddedListeners.begin(); p_listener != _toAddedListeners.end(); ++p_listener)
+		{
+			const auto& listener = *p_listener;
+			
+
+//for (auto& l : *iter->second)
+				auto& list = *iter->second;
+                for (auto p_l = list.begin(); p_l != list.end(); ++p_l)
+				{
+					const auto& l = *p_l;
+
+
+
+//for (const auto& e : _listenerMap)
+    for (auto p_e = _listenerMap.begin(); p_e != _listenerMap.end(); ++p_e)
+	{
+		const auto& e = *p_e;
+		
+
+
+//for( const auto &function : temp ) {
+		for (auto p_function = temp.begin(); p_function != temp.end(); ++p_function)
+		{
+			const auto& function = *p_function;
+			
+
+
+//for (auto& seq : _sequences)
+    for (auto p_seq = _sequences.begin(); p_seq != _sequences.end(); ++p_seq)
+	{
+		const auto& seq = *p_seq;
+		
+		
+//for (auto object : _frameArray)
+    for (auto p_object = _frameArray.begin(); p_object != _frameArray.end(); ++p_object)
+	{
+		const auto& object = *p_object;
+		
+//for(auto array : _frameArray)
+    for (auto p_array = _frameArray.begin(); p_array != _frameArray.end(); ++p_array)
+	{
+		const auto& array = *p_array;
+		
+
+
+
+
+//for (auto frame : _frames)
+    for (auto p_frame = _frames.begin(); p_frame != _frames.end(); ++p_frame)
+	{
+		const auto& frame = *p_frame;
+		
+
+for (auto p_object = ccbones.begin(); p_object != ccbones.end(); ++p_object)
+			{
+				const auto& object = *p_object;
+				
+
+//for(auto& element : _boneDic)
+    for (auto p_element = _boneDic.begin(); p_element != _boneDic.end(); ++p_element)
+	{
+		auto& element = *p_element;
+		
+		
+//for(const auto &bone : _topBoneList) {
+	for (auto p_bone = _topBoneList.begin(); p_bone != _topBoneList.end(); ++p_bone)
+	{
+		const auto& bone = *p_bone;
+		
+
+
+//for (const auto& tween : _tweenList)
+    for (auto p_tween = _tweenList.begin(); p_tween != _tweenList.end(); ++p_tween)
+	{
+		const auto& tween = *p_tween;
+		
+//for (auto& shape : _shapes)
+    for (auto p_shape = _shapes.begin(); p_shape != _shapes.end(); ++p_shape)
+	{
+		const auto& shape = *p_shape;
+
+
+for (auto p_joint = _cpConstraints.begin(); p_joint != _cpConstraints.end(); ++p_joint)
+	{
+		const auto& joint = *p_joint;
+		
+				
+//for (auto subjoint : _cpConstraints)
+        for (auto p_subjoint = _cpConstraints.begin(); p_subjoint != _cpConstraints.end(); ++p_subjoint)
+		{
+			const auto& subjoint = *p_subjoint;
+
+
+//for (auto& body : addCopy)
+    for (auto p_body = addCopy.begin(); p_body != addCopy.end(); ++p_body)
+	{
+		const auto& body = *p_body;
+		
+//for (auto cps : shape->_cpShapes)
+        auto &list = shape->_cpShapes;
+		for (auto p_cps = list.begin(); p_cps != list.end(); ++p_cps)
+		{
+			const auto& cps = *p_cps;
+			
+
+//for (auto constraint : joint->_cpConstraints)
+    auto& constraints = joint->_cpConstraints;
+	for (auto p_constraint = constraints.begin(); p_constraint != constraints.end(); ++p_constraint)
+	{
+		const auto& constraint = *p_constraint;
+		
+		
+//for (auto& touch : touchEvent._touches)
+	auto& touches = touchEvent._touches;
+    for (auto p_touch = touches.begin(); p_touch != touches.end(); ++p_touch)
+	{
+		const auto& touch = *p_touch;
+		
+    //for(auto &attrib : _glprogram->_vertexAttribs) {
+	auto& list1 = _glprogram->_vertexAttribs;
+	for (auto p_attrib = list1.begin(); p_attrib != list1.end(); ++p_attrib)
+	{
+		auto& attrib = *p_attrib;
+        VertexAttribValue value(&attrib.second);
+        _attributes[attrib.first] = value;
+    }
+
+    //for(auto &uniform : _glprogram->_userUniforms) {
+	auto& list2 = _glprogram->_userUniforms;
+	for (auto p_uniform = list2.begin(); p_uniform != list2.end(); ++p_uniform)
+	{
+		auto& uniform = *p_uniform;
+        UniformValue value(&uniform.second, _glprogram);
+        _uniforms[uniform.second.location] = value;
+        _uniformsByName[uniform.first] = uniform.second.location;
+    }
+    
+
+//for (const auto& light : lights)
+        for (auto p_light = lights.begin(); p_light != lights.end(); ++p_light)
+		{
+			auto& light = *p_light;
+			
+//for(const auto& cmd : _batchedCommands)
+    for (auto p_cmd = _batchedCommands.begin(); p_cmd != _batchedCommands.end(); ++p_cmd)
+	{
+		auto& cmd = *p_cmd;
+		
+//for (auto &renderqueue : _renderGroups)
+        for (auto p_renderqueue = _renderGroups.begin(); p_renderqueue != _renderGroups.end(); ++p_renderqueue)
+		{
+			auto& renderqueue = *p_renderqueue;
+			
+//for(const auto& node : _pages)
+    for (auto p_node = _pages.begin(); p_node != _pages.end(); ++p_node)
+	{
+		const auto& node = *p_node;
+		
+
+
+//for (auto& page : this->getPages())
+	auto& pages = this->getPages();
+    for (auto p_page = pages.begin(); p_page != pages.end(); ++p_page)
+	{
+		const auto& page = *p_page;
+		
+//for (auto& sp : _protectedChildren)
+            for (auto p_sp = _protectedChildren.begin(); p_sp != _protectedChildren.end(); ++p_sp)
+			{
+				const auto& sp = *p_sp;
+
+
+				
+//for (auto& subWidget : container)
+    for (auto p_subWidget = container.begin(); p_subWidget != container.end(); ++p_subWidget)
+	{
+		const auto& subWidget = *p_subWidget;
+		
