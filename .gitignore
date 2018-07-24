@@ -1,5 +1,10 @@
 /build/Debug.win32
 /cocos/2d/Debug.win32
+/cocos/editor-support/spine/proj.win32/Debug.win32
+/cocos/scripting/lua-bindings/proj.win32/Debug.win32
+/external/Box2D/proj.win32/Debug.win32
+/tests/cpp-empty-test/Classes/core/external/freetype/objs/Debug Multithreaded_mt
+!/tests/cpp-empty-test/Classes/core/external/jxrlib/image/x86/x86.h
 !*.lib
 !*.dll
 
