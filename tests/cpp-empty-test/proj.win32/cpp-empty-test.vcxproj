@@ -72,7 +72,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\Classes;..\Classes\core\utils;..\Classes\core\environ;..\Classes\core\external\onig;..\Classes\core\tjs2;..\Classes\core\visual;..\Classes\core\msg;..\Classes\core\external\zlib;..\Classes\core\msg\win32;..\Classes\core\base\win32;..\Classes\core\visual\win32;..\Classes\core\sound;..\Classes\core\sound\win32;..\Classes\core\utils\win32;..\Classes\core\environ\win32;..\Classes\core\extension;..\Classes\core\base;..\Classes\core\external\pthreads;..\Classes\core;..\Classes\core\external\jxrlib\jxrgluelib;..\..\..\external\png\include\win32;..\Classes\core\external\jxrlib\image\decode;..\Classes\core\external;..\..\..;..\..\..\extensions;..\Classes\plugins;..\Classes\core\external\freetype2;..\Classes\core\external\libjpeg-turbo;..\Classes\core\external\libjpeg-turbo\vcproj;..\Classes\core\external\opencv2\include;..\..\..\external;..\..\..\external\zlib\include;E:\boost_1_55_0;D:\boost_1_55_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Classes;..\Classes\core\utils;..\Classes\core\environ;..\Classes\core\external\onig;..\Classes\core\tjs2;..\Classes\core\visual;..\Classes\core\msg;..\Classes\core\external\zlib;..\Classes\core\msg\win32;..\Classes\core\base\win32;..\Classes\core\visual\win32;..\Classes\core\sound;..\Classes\core\sound\win32;..\Classes\core\utils\win32;..\Classes\core\environ\win32;..\Classes\core\extension;..\Classes\core\base;..\Classes\core\external\pthreads;..\Classes\core;..\Classes\core\external\jxrlib\jxrgluelib;..\..\..\external\png\include\win32;..\Classes\core\external\jxrlib\image\decode;..\Classes\core\external;..\..\..;..\..\..\extensions;..\Classes\plugins;..\Classes\core\external\freetype2;..\Classes\core\external\libjpeg-turbo;..\Classes\core\external\libjpeg-turbo\vcproj;..\Classes\core\external\opencv2\include;..\..\..\external;..\..\..\external\zlib\include;..\..\..\external\boost_1_55_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;COCOS2D_DEBUG=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;TJS_TEXT_OUT_CRLF;__STDC_CONSTANT_MACROS;USE_UNICODE_FSTRING;_7ZIP_ST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -86,7 +86,7 @@
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
-      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)$(Configuration).win32;..\Classes\core\external\lib;..\Classes\core\external\onig\lib;..\Classes\core\external\pthreads;..\Classes\core\external\libjpeg-turbo\vcproj\lib\Win32;..\Classes\core\external\opencv2\lib;D:\boost_1_55_0\lib32-msvc-10.0;E:\boost_1_55_0\lib32-msvc-10.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)$(Configuration).win32;..\Classes\core\external\lib;..\Classes\core\external\onig\lib;..\Classes\core\external\pthreads;..\Classes\core\external\libjpeg-turbo\vcproj\lib\Win32;..\Classes\core\external\opencv2\lib;..\..\..\external\boost_1_55_0\lib32-msvc-10.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
