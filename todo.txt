@@ -1,0 +1,3 @@
+ImageInfo *imageInfo = new (std::nothrow) ImageInfo();
+
+atomic,chrono,date_time,math,regex,system,thread

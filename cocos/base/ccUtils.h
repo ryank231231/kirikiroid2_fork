@@ -63,7 +63,7 @@ namespace utils
      * @since v3.2
      */
     void CC_DLL captureScreen(const std::function<void(bool, const std::string&)>& afterCaptured, const std::string& filename);
-    
+#if 0    
     /** Find children by name, it will return all child that has the same name.
      * It supports c++ 11 regular expression. It is  a helper function of `Node::enumerateChildren()`.
      * You can refer to `Node::enumerateChildren()` for detail information.
@@ -74,7 +74,7 @@ namespace utils
      * @since v3.2
      */
     std::vector<Node*> CC_DLL findChildren(const Node &node, const std::string &name);
-    
+#endif    
     /** Same to ::atof, but strip the string, remain 7 numbers after '.' before call atof.
      * Why we need this? Because in android c++_static, atof ( and std::atof ) is unsupported for numbers have long decimal part and contain
      * several numbers can approximate to 1 ( like 90.099998474121094 ), it will return inf. This function is used to fix this bug.

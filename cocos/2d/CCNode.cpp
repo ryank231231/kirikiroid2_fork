@@ -32,7 +32,9 @@ THE SOFTWARE.
 
 #include <algorithm>
 #include <string>
+#if 0
 #include <boost/regex.hpp>
+#endif
 
 #include "base/CCDirector.h"
 #include "base/CCScheduler.h"
@@ -914,6 +916,7 @@ Node* Node::getChildByName(const std::string& name) const
     return nullptr;
 }
 
+#if 0
 void Node::enumerateChildren(const std::string &name, std::function<bool (Node *)> callback) const
 {
     CCASSERT(name.length() != 0, "Invalid name");
@@ -1033,6 +1036,7 @@ bool Node::doEnumerate(std::string name, std::function<bool (Node *)> callback) 
     
     return ret;
 }
+#endif
 
 /* "add" logic MUST only be on this method
 * If a class want's to extend the 'addChild' behavior it only needs

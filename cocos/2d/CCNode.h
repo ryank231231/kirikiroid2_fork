@@ -814,8 +814,10 @@ public:
      *
      * @since v3.2
      */
+#if 0
     virtual void enumerateChildren(const std::string &name, std::function<bool(Node* node)> callback) const;
-    /**
+#endif
+	/**
      * Returns the array of the node's children.
      *
      * @return the array the node's children.
@@ -1734,9 +1736,10 @@ protected:
     virtual void updateCascadeColor();
     virtual void disableCascadeColor();
     virtual void updateColor() {}
-    
+#if 0    
     bool doEnumerate(std::string name, std::function<bool (Node *)> callback) const;
-    bool doEnumerateRecursive(const Node* node, const std::string &name, std::function<bool (Node *)> callback) const;
+	bool doEnumerateRecursive(const Node* node, const std::string &name, std::function<bool (Node *)> callback) const;
+#endif
     
     //check whether this camera mask is visible by the current visiting camera
     bool isVisitableByVisitingCamera() const;

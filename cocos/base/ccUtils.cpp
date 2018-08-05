@@ -150,7 +150,7 @@ void captureScreen(const std::function<void(bool, const std::string&)>& afterCap
     captureScreenCommand.func = std::bind(onCaptureScreen, afterCaptured, filename);
     Director::getInstance()->getRenderer()->addCommand(&captureScreenCommand);
 }
-    
+#if 0    
 std::vector<Node*> findChildren(const Node &node, const std::string &name)
 {
     std::vector<Node*> vec;
@@ -162,7 +162,7 @@ std::vector<Node*> findChildren(const Node &node, const std::string &name)
 
     return vec;
 }
-
+#endif
 #define MAX_ITOA_BUFFER_SIZE 256
 double atof(const char* str)
 {
