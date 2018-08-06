@@ -156,7 +156,7 @@ int TVPShowSimpleMessageBox(const ttstr & text, const ttstr & caption, const std
 extern "C" int TVPShowSimpleMessageBox(const char *pszText, const char *pszTitle, unsigned int nButton, const char **btnText) {
 	std::vector<ttstr> vecButtons;
 	for (unsigned int i = 0; i < nButton; ++i) {
-		vecButtons.emplace_back(btnText[i]);
+		vecButtons.push_back(btnText[i]);
 	}
 	return TVPShowSimpleMessageBox(pszText, pszTitle, vecButtons);
 }
@@ -170,7 +170,7 @@ std::vector<std::string> TVPGetDriverPath() {
 		case DRIVE_REMOVABLE:
 		case DRIVE_FIXED:
 		case DRIVE_REMOTE:
-			ret.emplace_back(drv);
+			ret.push_back(drv);
 			break;
 		}
 	}
@@ -179,7 +179,7 @@ std::vector<std::string> TVPGetDriverPath() {
 
 std::vector<std::string> TVPGetAppStoragePath() {
 	std::vector<std::string> ret;
-	ret.emplace_back(TVPGetDefaultFileDir());
+	ret.push_back(TVPGetDefaultFileDir());
 	return ret;
 }
 

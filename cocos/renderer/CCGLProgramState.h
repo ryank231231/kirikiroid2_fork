@@ -25,7 +25,7 @@ THE SOFTWARE.
 #ifndef __CCGLPROGRAMSTATE_H__
 #define __CCGLPROGRAMSTATE_H__
 
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 #include "base/ccTypes.h"
 #include "base/CCVector.h"
@@ -300,10 +300,10 @@ protected:
     UniformValue* getUniformValue(GLint uniformLocation);
     
     bool _uniformAttributeValueDirty;
-    boost::unordered_map<std::string, GLint> _uniformsByName;
-    boost::unordered_map<GLint, UniformValue> _uniforms;
-    boost::unordered_map<std::string, VertexAttribValue> _attributes;
-    boost::unordered_map<std::string, int> _boundTextureUnits;
+    std::unordered_map<std::string, GLint> _uniformsByName;
+    std::unordered_map<GLint, UniformValue> _uniforms;
+    std::unordered_map<std::string, VertexAttribValue> _attributes;
+    std::unordered_map<std::string, int> _boundTextureUnits;
 
     int _textureUnitIndex;
     uint32_t _vertexAttribsFlags;

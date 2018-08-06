@@ -172,8 +172,8 @@ protected:
                 AsyncTaskCallBack taskCallBack;
                 taskCallBack.callback = callback;
                 taskCallBack.callbackParam = callbackParam;
-                _tasks.emplace([task](){ task(); });
-                _taskCallBacks.emplace(taskCallBack);
+                _tasks.push([task](){ task(); });
+                _taskCallBacks.push(taskCallBack);
             }
             _condition.notify_one();
         }

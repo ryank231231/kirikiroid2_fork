@@ -25,7 +25,7 @@ THE SOFTWARE.
 
 #include "CCGLViewImpl-desktop.h"
 
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 #include "platform/CCApplication.h"
 #include "base/CCDirector.h"
@@ -126,7 +126,7 @@ struct keyCodeItem
     EventKeyboard::KeyCode keyCode;
 };
 
-static boost::unordered_map<int, EventKeyboard::KeyCode> g_keyCodeMap;
+static std::unordered_map<int, EventKeyboard::KeyCode> g_keyCodeMap;
 
 static keyCodeItem g_keyCodeStructArray[] = {
     /* The unknown key */

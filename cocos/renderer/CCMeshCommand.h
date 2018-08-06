@@ -25,7 +25,7 @@
 #ifndef _CC_MESHCOMMAND_H_
 #define _CC_MESHCOMMAND_H_
 
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 #include "renderer/CCRenderCommand.h"
 #include "renderer/CCGLProgram.h"
 #include "math/CCMath.h"

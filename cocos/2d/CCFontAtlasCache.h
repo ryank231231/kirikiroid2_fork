@@ -28,7 +28,7 @@
 
 /// @cond DO_NOT_SHOW
 
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 #include "2d/CCLabel.h"
 
@@ -55,7 +55,7 @@ public:
     
 private: 
     static std::string generateFontName(const std::string& fontFileName, int size, GlyphCollection theGlyphs, bool useDistanceField);
-    static boost::unordered_map<std::string, FontAtlas *> _atlasMap;
+    static std::unordered_map<std::string, FontAtlas *> _atlasMap;
 };
 
 NS_CC_END

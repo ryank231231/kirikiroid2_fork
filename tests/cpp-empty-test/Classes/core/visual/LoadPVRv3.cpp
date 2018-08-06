@@ -291,7 +291,7 @@ void TVPSavePVRv3(void* formatdata, tTJSBinaryStream* dst, const iTVPBaseBitmap*
 					return TJS_S_OK;
 				}
 				// push items
-				Tags.emplace_back(*param[0], *param[2]);
+				Tags.push_back(*param[0], *param[2]);
 				if (result) *result = (tjs_int)1;
 				return TJS_S_OK;
 			}

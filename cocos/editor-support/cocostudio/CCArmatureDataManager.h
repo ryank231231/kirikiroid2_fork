@@ -199,7 +199,7 @@ private:
 
     bool _autoLoadSpriteFile;
 
-    boost::unordered_map<std::string, RelativeData> _relativeDatas;
+    std::unordered_map<std::string, RelativeData> _relativeDatas;
 };
 
 

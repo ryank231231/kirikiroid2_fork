@@ -29,7 +29,7 @@
 /// @cond DO_NOT_SHOW
 
 #include <string>
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 #include "platform/CCPlatformMacros.h"
 #include "base/CCRef.h"
@@ -80,7 +80,7 @@ public:
     
     bool prepareLetterDefinitions(const std::u16string& utf16String);
 
-    inline const boost::unordered_map<ssize_t, Texture2D*>& getTextures() const{ return _atlasTextures;}
+    inline const std::unordered_map<ssize_t, Texture2D*>& getTextures() const{ return _atlasTextures;}
     void  addTexture(Texture2D *texture, int slot);
     float getCommonLineHeight() const;
     void  setCommonLineHeight(float newHeight);
@@ -112,8 +112,8 @@ public:
 
 protected:
     void relaseTextures();
-    boost::unordered_map<ssize_t, Texture2D*> _atlasTextures;
-    boost::unordered_map<unsigned short, FontLetterDefinition> _fontLetterDefinitions;
+    std::unordered_map<ssize_t, Texture2D*> _atlasTextures;
+    std::unordered_map<unsigned short, FontLetterDefinition> _fontLetterDefinitions;
     float _commonLineHeight;
     Font * _font;
 

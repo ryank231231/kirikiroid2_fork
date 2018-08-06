@@ -44,7 +44,7 @@
 NS_CC_BEGIN
 const float PHYSICS_INFINITY = INFINITY;
 extern const char* PHYSICSCONTACT_EVENT_NAME;
-extern boost::unordered_map<cpShape*, PhysicsShape*> s_physicsShapeMap;
+extern std::unordered_map<cpShape*, PhysicsShape*> s_physicsShapeMap;
 
 const int PhysicsWorld::DEBUGDRAW_NONE = 0x00;
 const int PhysicsWorld::DEBUGDRAW_SHAPE = 0x01;

@@ -444,7 +444,7 @@ void Sprite3D::genGLProgramState(bool useLight)
 {
     _shaderUsingLight = useLight;
     
-    boost::unordered_map<const MeshVertexData*, GLProgramState*> glProgramestates;
+    std::unordered_map<const MeshVertexData*, GLProgramState*> glProgramestates;
     //for(auto& mesh : _meshVertexDatas)
     for (auto p_mesh = _meshVertexDatas.begin(); p_mesh != _meshVertexDatas.end(); ++p_mesh)
 	{

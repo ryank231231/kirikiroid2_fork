@@ -15,7 +15,7 @@
 #include "tjsNative.h"
 #include "SoundBufferBaseIntf.h"
 #include "tjsUtils.h"
-#include <boost/container/vector.hpp>
+#include <vector>
 typedef tTVReal D3DVALUE;
 
 
@@ -165,7 +165,7 @@ class tTJSNI_BaseWaveSoundBuffer : public tTJSNI_SoundBuffer
 			iTVPBasicWaveFilter * interf) :
 			Filter(filter), Interface(interf) {;}
 	};
-	boost::container::vector<tFilterObjectAndInterface> FilterInterfaces; // backupped filter interface array
+	std::vector<tFilterObjectAndInterface> FilterInterfaces; // backupped filter interface array
 
 protected:
 	tTVPWaveLoopManager * LoopManager; // will be set by tTJSNI_WaveSoundBuffer

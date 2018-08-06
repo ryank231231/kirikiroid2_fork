@@ -183,7 +183,7 @@ Sprite *TVPLoadCursorCUR(tTJSBinaryStream *pStream) {
 		if (entry.bHeight > bestentry.bHeight) bestentry = entry;
 	}
 	cur_dir.clear();
-	cur_dir.emplace_back(bestentry);
+	cur_dir.push_back(bestentry);
 
 	for (int i = 0; i < cur_dir.size(); ++i) {
 		const ICODIREntry &entry = cur_dir[i];

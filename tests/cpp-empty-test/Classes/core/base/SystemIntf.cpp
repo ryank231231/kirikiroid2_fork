@@ -145,8 +145,8 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/inputString)
 	// return false if the user selects "cancel", otherwise return true.
 	// implement in each platform.
 	std::vector<ttstr> btns;
-	btns.emplace_back(LocaleConfigManager::GetInstance()->GetText("msgbox_ok"));
-	btns.emplace_back(LocaleConfigManager::GetInstance()->GetText("cancel"));
+	btns.push_back(LocaleConfigManager::GetInstance()->GetText("msgbox_ok"));
+	btns.push_back(LocaleConfigManager::GetInstance()->GetText("cancel"));
 	int ret = TVPShowSimpleInputBox(value, caption, prompt, btns);
 	bool b = ret == 0; // the left button clicked
 

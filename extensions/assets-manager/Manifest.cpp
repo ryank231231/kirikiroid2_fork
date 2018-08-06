@@ -138,7 +138,7 @@ bool Manifest::versionEquals(const Manifest *b) const
     else
     {
         std::vector<std::string> bGroups = b->getGroups();
-        boost::unordered_map<std::string, std::string> bGroupVer = b->getGroupVerions();
+        std::unordered_map<std::string, std::string> bGroupVer = b->getGroupVerions();
         // Check group size
         if (bGroups.size() != _groups.size())
             return false;
@@ -157,15 +157,15 @@ bool Manifest::versionEquals(const Manifest *b) const
     return true;
 }
 
-boost::unordered_map<std::string, Manifest::AssetDiff> Manifest::genDiff(const Manifest *b) const
+std::unordered_map<std::string, Manifest::AssetDiff> Manifest::genDiff(const Manifest *b) const
 {
-    boost::unordered_map<std::string, AssetDiff> diff_map;
-    boost::unordered_map<std::string, Asset> bAssets = b->getAssets();
+    std::unordered_map<std::string, AssetDiff> diff_map;
+    std::unordered_map<std::string, Asset> bAssets = b->getAssets();
     
     std::string key;
     Asset valueA;
     Asset valueB;
-    boost::unordered_map<std::string, Asset>::const_iterator valueIt, it;
+    std::unordered_map<std::string, Asset>::const_iterator valueIt, it;
     for (it = _assets.begin(); it != _assets.end(); ++it)
     {
         key = it->first;
@@ -177,7 +177,7 @@ boost::unordered_map<std::string, Manifest::AssetDiff> Manifest::genDiff(const M
             AssetDiff diff;
             diff.asset = valueA;
             diff.type = DiffType::DELETED;
-            diff_map.emplace(key, diff);
+            diff_map.insert(std::pair<std::string, AssetDiff>(key, diff));
             continue;
         }
         
@@ -187,7 +187,7 @@ boost::unordered_map<std::string, Manifest::AssetDiff> Manifest::genDiff(const M
             AssetDiff diff;
             diff.asset = valueB;
             diff.type = DiffType::MODIFIED;
-            diff_map.emplace(key, diff);
+            diff_map.insert(std::pair<std::string, AssetDiff>(key, diff));
         }
     }
     
@@ -202,7 +202,7 @@ boost::unordered_map<std::string, Manifest::AssetDiff> Manifest::genDiff(const M
             AssetDiff diff;
             diff.asset = valueB;
             diff.type = DiffType::ADDED;
-            diff_map.emplace(key, diff);
+            diff_map.insert(std::pair<std::string, AssetDiff>(key, diff));
         }
     }
     
@@ -229,7 +229,7 @@ void Manifest::genResumeAssetsList(Downloader::DownloadUnits *units) const
             {
                 unit.resumeDownload = false;
             }
-            units->emplace(unit.customId, unit);
+            units->insert(Downloader::DownloadUnitsPair(unit.customId, unit));
         }
     }
 }
@@ -294,7 +294,7 @@ const std::vector<std::string>& Manifest::getGroups() const
     return _groups;
 }
 
-const boost::unordered_map<std::string, std::string>& Manifest::getGroupVerions() const
+const std::unordered_map<std::string, std::string>& Manifest::getGroupVerions() const
 {
     return _groupVer;
 }
@@ -304,7 +304,7 @@ const std::string& Manifest::getGroupVersion(const std::string &group) const
     return _groupVer.at(group);
 }
 
-const boost::unordered_map<std::string, Manifest::Asset>& Manifest::getAssets() const
+const std::unordered_map<std::string, Manifest::Asset>& Manifest::getAssets() const
 {
     return _assets;
 }
@@ -435,7 +435,7 @@ void Manifest::loadVersion(const rapidjson::Document &json)
                     version = itr->value.GetString();
                 }
                 _groups.push_back(group);
-                _groupVer.emplace(group, version);
+                _groupVer.insert(std::pair<std::string, std::string>(group, version));
             }
         }
     }
@@ -474,7 +474,7 @@ void Manifest::loadManifest(const rapidjson::Document &json)
             {
                 std::string key = itr->name.GetString();
                 Asset asset = parseAsset(key, itr->value);
-                _assets.emplace(key, asset);
+                _assets.insert(std::pair<std::string, Asset>(key, asset));
             }
         }
     }

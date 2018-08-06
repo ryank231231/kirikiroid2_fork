@@ -37,7 +37,7 @@
 #include "GraphicsLoadThread.h"
 #include <complex>
 #include <list>
-#include <boost/container/vector.hpp>
+#include <vector>
 
 void TVPLoadPVRv3(void* formatdata, void *callbackdata,
 	tTVPGraphicSizeCallback sizecallback, tTVPGraphicScanLineCallback scanlinecallback,
@@ -996,7 +996,7 @@ struct tTVPLoadGraphicData
 	tjs_uint BufW;
 	tjs_uint BufH;
 	bool NeedMetaInfo;
-	boost::container::vector<tTVPGraphicMetaInfoPair> * MetaInfo;
+	std::vector<tTVPGraphicMetaInfoPair> * MetaInfo;
 };
 //---------------------------------------------------------------------------
 static int TVPLoadGraphic_SizeCallback(void *callbackdata, tjs_uint w,
@@ -1169,8 +1169,8 @@ static void TVPLoadGraphic_MetaInfoPushCallback(void *callbackdata,
 
 	if(data->NeedMetaInfo)
 	{
-		if(!data->MetaInfo) data->MetaInfo = new boost::container::vector<tTVPGraphicMetaInfoPair>();
-		data->MetaInfo->emplace_back(name, value);
+		if(!data->MetaInfo) data->MetaInfo = new std::vector<tTVPGraphicMetaInfoPair>();
+		data->MetaInfo->push_back(tTVPGraphicMetaInfoPair(name, value));
 	}
 }
 //---------------------------------------------------------------------------
@@ -1281,10 +1281,10 @@ static void TVPDoAlphaColorMat(tTVPBitmap *dest, tjs_uint32 color)
 
 //---------------------------------------------------------------------------
 iTJSDispatch2 * TVPMetaInfoPairsToDictionary(
-	boost::container::vector<tTVPGraphicMetaInfoPair> *vec)
+	std::vector<tTVPGraphicMetaInfoPair> *vec)
 {
 	if(!vec) return NULL;
-	boost::container::vector<tTVPGraphicMetaInfoPair>::iterator i;
+	std::vector<tTVPGraphicMetaInfoPair>::iterator i;
 	iTJSDispatch2 *dic = TJSCreateDictionaryObject();
 	try
 	{
@@ -1359,7 +1359,7 @@ private:
 public:
 	ttstr ProvinceName;
 
-	boost::container::vector<tTVPGraphicMetaInfoPair> * MetaInfo;
+	std::vector<tTVPGraphicMetaInfoPair> * MetaInfo;
 
 private:
 	tjs_int RefCount;
@@ -1550,7 +1550,7 @@ struct tTVPClearGraphicCacheCallback : public tTVPCompactEventCallbackIntf
 } static TVPClearGraphicCacheCallback;
 static bool TVPClearGraphicCacheCallbackInit = false;
 //---------------------------------------------------------------------------
-void TVPPushGraphicCache( const ttstr& nname, tTVPBitmap* bmp, boost::container::vector<tTVPGraphicMetaInfoPair>* meta )
+void TVPPushGraphicCache( const ttstr& nname, tTVPBitmap* bmp, std::vector<tTVPGraphicMetaInfoPair>* meta )
 {
 	if( TVPGraphicCacheEnabled ) {
 		// graphic compact initialization
@@ -1765,7 +1765,7 @@ tTVPGraphicHandlerType* TVPFindGraphicLoadHandler(ttstr &_name, ttstr *maskname,
 }
 //---------------------------------------------------------------------------
 static tTVPBitmap* TVPInternalLoadBitmap(const ttstr &_name,
-	tjs_uint32 keyidx, tjs_uint desw, tjs_int desh, boost::container::vector<tTVPGraphicMetaInfoPair> * * MetaInfo,
+	tjs_uint32 keyidx, tjs_uint desw, tjs_int desh, std::vector<tTVPGraphicMetaInfoPair> * * MetaInfo,
 		tTVPGraphicLoadMode mode, ttstr *provincename)
 {
 	// name must be normalized.
@@ -1862,7 +1862,7 @@ static tTVPBitmap* TVPInternalLoadBitmap(const ttstr &_name,
 //---------------------------------------------------------------------------
 iTVPTexture2D* TVPLoadPVRv3(tTJSBinaryStream *s, const std::function<void(const ttstr&, const tTJSVariant&)> &cb);
 static iTVPTexture2D *TVPInternalLoadTexture(const ttstr &_name,
-	boost::container::vector<tTVPGraphicMetaInfoPair> * * MetaInfo, ttstr *provincename) {
+	std::vector<tTVPGraphicMetaInfoPair> * * MetaInfo, ttstr *provincename) {
 	ttstr name(_name), maskname;
 	tTVPGraphicHandlerType * handler = TVPFindGraphicLoadHandler(name, &maskname, provincename);
 	if (!maskname.IsEmpty()) {
@@ -1872,8 +1872,8 @@ static iTVPTexture2D *TVPInternalLoadTexture(const ttstr &_name,
 	tTVPStreamHolder holder(name);
 #ifdef _MSC_VER
 	return TVPLoadPVRv3(holder.Get(), [MetaInfo](const ttstr& k, const tTJSVariant& v) {
-		if (!*MetaInfo) *MetaInfo = new boost::container::vector<tTVPGraphicMetaInfoPair>;
-		(*MetaInfo)->emplace_back(k, v);
+		if (!*MetaInfo) *MetaInfo = new std::vector<tTVPGraphicMetaInfoPair>;
+		(*MetaInfo)->push_back(tTVPGraphicMetaInfoPair(k, v));
 	});
 #else
 	__debugbreak(); throw;
@@ -1910,7 +1910,7 @@ void TVPLoadGraphicProvince(tTVPBaseBitmap *dest, const ttstr &name, tjs_int key
 	tTVPGraphicImageData * data = nullptr;
 
     ttstr pn;
-	boost::container::vector<tTVPGraphicMetaInfoPair> * mi = nullptr;
+	std::vector<tTVPGraphicMetaInfoPair> * mi = nullptr;
     try {
         tTVPBitmap *bmp = TVPInternalLoadBitmap(nname, keyidx, desw, desh, &mi, glmPalettized, &pn);
         dest->AssignBitmap(bmp);
@@ -1990,7 +1990,7 @@ int TVPLoadGraphic(iTVPBaseBitmap *dest, const ttstr &name, tjs_int32 keyidx,
 	tTVPGraphicImageData * data = NULL;
 
 	ttstr pn;
-	boost::container::vector<tTVPGraphicMetaInfoPair> * mi = nullptr;
+	std::vector<tTVPGraphicMetaInfoPair> * mi = nullptr;
     int ret = 0;
 	try
 	{
@@ -2109,7 +2109,7 @@ public:
 			tTJSCSH lock(CSTask);
 			ReqInterrupt = true;
 			clearTask(); // drop all unfinished tasks
-			TaskList.emplace_back(param);
+			TaskList.push_back(param);
 		}
 		TaskCond.notify_one();
     }
@@ -2189,7 +2189,7 @@ private:
         // load into dest
 		tTVPGraphicImageData * data = nullptr;
 
-		boost::container::vector<tTVPGraphicMetaInfoPair> * mi = nullptr;
+		std::vector<tTVPGraphicMetaInfoPair> * mi = nullptr;
         int ret = 0;
         try
         {
@@ -2435,7 +2435,7 @@ void TVPTouchImages(const std::vector<ttstr> & storages, tjs_int64 limit,
 		item.main.Stream = TVPCreateStream(item.main.filename, 0);
 		if (item.main.Stream) {
 			if (item.mask.handler) item.mask.Stream = TVPCreateStream(item.mask.filename, 0);
-			param->items.emplace_back(item);
+			param->items.push_back(item);
 		}
     }
     TVPGraphicPreload::Instance()->addTask(param);

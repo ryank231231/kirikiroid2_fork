@@ -69,7 +69,9 @@ void SpriteFrameCache::destroyInstance()
 bool SpriteFrameCache::init()
 {
     _spriteFrames.reserve(20);
+#if 0
     _spriteFramesAliases.reserve(20);
+#endif
     _loadedFileNames = new std::set<std::string>();
     return true;
 }

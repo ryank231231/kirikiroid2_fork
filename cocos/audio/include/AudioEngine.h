@@ -31,7 +31,7 @@
 #include <functional>
 #include <list>
 #include <string>
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 #include "platform/CCPlatformMacros.h"
 #include "Export.h"
@@ -322,13 +322,13 @@ protected:
     };
 
     //audioID,audioAttribute
-    static boost::unordered_map<int, AudioInfo> _audioIDInfoMap;
+    static std::unordered_map<int, AudioInfo> _audioIDInfoMap;
     
     //audio file path,audio IDs
-    static boost::unordered_map<std::string,std::list<int>> _audioPathIDMap;
+    static std::unordered_map<std::string,std::list<int>> _audioPathIDMap;
     
     //profileName,ProfileHelper
-    static boost::unordered_map<std::string, ProfileHelper> _audioPathProfileHelperMap;
+    static std::unordered_map<std::string, ProfileHelper> _audioPathProfileHelperMap;
     
     static unsigned int _maxInstances;
     

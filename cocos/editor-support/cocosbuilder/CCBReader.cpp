@@ -551,7 +551,7 @@ Node * CCBReader::readNodeGraph(Node * pParent)
     }
 
     // Read animated properties
-    boost::unordered_map<int, Map<std::string, CCBSequenceProperty*>> seqs;
+    std::unordered_map<int, Map<std::string, CCBSequenceProperty*>> seqs;
     _animatedProps = new std::set<std::string>();
     
     int numSequence = readInt(false);

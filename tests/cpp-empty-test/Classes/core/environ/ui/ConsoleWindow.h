@@ -5,7 +5,7 @@
 #include <deque>
 #include <vector>
 #include "tjsCommHead.h"
-#include <boost/container/deque.hpp>
+#include <deque>
 
 class TVPConsoleWindow : public cocos2d::Node {
 	TVPConsoleWindow();
@@ -22,6 +22,6 @@ private:
 
 	std::deque<cocos2d::Label*> _dispLabels;
 	std::vector<cocos2d::Label*> _unusedLabels;
-	boost::container::deque<std::pair<ttstr, cocos2d::Color3B> > _queuedLines;
+	std::deque<std::pair<ttstr, cocos2d::Color3B> > _queuedLines;
 	unsigned int _maxQueueSize;
 };

@@ -977,14 +977,14 @@ void tTJSNI_BaseWaveSoundBuffer::RebuildFilterChain()
 		iTVPBasicWaveFilter * filter =
 			reinterpret_cast<iTVPBasicWaveFilter *>((tjs_intptr_t)(tjs_int64)iface_v);
 		// save to the backupped array
-		FilterInterfaces.emplace_back(v, filter);
+		FilterInterfaces.push_back(tFilterObjectAndInterface(v, filter));
 	}
 
 	// reset filter output
 	FilterOutput = LoopManager;
 
 	// for each filter ...
-	for(boost::container::vector<tFilterObjectAndInterface>::iterator i = FilterInterfaces.begin();
+	for(std::vector<tFilterObjectAndInterface>::iterator i = FilterInterfaces.begin();
 		i != FilterInterfaces.end(); i++)
 	{
 		// recreate filter
@@ -994,17 +994,17 @@ void tTJSNI_BaseWaveSoundBuffer::RebuildFilterChain()
 	const tTVPWaveFormat &filteredFormat = FilterOutput->GetFormat();
 	if (filteredFormat.IsFloat) {
 		SoundBufferConvertFloatToPCM16 *filter = new SoundBufferConvertFloatToPCM16;
-		FilterInterfaces.emplace_back(filter, filter);
+		FilterInterfaces.push_back(tFilterObjectAndInterface(filter, filter));
 		FilterOutput = filter->Recreate(FilterOutput);
 		filter->Release();
 	} else if (filteredFormat.BitsPerSample == 24) {
 		SoundBufferConvertPCM24ToPCM16 *filter = new SoundBufferConvertPCM24ToPCM16;
-		FilterInterfaces.emplace_back(filter, filter);
+		FilterInterfaces.push_back(tFilterObjectAndInterface(filter, filter));
 		FilterOutput = filter->Recreate(FilterOutput);
 		filter->Release();
 	} else if (filteredFormat.BitsPerSample == 32) {
 		SoundBufferConvertPCM32ToPCM16 *filter = new SoundBufferConvertPCM32ToPCM16;
-		FilterInterfaces.emplace_back(filter, filter);
+		FilterInterfaces.push_back(tFilterObjectAndInterface(filter, filter));
 		FilterOutput = filter->Recreate(FilterOutput);
 		filter->Release();
 	}
@@ -1017,7 +1017,7 @@ void tTJSNI_BaseWaveSoundBuffer::ClearFilterChain()
 	// reset filter output
 	FilterOutput = NULL;
 
-	for(boost::container::vector<tFilterObjectAndInterface>::iterator i = FilterInterfaces.begin();
+	for(std::vector<tFilterObjectAndInterface>::iterator i = FilterInterfaces.begin();
 		i != FilterInterfaces.end(); i++)
 	{
 		// recreate filter
@@ -1031,7 +1031,7 @@ void tTJSNI_BaseWaveSoundBuffer::ClearFilterChain()
 void tTJSNI_BaseWaveSoundBuffer::ResetFilterChain()
 {
 	// Reset filter chain.
-	for(boost::container::vector<tFilterObjectAndInterface>::iterator i = FilterInterfaces.begin();
+	for(std::vector<tFilterObjectAndInterface>::iterator i = FilterInterfaces.begin();
 		i != FilterInterfaces.end(); i++)
 		i->Interface->Reset();
 }
@@ -1045,7 +1045,7 @@ void tTJSNI_BaseWaveSoundBuffer::UpdateFilterChain()
 	// but it's guaranteed that the call is never overlapped with
 	// UpdateFilterChain self and ClearFilterChain and RebuildFilterChain.
 	// so we does not need to protect this call by CriticalSection.
-	for(boost::container::vector<tFilterObjectAndInterface>::iterator i = FilterInterfaces.begin();
+	for(std::vector<tFilterObjectAndInterface>::iterator i = FilterInterfaces.begin();
 		i != FilterInterfaces.end(); i++)
 		i->Interface->Update();
 }

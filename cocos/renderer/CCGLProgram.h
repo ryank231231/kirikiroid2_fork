@@ -30,7 +30,7 @@ THE SOFTWARE.
 #ifndef __CCGLPROGRAM_H__
 #define __CCGLPROGRAM_H__
 
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 #include "base/ccMacros.h"
 #include "base/CCRef.h"
@@ -517,11 +517,11 @@ protected:
     } _flags;
 
     /**User defined Uniforms.*/
-    boost::unordered_map<std::string, Uniform> _userUniforms;
+    std::unordered_map<std::string, Uniform> _userUniforms;
     /**User defined vertex attributes.*/
-    boost::unordered_map<std::string, VertexAttrib> _vertexAttribs;
+    std::unordered_map<std::string, VertexAttrib> _vertexAttribs;
     /**Hash value of uniforms for quick access.*/
-    boost::unordered_map<GLint, std::pair<GLvoid*, unsigned int>> _hashForUniforms;
+    std::unordered_map<GLint, std::pair<GLvoid*, unsigned int>> _hashForUniforms;
     //cached director pointer for calling
     Director* _director;
 };

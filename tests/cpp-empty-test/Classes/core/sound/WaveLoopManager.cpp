@@ -662,7 +662,7 @@ void tTVPWaveLoopManager::GetLabelAt(tjs_int64 from, tjs_int64 to,
 	for(; s < (int)Labels.size(); s++)
 	{
 		if(Labels[s].Position >= from && Labels[s].Position < to)
-			labels.emplace_back(Labels[s]);
+			labels.push_back(Labels[s]);
 		else
 			break;
 	}
@@ -1225,7 +1225,7 @@ bool tTVPWaveLoopManager::ReadInformation(char * p)
 		if(!GetInt64(p_start  + 10, start )) return false;
 		link.From = start + length;
 		link.To = start;
-		Links.emplace_back(link);
+		Links.push_back(link);
 	}
 	else
 	{
@@ -1258,7 +1258,7 @@ bool tTVPWaveLoopManager::ReadInformation(char * p)
 				if(!*p) return false;
 				tTVPWaveLoopLink link;
 				if(!ReadLinkInformation(p, link)) return false;
-				Links.emplace_back(link);
+				Links.push_back(link);
 			}
 			else if(!strncasecmp(p, "Label", 5) && !isalpha(p[5]))
 			{
@@ -1267,7 +1267,7 @@ bool tTVPWaveLoopManager::ReadInformation(char * p)
 				if(!*p) return false;
 				tTVPWaveLabel label;
 				if(!ReadLabelInformation(p, label)) return false;
-				Labels.emplace_back(label);
+				Labels.push_back(label);
 			}
 			else
 			{

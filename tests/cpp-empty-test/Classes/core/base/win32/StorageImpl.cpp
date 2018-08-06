@@ -348,7 +348,7 @@ const std::vector<ttstr> &_getPrefixPath() {
 	static std::vector<ttstr> ret;
 	if (ret.empty()) {
 		for (const std::string &path : TVPGetApplicationHomeDirectory()) {
-			ret.emplace_back(path);
+			ret.push_back(path);
 		}
 	}
 	return ret;
@@ -357,7 +357,7 @@ const std::vector<std::string> &_getHomeDir() {
 	static std::vector<std::string> ret;
 	if (ret.empty()) {
 		for (const std::string &path : TVPGetApplicationHomeDirectory()) {
-			ret.emplace_back(path + "/");
+			ret.push_back(path + "/");
 		}
 	}
 	return ret;

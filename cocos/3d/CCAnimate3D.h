@@ -26,7 +26,7 @@
 #define __CCANIMATE3D_H__
 
 #include <map>
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 #include "3d/CCAnimation3D.h"
 #include "base/ccMacros.h"
@@ -158,13 +158,13 @@ protected:
     EvaluateType _scaleEvaluate;
     Animate3DQuality _quality;
     
-    boost::unordered_map<Bone3D*, Animation3D::Curve*> _boneCurves; //weak ref
-    boost::unordered_map<Node*, Animation3D::Curve*> _nodeCurves;
+    std::unordered_map<Bone3D*, Animation3D::Curve*> _boneCurves; //weak ref
+    std::unordered_map<Node*, Animation3D::Curve*> _nodeCurves;
 
     //sprite animates
-    static boost::unordered_map<Node*, Animate3D*> s_fadeInAnimates;
-    static boost::unordered_map<Node*, Animate3D*> s_fadeOutAnimates;
-    static boost::unordered_map<Node*, Animate3D*> s_runningAnimates;
+    static std::unordered_map<Node*, Animate3D*> s_fadeInAnimates;
+    static std::unordered_map<Node*, Animate3D*> s_fadeOutAnimates;
+    static std::unordered_map<Node*, Animate3D*> s_runningAnimates;
 };
 
 // end of 3d group

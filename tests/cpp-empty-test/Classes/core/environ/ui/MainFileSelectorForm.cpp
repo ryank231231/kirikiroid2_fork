@@ -55,7 +55,7 @@ static void _LoadHistory() {
 			for (tinyxml2::XMLElement *item = rootElement->FirstChildElement("Item"); item; item = item->NextSiblingElement("Item")) {
 				const char *path = item->Attribute("Path");
 				if (path) {
-					_HistoryPath.emplace_back(path);
+					_HistoryPath.push_back(path);
 				}
 			}
 		}
@@ -96,7 +96,7 @@ static void _RemoveHistory(const std::string &path) {
 static void _AddHistory(const std::string &path) {
 	if (!_HistoryPath.empty() && _HistoryPath.front() == path) return;
 	_RemoveHistory(path);
-	_HistoryPath.emplace_front(path);
+	_HistoryPath.push_front(path);
 	_SaveHistory();
 }
 
@@ -118,7 +118,7 @@ static bool _CheckGameFolder(const std::string &path) {
 				isValidGameFolder = true;
 			}
 		} else if (mask & S_IFDIR) {
-			subFolders.emplace_back(path + "/" + name);
+			subFolders.push_back(path + "/" + name);
 		}
 	});
 	while (!isValidGameFolder) {
@@ -225,7 +225,7 @@ void TVPMainFileSelectorForm::onCellClicked(int idx) {
 
 void TVPMainFileSelectorForm::getShortCutDirList(std::vector<std::string> &pathlist) {
 	if (!_lastpath.empty()) {
-		pathlist.emplace_back(_lastpath);
+		pathlist.push_back(_lastpath);
 	}
 	TVPBaseFileSelectorForm::getShortCutDirList(pathlist);
 }
@@ -419,8 +419,8 @@ void TVPMainFileSelectorForm::showMenu(Ref*) {
 		reader.findWidget("btnNewFolder")->addClickEventListener([this](Ref*) {
 			ttstr name = TJS_W("New Folder");
 			std::vector<ttstr> btns;
-			btns.emplace_back("OK");
-			btns.emplace_back("Cancel");
+			btns.push_back("OK");
+			btns.push_back("Cancel");
 			if (TVPShowSimpleInputBox(name, "Input name", "", btns) == 0) {
 				ttstr newname(CurrentPath);
 				newname += TJS_W("/");

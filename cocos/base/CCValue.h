@@ -29,7 +29,7 @@
 #include "base/ccMacros.h"
 #include <string>
 #include <vector>
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 /**
  * @addtogroup base
@@ -41,8 +41,8 @@ NS_CC_BEGIN
 class Value;
 
 typedef std::vector<Value> ValueVector;
-typedef boost::unordered_map<std::string, Value> ValueMap;
-typedef boost::unordered_map<int, Value> ValueMapIntKey;
+typedef std::unordered_map<std::string, Value> ValueMap;
+typedef std::unordered_map<int, Value> ValueMapIntKey;
 
 CC_DLL extern const ValueVector ValueVectorNull;
 CC_DLL extern const ValueMap ValueMapNull;

@@ -35,7 +35,7 @@
 #include "json/document.h"
 
 #include <string>
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 #include <vector>
 
 NS_CC_EXT_BEGIN
@@ -201,7 +201,7 @@ private:
     std::shared_ptr<Downloader> _downloader;
     
     //! The reference to the local assets
-    const boost::unordered_map<std::string, Manifest::Asset> *_assets;
+    const std::unordered_map<std::string, Manifest::Asset> *_assets;
     
     //! The path to store downloaded resources.
     std::string _storagePath;
@@ -255,7 +255,7 @@ private:
     double _totalSize;
     
     //! Downloaded size for each file
-    boost::unordered_map<std::string, double> _downloadedSize;
+    std::unordered_map<std::string, double> _downloadedSize;
     
     //! Total number of assets to download
     int _totalToDownload;

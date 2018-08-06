@@ -848,7 +848,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/inform)
 			for (auto& p_label = items.begin(); p_label != items.end(); ++p_label)
 			{
 				const auto& label = *p_label;
-				vecButtons.emplace_back(label);
+				vecButtons.push_back(label);
 			}
 			int ret = TVPShowSimpleMessageBox(text, caption, vecButtons);
 			if (result) result->operator =(ret);
@@ -856,9 +856,9 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/inform)
 			int nButtons = param[2]->AsInteger();
 			std::vector<ttstr> vecButtons;
 			if (nButtons >= 1)
-				vecButtons.emplace_back(TJS_W("OK"));
+				vecButtons.push_back(TJS_W("OK"));
 			if (nButtons >= 2)
-				vecButtons.emplace_back(TJS_W("Cancel"));
+				vecButtons.push_back(TJS_W("Cancel"));
 			int ret = TVPShowSimpleMessageBox(text, caption, vecButtons);
 			if (result) result->operator =(ret);
 		}

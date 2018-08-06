@@ -51,12 +51,12 @@ const int AudioEngine::INVALID_AUDIO_ID = -1;
 const float AudioEngine::TIME_UNKNOWN = -1.0f;
 
 //audio file path,audio IDs
-boost::unordered_map<std::string,std::list<int>> AudioEngine::_audioPathIDMap;
+std::unordered_map<std::string,std::list<int>> AudioEngine::_audioPathIDMap;
 //profileName,ProfileHelper
-boost::unordered_map<std::string, AudioEngine::ProfileHelper> AudioEngine::_audioPathProfileHelperMap;
+std::unordered_map<std::string, AudioEngine::ProfileHelper> AudioEngine::_audioPathProfileHelperMap;
 unsigned int AudioEngine::_maxInstances = MAX_AUDIOINSTANCES;
 AudioEngine::ProfileHelper* AudioEngine::_defaultProfileHelper = nullptr;
-boost::unordered_map<int, AudioEngine::AudioInfo> AudioEngine::_audioIDInfoMap;
+std::unordered_map<int, AudioEngine::AudioInfo> AudioEngine::_audioIDInfoMap;
 AudioEngineImpl* AudioEngine::_audioEngineImpl = nullptr;
 
 void AudioEngine::end()

@@ -68,7 +68,7 @@ void iSysConfigManager::Initialize() {
 				const char *key = item->Attribute("key");
 				const char *val = item->Attribute("value");
 				if (key && val) {
-					CustomArguments.emplace_back(key, val);
+					CustomArguments.push_back(std::pair<std::string, std::string>(key, val));
 				}
 			}
 		}
@@ -177,7 +177,7 @@ std::vector<std::string> iSysConfigManager::GetCustomArgumentsForPush() {
 		line += arg.first;
 		line += "=";
 		line += arg.second;
-		ret.emplace_back(line);
+		ret.push_back(line);
 	}
 	return ret;
 }

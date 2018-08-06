@@ -44,7 +44,7 @@ typedef struct _DataRef
     unsigned int referenceCount;
 }DataRef;
 
-static boost::unordered_map<std::string, DataRef> s_cacheFontData;
+static std::unordered_map<std::string, DataRef> s_cacheFontData;
 
 FontFreeType * FontFreeType::create(const std::string &fontName, int fontSize, GlyphCollection glyphs, const char *customGlyphs,bool distanceFieldEnabled /* = false */,int outline /* = 0 */)
 {

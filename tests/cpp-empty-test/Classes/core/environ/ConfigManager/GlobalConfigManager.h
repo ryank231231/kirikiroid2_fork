@@ -1,13 +1,12 @@
 #pragma once
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 #include <string>
 #include <vector>
-#include <boost/container/vector.hpp>
 
 class iSysConfigManager {
 protected:
-	boost::unordered_map<std::string, std::string> AllConfig;
-	boost::container::vector<std::pair<std::string, std::string> > CustomArguments;
+	std::unordered_map<std::string, std::string> AllConfig;
+	std::vector<std::pair<std::string, std::string> > CustomArguments;
 
 	bool ConfigUpdated;
 
@@ -27,12 +26,12 @@ public:
 	void SetValueFloat(const std::string &name, float val);
 	void SetValue(const std::string &name, const std::string & val);
 
-	boost::container::vector<std::pair<std::string, std::string> > &GetCustomArgumentsForModify() {
+	std::vector<std::pair<std::string, std::string> > &GetCustomArgumentsForModify() {
 		ConfigUpdated = true;
 		return CustomArguments;
 	}
 
-	const boost::container::vector<std::pair<std::string, std::string> > &GetCustomArguments() const { return CustomArguments; }
+	const std::vector<std::pair<std::string, std::string> > &GetCustomArguments() const { return CustomArguments; }
 
 	std::vector<std::string> GetCustomArgumentsForPush();
 };

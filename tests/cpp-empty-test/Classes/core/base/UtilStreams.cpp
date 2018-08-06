@@ -426,7 +426,7 @@ public:
 			ttstr filename(archive_entry_pathname_utf8(entry));
 			if (normalizeFileName)
 				NormalizeInArchiveStorageName(filename);
-			_filelist.emplace_back(filename, entry);
+			_filelist.push_back(filename, entry);
 			entry = archive_entry_new2(_arc);
 		}
 		archive_entry_free(entry);

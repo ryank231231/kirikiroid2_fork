@@ -54,7 +54,7 @@ bool TVPAppDelegate::applicationDidFinishLaunching() {
 	// If the resource size is different from design resolution size, you need to set contentScaleFactor.
 	// We use the ratio of resource's height to the height of design resolution,
 	// this can make sure that the resource's height could fit for the height of design resolution.
-	searchPath.emplace_back("res");
+	searchPath.push_back("res");
 
 	std::string skinpath = GlobalConfigManager::GetInstance()->GetValue<std::string>("skin_path", "");
 	if (!skinpath.empty()) {

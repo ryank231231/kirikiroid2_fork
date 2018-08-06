@@ -30,7 +30,7 @@
 #include "Downloader.h"
 
 #include <string>
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 #include <vector>
 
 #include "json/document.h"
@@ -129,7 +129,7 @@ protected:
     /** @brief Generate difference between this Manifest and another.
      * @param b   The other manifest
      */
-    boost::unordered_map<std::string, AssetDiff> genDiff(const Manifest *b) const;
+    std::unordered_map<std::string, AssetDiff> genDiff(const Manifest *b) const;
     
     /** @brief Generate resuming download assets list
      * @param units   The download units reference to be modified by the generation result
@@ -156,7 +156,7 @@ protected:
     
     /** @brief Gets all groups version.
      */
-    const boost::unordered_map<std::string, std::string>& getGroupVerions() const;
+    const std::unordered_map<std::string, std::string>& getGroupVerions() const;
     
     /** @brief Gets version for the given group.
      * @param group   Key of the requested group
@@ -167,7 +167,7 @@ protected:
      * @brief Gets assets.
      * @lua NA
      */
-    const boost::unordered_map<std::string, Asset>& getAssets() const;
+    const std::unordered_map<std::string, Asset>& getAssets() const;
     
     /** @brief Set the download state for an asset
      * @param key   Key of the asset to set
@@ -205,13 +205,13 @@ private:
     std::vector<std::string> _groups;
     
     //! The versions of all local group [Optional]
-    boost::unordered_map<std::string, std::string> _groupVer;
+    std::unordered_map<std::string, std::string> _groupVer;
     
     //! The version of local engine
     std::string _engineVer;
     
     //! Full assets list
-    boost::unordered_map<std::string, Asset> _assets;
+    std::unordered_map<std::string, Asset> _assets;
     
     //! All search paths
     std::vector<std::string> _searchPaths;

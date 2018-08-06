@@ -90,7 +90,7 @@ static void _TEST_SHADER(const char *_method, iTVPRenderManager* _this,
 	tTVPRect rc(0, 0, 256, 256);
 	std::vector<tRenderTexRectArray::Element> src_tex;
 	for (int i = 0; i < method->GetValidTex(); ++i)
-		src_tex.emplace_back(texdata[i], rc);
+		src_tex.push_back(texdata[i], rc);
 	fcall(src_tex, method);
 	_this->OperateRect(method, texdest, nullptr, rc, src_tex.empty() ? tRenderTexRectArray() : tRenderTexRectArray(&src_tex[0], src_tex.size()));
 	if (ignoreAlpha) _TEST_IGNORE_ALPHA();

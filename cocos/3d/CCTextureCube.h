@@ -28,7 +28,7 @@
 #include "renderer/CCTexture2D.h"
 
 #include <string>
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 #include "base/ccTypes.h"
 
 NS_CC_BEGIN

@@ -1,0 +1,114 @@
+boost/thread/thread.hpp
+boost/thread/mutex.hpp
+boost/thread/condition_variable.hpp
+boost/thread/recursive_mutex.hpp
+boost/thread/lock_guard.hpp
+boost/thread/future.hpp
+
+boost/container/vector.hpp
+	ListInfo.emplace_back(std::get<0>(it), std::get<1>(it));
+boost/container/deque.hpp
+	if (_queuedLines.size() > _maxQueueSize) {
+		_queuedLines.pop_front();
+	}
+	_queuedLines.emplace_back(line, clr);
+boost/container/map.hpp
+	_RenderManagerFactory->emplace(name, std::make_pair(func, nullptr));
+	//-------------------
+	//https://blog.csdn.net/windpenguin/article/details/75581552
+	vector
+	emplace <->  insert
+	emplace_back?  <-> ?push_back
+	set
+	emplcace <->  insert
+	map
+	emplace <->  insert
+
+
+boost/unordered_map.hpp
+	_indicesVertexZNumber.erase(iter.first);
+	---
+	same as map
+
+(x) boost/atomic.hpp
+	boost::atomic_long  RefCount;
+		TJS_METHOD_DEF(void, AddRef, ())
+		{
+			RefCount++;
+		}
+	boost::atomic_flag atom_lock;
+		while (atom_lock.test_and_set(boost::memory_order_acquire)) {
+		atom_lock.clear(boost::memory_order_release);
+	(x) boost::atomic<bool> m_bStop, m_bRunning;
+		if (m_bRunning.exchange(true)) {
+	-----
+	SDL_timer_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+	pthread_mutex_init(SDL_timer_mutex, NULL);
+	pthread_mutex_lock(SDL_timer_mutex);
+	...
+	pthread_mutex_unlock(SDL_timer_mutex);
+	if (SDL_timer_threaded) {
+		pthread_mutex_destroy(SDL_timer_mutex);
+		free(SDL_timer_mutex);
+		SDL_timer_mutex = NULL;
+	}
+	-----
+	https://blog.csdn.net/u013713010/article/details/53404626
+	pthread_spinlock_t lock = 0;
+	 pthread_spin_init(&lock, PTHREAD_PROCESS_PRIVATE);	 
+	 for (int i = 0; i < 10000000; i++)
+	 {
+	  pthread_spin_lock(&lock);
+	  ++count;
+	  pthread_spin_unlock(&lock);
+	 }
+	pthread_spin_destroy(&lock);
+	-----
+ 
+	
+
+(x)boost/tr1/cmath.hpp
+	result.r = static_cast<int>(boost::math::tr1::roundf(color.r));
+	result.g = static_cast<int>(boost::math::tr1::roundf(color.g));
+	result.b = static_cast<int>(boost::math::tr1::roundf(color.b));
+	//---------------------
+	//https://github.com/Mocahteam/SPRED/blob/5f8af28cf517b2bc6e4b7d110231a922cf7d085a/old_versions/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/MathUtil.cpp
+	#if defined(_MSC_VER)
+
+	float round(float val)
+	{
+	#if defined(__cplusplus)
+		return floor(val + 0.5f);
+	#else
+		return floorf(val + 0.5f);
+	#endif
+	}
+
+	double round(double val)
+	{
+		return floor(val + 0.5);
+	}
+
+	#endif
+
+(x)boost/function.hpp
+	(???x)
+
+(x) boost/regex.hpp
+	if (boost::regex_match(child->_name, boost::regex(searchName)))
+	boost::regex pat("\\/");
+	std::string _old = boost::regex_replace(oldPath, pat, "\\");
+	std::string _new = boost::regex_replace(newPath, pat, "\\");
+		
+boost/chrono.hpp
+	boost::chrono::high_resolution_clock::time_point _startTime;
+	boost::this_thread::sleep_for(boost::chrono::milliseconds(50));
+	inline const boost::chrono::high_resolution_clock::time_point& getStartTime(void) { return _startTime; };
+	long duration = static_cast<long>(boost::chrono::duration_cast<boost::chrono::microseconds>(now - timer->_startTime).count());
+	_startTime = boost::chrono::high_resolution_clock::now();
+	m_condPicture.wait_for(lk, boost::chrono::milliseconds(10));
+	boost::this_thread::sleep_for(boost::chrono::milliseconds(remain));
+	_cond.wait_for(lk, boost::chrono::milliseconds(10));
+	if (m_p->condition.wait_for(lock, boost::chrono::milliseconds(milliseconds)) != std::cv_status::timeout)
+	m_presentevent.wait_for(lock, boost::chrono::milliseconds(endtime.MillisLeft()));
+	

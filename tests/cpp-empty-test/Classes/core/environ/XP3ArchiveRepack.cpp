@@ -308,7 +308,7 @@ uint64_t XP3ArchiveRepackAsyncImpl::AddTask(const std::string &src/*, const std:
 	for (const tTVPXP3Archive::tArchiveItem &item : xp3arc->ItemVector) {
 		xp3arc->TotalSize += item.OrgSize;
 	}
-	ConvFileList.emplace_back(xp3arc, src);
+	ConvFileList.push_back(xp3arc, src);
 	return xp3arc->TotalSize;
 }
 
@@ -518,8 +518,8 @@ void XP3ArchiveRepackAsyncImpl::DoConv()
 				if (item.Name.length() > 256 && item.Name.StartsWith(TJS_W("$$$")))
 					continue;
 				ttstr name = TVPChopStorageExt(item.Name);
-				allFileName.emplace(name, &item);
-				allfilelist.emplace_back(idx);
+				allFileName.push_back(name, &item);
+				allfilelist.push_back(idx);
 			}
 			if(OptionMergeMaskImg)
 			for (tjs_uint idx : allfilelist) {
@@ -537,8 +537,8 @@ void XP3ArchiveRepackAsyncImpl::DoConv()
 						const tTVPXP3Archive::tArchiveItem* imgItem = itpair.first->second;
 						allFileName.erase(itpair.first);
 						allFileName.erase(name);
-						imglist.emplace(imgItem - &xp3arc->ItemVector.front(), idx);
-						masklist.emplace(idx);
+						imglist.push_back(imgItem - &xp3arc->ItemVector.front(), idx);
+						masklist.push_back(idx);
 						continue;
 					}
 				}
@@ -609,7 +609,7 @@ void XP3ArchiveRepackAsyncImpl::DoConv()
 				return nullptr;
 			}, [](void *callbackdata, const ttstr & name, const ttstr & value) {
 				BmpInfoWithMask * data = (BmpInfoWithMask *)callbackdata;
-				data->metainfo.emplace(name, value);
+				data->metainfo.push_back(name, value);
 			}, strImg.get(), TVP_clNone, glmNormal);
 
 			// mask part
@@ -708,7 +708,7 @@ void XP3ArchiveRepackAsyncImpl::DoConv()
 						return nullptr;
 					}, [](void *callbackdata, const ttstr & name, const ttstr & value) {
 						BmpInfo * data = (BmpInfo *)callbackdata;
-						data->metainfo.emplace(name, value);
+						data->metainfo.push_back(name, value);
 					}, s.get(), TVP_clNone, glmNormal);
 
 					// skip 8-bit image

@@ -1,10 +1,12 @@
 #pragma once
 #include "KRMovieDef.h"
+#if 0
 #include <boost/atomic.hpp>
 #include <boost/thread/recursive_mutex.hpp>
 #include <boost/thread/condition_variable.hpp>
 #include <boost/thread/thread.hpp>
 #include <boost/thread/mutex.hpp>
+#endif
 
 NS_KRMOVIE_BEGIN
 typedef boost::recursive_mutex CCriticalSection;

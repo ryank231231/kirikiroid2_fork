@@ -27,7 +27,7 @@ THE SOFTWARE.
 
 #include <string>
 #include <vector>
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 #include "platform/CCPlatformMacros.h"
 #include "base/ccTypes.h"
@@ -406,7 +406,7 @@ public:
     virtual long getFileSize(const std::string &filepath);
 
     /** Returns the full path cache. */
-    const boost::unordered_map<std::string, std::string>& getFullPathCache() const { return _fullPathCache; }
+    const std::unordered_map<std::string, std::string>& getFullPathCache() const { return _fullPathCache; }
 
 protected:
     /**
@@ -513,7 +513,7 @@ protected:
      *  The full path cache. When a file is found, it will be added into this cache. 
      *  This variable is used for improving the performance of file search.
      */
-    mutable boost::unordered_map<std::string, std::string> _fullPathCache;
+    mutable std::unordered_map<std::string, std::string> _fullPathCache;
     
     /**
      * Writable path.

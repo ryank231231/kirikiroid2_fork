@@ -46,7 +46,7 @@ public:
 	void animationEvent(Armature *armature, MovementEventType movementType, const std::string& movementID);
     
 private:
-	boost::unordered_map<cocos2d::Ref*, SEL_MovementEventCallFunc> *_mapEventAnimation;
+	std::unordered_map<cocos2d::Ref*, SEL_MovementEventCallFunc> *_mapEventAnimation;
 
 };
 
@@ -83,8 +83,8 @@ private:
 
 private:
     static TriggerMng *_sharedTriggerMng;
-    boost::unordered_map<unsigned int, TriggerObj*> _triggerObjs;
-    boost::unordered_map<Armature*, ArmatureMovementDispatcher*> *_movementDispatches;
+    std::unordered_map<unsigned int, TriggerObj*> _triggerObjs;
+    std::unordered_map<Armature*, ArmatureMovementDispatcher*> *_movementDispatches;
     cocos2d::EventDispatcher* _eventDispatcher;  ///< event dispatcher used to dispatch all kinds of events
 };
 

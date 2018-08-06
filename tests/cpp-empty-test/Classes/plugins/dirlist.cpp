@@ -40,7 +40,7 @@ class tGetDirListFunction : public tTJSDispatch
 			TVPGetLocalName(dir);
 			TVPGetLocalFileListAt(dir, [ni](const ttstr &name, tTVPLocalFileInfo* s) {
 				if (s->Mode & (S_IFREG | S_IFDIR)) {
-					ni->Items.emplace_back(name);
+					ni->Items.push_back(name);
 				}
 			});
 			*result = tTJSVariant(array, array);

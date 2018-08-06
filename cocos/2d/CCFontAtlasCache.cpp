@@ -35,7 +35,7 @@
 
 NS_CC_BEGIN
 
-boost::unordered_map<std::string, FontAtlas *> FontAtlasCache::_atlasMap;
+std::unordered_map<std::string, FontAtlas *> FontAtlasCache::_atlasMap;
 
 void FontAtlasCache::purgeCachedData()
 {

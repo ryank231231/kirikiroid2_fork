@@ -27,7 +27,7 @@
 #define _CC_GROUPCOMMAND_H_
 
 #include <vector>
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 #include "base/CCRef.h"
 #include "CCRenderCommand.h"
@@ -51,7 +51,7 @@ protected:
     GroupCommandManager();
     ~GroupCommandManager();
     bool init();
-    boost::unordered_map<int, bool> _groupMapping;
+    std::unordered_map<int, bool> _groupMapping;
     std::vector<int> _unusedIDs;
 };
 

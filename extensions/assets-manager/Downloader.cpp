@@ -505,7 +505,7 @@ void Downloader::batchDownloadSync(const DownloadUnits &units, const std::string
             }
             const std::string &key = it->first;
             const DownloadUnit &unit = it->second;
-            group.emplace(key, unit);
+            group.insert(DownloadUnitsPair(key, unit));
         }
         if (group.size() > 0)
         {

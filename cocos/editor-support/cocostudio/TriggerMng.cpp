@@ -34,7 +34,7 @@ namespace cocostudio {
 TriggerMng* TriggerMng::_sharedTriggerMng = nullptr;
 
 TriggerMng::TriggerMng(void)
-: _movementDispatches(new boost::unordered_map<Armature*, ArmatureMovementDispatcher*>)
+: _movementDispatches(new std::unordered_map<Armature*, ArmatureMovementDispatcher*>)
 {
     _eventDispatcher = Director::getInstance()->getEventDispatcher();
     _eventDispatcher->retain();
@@ -491,7 +491,7 @@ void TriggerMng::addEventListenerWithFixedPriority(cocos2d::EventListener* liste
 ArmatureMovementDispatcher::ArmatureMovementDispatcher(void)
 : _mapEventAnimation(nullptr)
 {
-	_mapEventAnimation = new boost::unordered_map<Ref*, SEL_MovementEventCallFunc> ;
+	_mapEventAnimation = new std::unordered_map<Ref*, SEL_MovementEventCallFunc> ;
 }
 
 ArmatureMovementDispatcher::~ArmatureMovementDispatcher(void)

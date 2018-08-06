@@ -1,7 +1,7 @@
 #pragma once
 #include "BaseForm.h"
 #include "base/CCRefPtr.h"
-#include <boost/container/vector.hpp>
+#include <vector>
 
 class TVPMessageBoxForm : public iTVPBaseForm {
 public:
@@ -29,7 +29,7 @@ class TVPSimpleProgressForm : public iTVPBaseForm {
 public:
 	static TVPSimpleProgressForm* create();
 
-	void initButtons(const boost::container::vector<std::pair<std::string, std::function<void(cocos2d::Ref*)> > > &vec);
+	void initButtons(const std::vector<std::pair<std::string, std::function<void(cocos2d::Ref*)> > > &vec);
 
 	void setTitle(const std::string &text);
 	void setContent(const std::string &text);

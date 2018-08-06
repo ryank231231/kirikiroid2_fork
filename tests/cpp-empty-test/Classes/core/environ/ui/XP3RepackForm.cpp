@@ -42,7 +42,7 @@
 #include "base/CCScheduler.h"
 #include "TickCount.h"
 #endif
-#include <boost/container/vector.hpp>
+#include <vector>
 
 
 using namespace cocos2d;
@@ -51,12 +51,12 @@ bool TVPGetXP3ArchiveOffset(tTJSBinaryStream *st, const ttstr name, tjs_uint64 &
 
 static void WalkDir(const ttstr &dir, const std::function<void(const ttstr&, tjs_uint64)>& cb) {
 	std::vector<ttstr> subdirs;
-	boost::container::vector<std::pair<std::string, tjs_uint64> > files;
+	std::vector<std::pair<std::string, tjs_uint64> > files;
 	TVPGetLocalFileListAt(dir, [&](const ttstr& path, tTVPLocalFileInfo* info) {
 		if (info->Mode & S_IFDIR) {
-			subdirs.emplace_back(path);
+			subdirs.push_back(path);
 		} else {
-			files.emplace_back(info->NativeName, info->Size);
+			files.push_back(info->NativeName, info->Size);
 		}
 	});
 	ttstr prefix = dir + TJS_W("/");
@@ -125,7 +125,7 @@ void TVPXP3Repacker::Start(std::vector<std::string> &filelist, const std::string
 		TVPMainScene::GetInstance()->pushUIForm(ProgressForm, TVPMainScene::eEnterAniNone);
 		std::vector<std::pair<std::string, std::function<void(cocos2d::Ref*)> > > vecButtons;
 		LocaleConfigManager *locmgr = LocaleConfigManager::GetInstance();
-		vecButtons.emplace_back(locmgr->GetText("stop"), [this](Ref*) {
+		vecButtons.push_back(locmgr->GetText("stop"), [this](Ref*) {
 			ArcRepacker.Stop();
 		});
 		ProgressForm->initButtons(vecButtons);
@@ -376,7 +376,7 @@ void TVPProcessXP3Repack(const std::string &dir)
 		tjs_uint64 offset;
 		tTVPLocalFileStream *st = new tTVPLocalFileStream(strpath, strpath, TJS_BS_READ);
 		if (TVPGetXP3ArchiveOffset(st, strpath, offset, false)) {
-			filelist.emplace_back(strpath.AsStdString());
+			filelist.push_back(strpath.AsStdString());
 		}
 		delete st;
 	});

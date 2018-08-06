@@ -20,7 +20,7 @@
 #endif
 #include "WaveIntf.h"
 #include "WaveLoopManager.h"
-#include <boost/container/vector.hpp>
+#include <vector>
 
 /*[*/
 //---------------------------------------------------------------------------
@@ -149,7 +149,7 @@ private:
 	tjs_uint8 *VisBuffer; // buffer for visualization
 	tjs_int *L2BufferDecodedSamplesInUnit;
 	tTVPWaveSegmentQueue *L1BufferSegmentQueues;
-	boost::container::vector<tTVPWaveLabel> LabelEventQueue;
+	std::vector<tTVPWaveLabel> LabelEventQueue;
 	tjs_int64 *L1BufferDecodeSamplePos;
 	tTVPWaveSegmentQueue *L2BufferSegmentQueues;
 

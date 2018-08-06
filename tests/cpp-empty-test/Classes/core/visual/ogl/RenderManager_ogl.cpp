@@ -119,12 +119,12 @@ static void TVPInitGLExtensionInfo() {
 	for (char &c : gl_extensions) {
 		if (c == ' ') {
 			c = 0;
-			sTVPGLExtensions.emplace(p);
+			sTVPGLExtensions.push_back(p);
 			p = &c;
 			++p;
 		}
 	}
-	if (*p) sTVPGLExtensions.emplace(p);
+	if (*p) sTVPGLExtensions.push_back(p);
 	IndividualConfigManager *cfgMgr = IndividualConfigManager::GetInstance();
 	for (const char *const *name = (&UsedGLExtInfo.NameBegin) + 1; *name; ++name) {
 		if (!cfgMgr->GetValue<int>(*name, 1)) {
@@ -239,12 +239,12 @@ std::string TVPGetOpenGLInfo() {
 	for (char &c : gl_extensions) {
 		if (c == ' ') {
 			c = 0;
-			Extensions.emplace(p);
+			Extensions.push_back(p);
 			p = &c;
 			++p;
 		}
 	}
-	if (*p) Extensions.emplace(p);
+	if (*p) Extensions.push_back(p);
 
 	std::stringstream ret;
 	ret << "Renderer : "; ret << glGetString(GL_RENDERER); ret << "\n";
@@ -3334,7 +3334,7 @@ public:
 			tTVPOGLRenderMethod_Script *method = (tTVPOGLRenderMethod_Script *)GetRenderMethod("PsAddBlend");
 			method->SetParameterOpa(method->EnumParameterID("opacity"), 255);
 			std::vector<tRenderTexRectArray::Element> src_tex;
-			src_tex.emplace_back(testtex2, rc);
+			src_tex.push_back(testtex2, rc);
 			OperateRect(method, testtex1, testtex1, rc, tRenderTexRectArray(&src_tex[0], src_tex.size()));
 
 			uint8_t *pix1 = (uint8_t *)testbmp1->GetScanLine(0);
@@ -3808,7 +3808,7 @@ public:
 					tTVPOGLTexture2D *newtex = GetTempTexture2D(tex, rc);
 					std::vector<tTVPPointD> pttar; pttar.reserve(ptcount);
 					for (int i = 0; i < ptcount; ++i) {
-						pttar.emplace_back(tTVPPointD{ _pttar[i].x - l, _pttar[i].y - t });
+						pttar.push_back(tTVPPointD{ _pttar[i].x - l, _pttar[i].y - t });
 					}
 					newtex->ApplyVertex(texitem, &pttar.front(), ptcount);
 				}

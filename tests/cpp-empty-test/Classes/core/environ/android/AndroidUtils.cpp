@@ -280,7 +280,7 @@ static std::vector<std::string> &split(const std::string &s, char delim, std::ve
 	std::stringstream ss(s);
 	std::string item;
 	while (std::getline(ss, item, delim)) {
-		elems.emplace_back(item);
+		elems.push_back(item);
 	}
 	return elems;
 }
@@ -315,7 +315,7 @@ static int InsertFilepathInto(JNIEnv *env, std::vector<std::string>& vec, jobjec
 	for (int i = 0; i < count; ++i) {
 		jobject FileObj = env->GetObjectArrayElement(FileObjs, i);
 		std::string path = File_getAbsolutePath(FileObj);
-		if (!path.empty()) vec.emplace_back(path);
+		if (!path.empty()) vec.push_back(path);
 	}
 	return count;
 }
@@ -334,7 +334,7 @@ static int GetExternalStoragePath(std::vector<std::string> &ret) {
 	} else if (JniHelper::getMethodInfo(methodInfo, "android/content/Context", "getExternalFilesDir", "(Ljava/lang/String;)Ljava/io/File;")) {
 		jobject FileObj = methodInfo.env->CallObjectMethod(sInstance, methodInfo.methodID, nullptr);
 		if (FileObj) {
-			ret.emplace_back(File_getAbsolutePath(FileObj));
+			ret.push_back(File_getAbsolutePath(FileObj));
 			++count;
 		}
 	}
@@ -343,7 +343,7 @@ static int GetExternalStoragePath(std::vector<std::string> &ret) {
 
 std::vector<std::string> TVPGetAppStoragePath() {
 	std::vector<std::string> ret;
-	ret.emplace_back(GetInternalStoragePath());
+	ret.push_back(GetInternalStoragePath());
 	GetExternalStoragePath(ret);
 	return ret;
 }
@@ -358,7 +358,7 @@ std::vector<std::string> TVPGetDriverPath() {
 			int count = methodInfo.env->GetArrayLength(PathObjs);
 			for (int i = 0; i < count; ++i) {
 				jstring path = (jstring)methodInfo.env->GetObjectArrayElement(PathObjs, i);
-				if (path) ret.emplace_back(cocos2d::JniHelper::jstring2string(path));
+				if (path) ret.push_back(cocos2d::JniHelper::jstring2string(path));
 			}
 		}
 	}
@@ -385,7 +385,7 @@ std::vector<std::string> TVPGetDriverPath() {
 				continue;
 			}
 			mounted.insert(tabs[0]);
-			ret.emplace_back(path);
+			ret.push_back(path);
 		}
 	}
 
@@ -465,8 +465,8 @@ int TVPShowSimpleMessageBox(const ttstr & text, const ttstr & caption, const std
 	std::vector<const char *> btnText; btnText.reserve(vecButtons.size());
 	std::vector<std::string> btnTextHold; btnTextHold.reserve(vecButtons.size());
 	for (const ttstr &btn : vecButtons) {
-		btnTextHold.emplace_back(btn.AsStdString());
-		btnText.emplace_back(btnTextHold.back().c_str());
+		btnTextHold.push_back(btn.AsStdString());
+		btnText.push_back(btnTextHold.back().c_str());
 	}
 	return TVPShowSimpleMessageBox(pszText, pszTitle, btnText.size(), &btnText[0]);
 }
@@ -515,7 +515,7 @@ std::vector<ttstr> Android_GetExternalStoragePath() {
 		for (const std::string &path : pathlist) {
 			std::string strPath = "file://.";
 			strPath += path;
-			ret.emplace_back(strPath);
+			ret.push_back(strPath);
 		}
 	}
 	return ret;
@@ -659,7 +659,7 @@ bool TVPCheckStartupPath(const std::string &path) {
 
 	if (!success) {
 		std::vector<std::string> paths;
-		paths.emplace_back(GetInternalStoragePath());
+		paths.push_back(GetInternalStoragePath());
 		GetExternalStoragePath(paths);
 		std::string msg = LocaleConfigManager::GetInstance()->GetText("use_internal_path");
 		if (paths.size() > 0) {
@@ -1215,7 +1215,7 @@ std::vector<std::string> TVPGetDriverPath() {
 		case DRIVE_REMOVABLE:
 		case DRIVE_FIXED:
 		case DRIVE_REMOTE:
-			ret.emplace_back(drv);
+			ret.push_back(drv);
 			break;
 		}
 	}
@@ -1287,7 +1287,7 @@ std::vector<std::string> TVPGetAppStoragePath() {
 	return ret;
 #else
 	std::vector<std::string> ret;
-	ret.emplace_back(TVPGetDefaultFileDir());
+	ret.push_back(TVPGetDefaultFileDir());
 	return ret;
 #endif
 }

@@ -56,18 +56,31 @@ tTJSCriticalSection::~tTJSCriticalSection() {
 }
 
 void tTJSSpinLock::lock() {
+#if 0
 	while (atom_lock.test_and_set(boost::memory_order_acquire)) {
 		boost::this_thread::yield();
 //		TVPRelinquishCPU();
 	}
+#else
+	pthread_spin_lock(&atom_lock_spin);
+#endif
 }
 
 void tTJSSpinLock::unlock() {
+#if 0
 	atom_lock.clear(boost::memory_order_release);
+#else
+	pthread_spin_unlock(&atom_lock_spin);
+#endif
 }
 
 tTJSSpinLock::tTJSSpinLock() {
+#if 0
 	unlock();
+#else
+	atom_lock_spin = 0;
+	pthread_spin_init(&atom_lock_spin, PTHREAD_PROCESS_PRIVATE);	 
+#endif
 }
 
 tTJSSpinLockHolder::tTJSSpinLockHolder(tTJSSpinLock &lock) {

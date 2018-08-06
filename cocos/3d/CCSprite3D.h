@@ -25,7 +25,7 @@
 #ifndef __CCSPRITE3D_H__
 #define __CCSPRITE3D_H__
 
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 #include "base/CCVector.h"
 #include "base/ccTypes.h"
@@ -222,7 +222,7 @@ protected:
     
     Vector<MeshVertexData*>      _meshVertexDatas;
     
-    boost::unordered_map<std::string, AttachNode*> _attachments;
+    std::unordered_map<std::string, AttachNode*> _attachments;
 
     BlendFunc                    _blend;
     
@@ -306,7 +306,7 @@ protected:
     
     
     static Sprite3DCache*                        _cacheInstance;
-    boost::unordered_map<std::string, Sprite3DData*> _spriteDatas; //cached sprite datas
+    std::unordered_map<std::string, Sprite3DData*> _spriteDatas; //cached sprite datas
 };
 
 /// @cond 

@@ -28,7 +28,7 @@
 #ifndef __AUDIO_ENGINE_INL_H_
 #define __AUDIO_ENGINE_INL_H_
 
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 #include "base/CCRef.h"
 #include "AudioCache.h"
@@ -72,13 +72,13 @@ private:
     ALuint _alSources[MAX_AUDIOINSTANCES];
     
     //source,used
-    boost::unordered_map<ALuint, bool> _alSourceUsed;
+    std::unordered_map<ALuint, bool> _alSourceUsed;
     
     //filePath,bufferInfo
-    boost::unordered_map<std::string, AudioCache> _audioCaches;
+    std::unordered_map<std::string, AudioCache> _audioCaches;
     
     //audioID,AudioInfo
-    boost::unordered_map<int, AudioPlayer>  _audioPlayers;
+    std::unordered_map<int, AudioPlayer>  _audioPlayers;
     
     boost::mutex _threadMutex;
     

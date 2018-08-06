@@ -80,7 +80,7 @@ void TVPMessageBoxForm::init(const std::string &caption, const std::string &text
 		}
 		Widget *btn = _btnModel->clone();
 		totalWidth += btn->getContentSize().width;
-		btns.emplace_back(btn);
+		btns.push_back(btn);
 		_btnList->addChild(btn);
 		btn->setTag(i);
 	}
@@ -131,7 +131,7 @@ TVPSimpleProgressForm* TVPSimpleProgressForm::create()
 	return form;
 }
 
-void TVPSimpleProgressForm::initButtons(const boost::container::vector<std::pair<std::string, std::function<void(cocos2d::Ref*)> > > &vec)
+void TVPSimpleProgressForm::initButtons(const std::vector<std::pair<std::string, std::function<void(cocos2d::Ref*)> > > &vec)
 {
 	Size btnSize = _btnCell->getContentSize();
 	float totalWidth = 0;

@@ -206,7 +206,7 @@ void TVPExecThreadTask(int numThreads, TVP_THREAD_TASK_FUNC func)
   static threadpool11::Pool pool;
   std::vector<boost::future<void>> futures;
   for (int i = 0; i < numThreads; ++i) {
-	  futures.emplace_back(pool.postWork<void>(std::bind(func, i)));
+	  futures.push_back(pool.postWork<void>(std::bind(func, i)));
   }
   for (auto& it : futures)
 	  it.get();
@@ -236,5 +236,5 @@ void TVPOnThreadExited() {
 
 void TVPAddOnThreadExitEvent(const std::function<void()> &ev)
 {
-	_OnThreadExitedEvents.emplace_back(ev);
+	_OnThreadExitedEvents.push_back(ev);
 }

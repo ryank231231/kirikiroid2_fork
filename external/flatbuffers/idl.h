@@ -149,7 +149,7 @@ template<typename T> class SymbolTable {
   }
 
   bool Add(const std::string &name, T *e) {
-    vec.emplace_back(e);
+    vec.push_back(e);
     auto it = dict.find(name);
     if (it != dict.end()) return true;
     dict[name] = e;

@@ -26,7 +26,7 @@ THE SOFTWARE.
 #define __TRIGGERFACTORY_H__
 
 #include <string>
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 #include <functional>
 #include "base/CCRef.h"
 #include "platform/CCPlatformMacros.h"
@@ -50,7 +50,7 @@ public:
         Instance _fun;
         InstanceFunc _func;
     };
-    typedef boost::unordered_map<std::string, TInfo>  FactoryMap;
+    typedef std::unordered_map<std::string, TInfo>  FactoryMap;
 
     static ObjectFactory* getInstance();
     static void destroyInstance();

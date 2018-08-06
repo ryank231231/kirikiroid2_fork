@@ -25,7 +25,7 @@
 #ifndef __CCANIMATION3D_H__
 #define __CCANIMATION3D_H__
 
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 #include "3d/CCAnimationCurve.h"
 
@@ -84,7 +84,7 @@ public:
     
 
     /**get the bone Curves set*/
-    const boost::unordered_map<std::string, Curve*>& getBoneCurves() const {return _boneCurves;}
+    const std::unordered_map<std::string, Curve*>& getBoneCurves() const {return _boneCurves;}
     
 CC_CONSTRUCTOR_ACCESS:
     Animation3D();
@@ -96,7 +96,7 @@ CC_CONSTRUCTOR_ACCESS:
     bool initWithFile(const std::string& filename, const std::string& animationName);
     
 protected:
-    boost::unordered_map<std::string, Curve*> _boneCurves;//bone curves map, key bone name, value AnimationCurve
+    std::unordered_map<std::string, Curve*> _boneCurves;//bone curves map, key bone name, value AnimationCurve
 
     float _duration; //animation duration
 };
@@ -128,7 +128,7 @@ protected:
     
     static Animation3DCache* _cacheInstance; //cache instance
     
-    boost::unordered_map<std::string, Animation3D*> _animations; //cached animations
+    std::unordered_map<std::string, Animation3D*> _animations; //cached animations
 };
 
 // end of 3d group

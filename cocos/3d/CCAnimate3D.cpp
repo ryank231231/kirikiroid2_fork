@@ -30,9 +30,9 @@
 
 NS_CC_BEGIN
 
-boost::unordered_map<Node*, Animate3D*> Animate3D::s_fadeInAnimates;
-boost::unordered_map<Node*, Animate3D*> Animate3D::s_fadeOutAnimates;
-boost::unordered_map<Node*, Animate3D*> Animate3D::s_runningAnimates;
+std::unordered_map<Node*, Animate3D*> Animate3D::s_fadeInAnimates;
+std::unordered_map<Node*, Animate3D*> Animate3D::s_fadeOutAnimates;
+std::unordered_map<Node*, Animate3D*> Animate3D::s_runningAnimates;
 float      Animate3D::_transTime = 0.1f;
 
 //create Animate3D using Animation.
@@ -159,7 +159,7 @@ void Animate3D::startWithTarget(Node *target)
         {
             if (_animation)
             {
-                const boost::unordered_map<std::string, Animation3D::Curve*>& boneCurves = _animation->getBoneCurves();
+                const std::unordered_map<std::string, Animation3D::Curve*>& boneCurves = _animation->getBoneCurves();
                 //for (const auto& iter: boneCurves)
                 for (auto p_iter = boneCurves.begin(); p_iter != boneCurves.end(); ++p_iter)
 				{
@@ -199,7 +199,7 @@ void Animate3D::startWithTarget(Node *target)
         }
         else
         {
-            const boost::unordered_map<std::string, Animation3D::Curve*>& boneCurves = _animation->getBoneCurves();
+            const std::unordered_map<std::string, Animation3D::Curve*>& boneCurves = _animation->getBoneCurves();
             //for (const auto& iter: boneCurves)
             for (auto p_iter = boneCurves.begin(); p_iter != boneCurves.end(); ++p_iter)
 			{

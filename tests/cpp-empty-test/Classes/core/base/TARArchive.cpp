@@ -90,7 +90,7 @@ public:
 					NormalizeInArchiveStorageName(item.filename);
 				item.size = original_size;
 				item.offset = _instr->GetPosition();
-				filelist.emplace_back(item);
+				filelist.push_back(item);
 				tjs_uint64 readsize = (original_size + (TBLOCK - 1)) & ~(TBLOCK - 1);
 				_instr->SetPosition(item.offset + readsize);
 			}

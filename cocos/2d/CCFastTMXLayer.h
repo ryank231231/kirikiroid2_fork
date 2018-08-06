@@ -28,7 +28,7 @@ THE SOFTWARE.
 #define __CC_FAST_TMX_LAYER_H__
 
 #include <map>
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 #include "2d/CCNode.h"
 #include "2d/CCTMXXMLParser.h"
 #include "renderer/CCPrimitiveCommand.h"
@@ -336,7 +336,7 @@ protected:
     std::vector<V3F_C4B_T2F_Quad> _totalQuads;
     std::vector<GLushort> _indices;
     std::map<int/*vertexZ*/, int/*offset to _indices by quads*/> _indicesVertexZOffsets;
-    boost::unordered_map<int/*vertexZ*/, int/*number to quads*/> _indicesVertexZNumber;
+    std::unordered_map<int/*vertexZ*/, int/*number to quads*/> _indicesVertexZNumber;
     std::vector<PrimitiveCommand> _renderCommands;
     bool _dirty;
     

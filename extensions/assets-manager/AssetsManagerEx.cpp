@@ -576,7 +576,7 @@ void AssetsManagerEx::startUpdate()
         _tempManifest->release();
         _tempManifest = _remoteManifest;
         
-        boost::unordered_map<std::string, Manifest::AssetDiff> diff_map = _localManifest->genDiff(_remoteManifest);
+        std::unordered_map<std::string, Manifest::AssetDiff> diff_map = _localManifest->genDiff(_remoteManifest);
         if (diff_map.size() == 0)
         {
             updateSucceed();
@@ -604,7 +604,7 @@ void AssetsManagerEx::startUpdate()
                     unit.srcUrl = packageUrl + path;
                     unit.storagePath = _storagePath + path;
                     unit.resumeDownload = false;
-                    _downloadUnits.emplace(unit.customId, unit);
+                    _downloadUnits.insert(Downloader::DownloadUnitsPair(unit.customId, unit));
                 }
             }
             // Set other assets' downloadState to SUCCESSED
@@ -810,7 +810,7 @@ void AssetsManagerEx::onError(const Downloader::Error &error)
         if (unitIt != _downloadUnits.end())
         {
             Downloader::DownloadUnit unit = unitIt->second;
-            _failedUnits.emplace(unit.customId, unit);
+            _failedUnits.insert(Downloader::DownloadUnitsPair(unit.customId, unit));
         }
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::ERROR_UPDATING, error.customId, error.message, error.curle_code, error.curlm_code);
     }
@@ -845,7 +845,7 @@ void AssetsManagerEx::onProgress(double total, double downloaded, const std::str
             // Set download state to DOWNLOADING, this will run only once in the download process
             _tempManifest->setAssetDownloadState(customId, Manifest::DownloadState::DOWNLOADING);
             // Register the download size information
-            _downloadedSize.emplace(customId, downloaded);
+            _downloadedSize.insert(std::pair<std::string, double>(customId, downloaded));
             _totalSize += total;
             _sizeCollected++;
             // All collected, enable total size

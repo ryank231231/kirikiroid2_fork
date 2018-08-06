@@ -26,7 +26,7 @@
 #if CC_USE_PHYSICS
 
 #include <climits>
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 #include "chipmunk.h"
 #include "chipmunk_unsafe.h"
@@ -37,7 +37,7 @@
 
 NS_CC_BEGIN
 extern const float PHYSICS_INFINITY;
-boost::unordered_map<cpShape*, PhysicsShape*> s_physicsShapeMap;
+std::unordered_map<cpShape*, PhysicsShape*> s_physicsShapeMap;
 static cpBody* s_sharedBody = nullptr;
 
 PhysicsShape::PhysicsShape()

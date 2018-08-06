@@ -128,7 +128,7 @@ public:
 			filename.FixLen();
 			if (normalizeFileName)
 				NormalizeInArchiveStorageName(filename);
-			filelist.emplace_back(filename, i);
+			filelist.push_back(filename, i);
 		}
 		if (normalizeFileName) {
 			std::sort(filelist.begin(), filelist.end(), [](const std::pair<ttstr, tjs_uint>& a, const std::pair<ttstr, tjs_uint>& b) {

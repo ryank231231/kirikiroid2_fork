@@ -9,8 +9,7 @@
 #include <boost/thread/mutex.hpp>
 #include <tuple>
 #include <map>
-#include <boost/container/vector.hpp>
-#include <boost/container/map.hpp>
+#include <vector>
 
 ttstr ExePath();
 
@@ -156,7 +155,7 @@ public:
 
 //	void PostMessageToMainWindow(UINT message, WPARAM wParam, LPARAM lParam);
 	void PostUserMessage(const std::function<void()> &func, void* param1 = nullptr, int param2 = 0);
-	void FilterUserMessage(const std::function<void(boost::container::vector<std::tuple<void*, int, tMsg> > &)> &func);
+	void FilterUserMessage(const std::function<void(std::vector<std::tuple<void*, int, tMsg> > &)> &func);
 
 #if 0
 	void ModalStarted( class tTVPWindow* form ) {
@@ -193,8 +192,8 @@ public:
 private:
 	boost::mutex m_msgQueueLock;
 
-	boost::container::vector<std::tuple<void*, int, tMsg> > m_lstUserMsg;
-	boost::container::map<void*, std::function<void(void*, eTVPActiveEvent)> > m_activeEvents;
+	std::vector<std::tuple<void*, int, tMsg> > m_lstUserMsg;
+	std::map<void*, std::function<void(void*, eTVPActiveEvent)> > m_activeEvents;
 };
 std::vector<std::string>* LoadLinesFromFile( const ttstr& path );
 

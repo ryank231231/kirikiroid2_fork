@@ -32,7 +32,7 @@
 #include <vector>
 
 #if USE_STD_UNORDERED_MAP
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 #else
 #include <map>
 #endif
@@ -45,7 +45,7 @@
 NS_CC_BEGIN
 
  /**
- * Similar to boost::unordered_map, but it will manage reference count automatically internally.
+ * Similar to std::unordered_map, but it will manage reference count automatically internally.
  * Which means it will invoke Ref::retain() when adding an element, and invoke Ref::release() when removing an element.
  * @warning The element should be `Ref` or its sub-class.
  * @js NA
@@ -56,7 +56,7 @@ class Map
 {
 public: 
 #if USE_STD_UNORDERED_MAP
-    typedef boost::unordered_map<K, V> RefMap;
+    typedef std::unordered_map<K, V> RefMap;
 #else
     typedef std::map<K, V> RefMap;
 #endif
@@ -133,7 +133,9 @@ public:
     void reserve(ssize_t capacity)
     {
 #if USE_STD_UNORDERED_MAP
+#if 0
         _data.reserve(capacity);
+#endif
 #endif
     }
     

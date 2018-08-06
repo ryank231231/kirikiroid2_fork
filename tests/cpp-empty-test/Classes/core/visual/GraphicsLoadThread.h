@@ -7,12 +7,12 @@
 #include "ThreadIntf.h"
 #include "NativeEventQueue.h"
 #include "GraphicsLoaderIntf.h"
-#include <boost/container/vector.hpp>
+#include <vector>
 
 // BaseBitmap を使うとリエントラントではないので、別の構造体に独自にロードする必要がある
 struct tTVPTmpBitmapImage {
 	class tTVPBitmap* bmp/* = nullptr*/;
-	boost::container::vector<tTVPGraphicMetaInfoPair> * MetaInfo;
+	std::vector<tTVPGraphicMetaInfoPair> * MetaInfo;
 	tTVPTmpBitmapImage();
 	~tTVPTmpBitmapImage();
 // パレット関連は現状読まない、ファイルに従うのではなく、事前指定方式なので

@@ -233,8 +233,8 @@ protected:
 
     CC_PROPERTY_PASS_BY_REF(Vec2, _labelAnchorPoint, LabelAnchorPoint);
 
-    boost::unordered_map<int, std::string> _titleDispatchTable;
-    boost::unordered_map<int, Color3B> _titleColorDispatchTable;
+    std::unordered_map<int, std::string> _titleDispatchTable;
+    std::unordered_map<int, Color3B> _titleColorDispatchTable;
 
     Map<int, Node*> _titleLabelDispatchTable;
     Map<int, cocos2d::ui::Scale9Sprite*> _backgroundSpriteDispatchTable;

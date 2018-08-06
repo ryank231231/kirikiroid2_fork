@@ -48,9 +48,8 @@ extern "C" {
 #pragma comment(lib,"opencv_core2413d.lib")
 #pragma comment(lib,"opencv_imgproc2413d.lib")
 #endif
-#include <boost/container/map.hpp>
-#include <boost/unordered_map.hpp>
-#include <boost/function.hpp>
+#include <map>
+#include <unordered_map>
 
 //#define USE_SWSCALE
 #define USE_CV_AFFINE
@@ -620,7 +619,7 @@ public:
 				dstSize, BlockH
 			};
 			memcpy(blk.Data, &tmp.front(), dstSize);
-			CompressedBlock.emplace_back(blk);
+			CompressedBlock.push_back(blk);
 			DataSize += dstSize;
 		}
 		if (h > y) {
@@ -632,7 +631,7 @@ public:
 				dstSize, h
 			};
 			memcpy(blk.Data, &tmp.front(), dstSize);
-			CompressedBlock.emplace_back(blk);
+			CompressedBlock.push_back(blk);
 			DataSize += dstSize;
 		}
 		_totalVMemSize += DataSize;
@@ -717,7 +716,7 @@ public:
 			dstSize, h
 		};
 		memcpy(blk.Data, tmp, dstSize);
-		CompressedBlock.emplace_back(blk);
+		CompressedBlock.push_back(blk);
 		DataSize += dstSize;
 	}
 
@@ -2923,7 +2922,7 @@ public:
 		tjs_int, tjs_int, tjs_int, const tTVPRect &, const tTVPRect &) > TAffuncFunc;
 #endif
 
-	boost::unordered_map<iTVPRenderMethod*, std::function<TAffuncFunc(tTVPRenderMethod_Software *)> > _stretchMethodFactory;
+	std::unordered_map<iTVPRenderMethod*, std::function<TAffuncFunc(tTVPRenderMethod_Software *)> > _stretchMethodFactory;
 
 #if 1
 	TAffuncFunc GetStretchFunction(tTVPRenderMethod_Software *method) {
@@ -4430,11 +4429,11 @@ public:
 
 };
 
-static boost::container::map<ttstr, std::pair<iTVPRenderManager*(*)(), iTVPRenderManager*> > *_RenderManagerFactory;
+static std::map<ttstr, std::pair<iTVPRenderManager*(*)(), iTVPRenderManager*> > *_RenderManagerFactory;
 
 void TVPRegisterRenderManager(const char* name, iTVPRenderManager*(*func)()) {
-	if (!_RenderManagerFactory) _RenderManagerFactory = new boost::container::map<ttstr, std::pair<iTVPRenderManager*(*)(), iTVPRenderManager*> >;
-	_RenderManagerFactory->emplace(name, std::make_pair(func, nullptr));
+	if (!_RenderManagerFactory) _RenderManagerFactory = new std::map<ttstr, std::pair<iTVPRenderManager*(*)(), iTVPRenderManager*> >;
+	_RenderManagerFactory->insert(std::pair< ttstr, std::pair<iTVPRenderManager*(*)(), iTVPRenderManager*> >(name, std::make_pair(func, nullptr)));
 }
 
 iTVPRenderManager * TVPGetRenderManager(const ttstr &name)

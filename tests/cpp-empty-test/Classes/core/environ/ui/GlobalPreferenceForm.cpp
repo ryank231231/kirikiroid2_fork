@@ -1,4 +1,4 @@
-#include <boost/container/vector.hpp>
+#include <vector>
 #include "GlobalPreferenceForm.h"
 #include "ConfigManager/LocaleConfigManager.h"
 #include "ui/UIButton.h"

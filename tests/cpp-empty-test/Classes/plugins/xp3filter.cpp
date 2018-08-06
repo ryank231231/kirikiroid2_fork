@@ -315,7 +315,7 @@ static XP3FilterDecoder* AddXP3Decoder() {
     REGISTER_OBJECT(Storages, cls);
 
 	decoder->ScriptEngine->ExecScript(sXP3FilterScript);
-//	sTVPScriptEngineStack.emplace_back(decoder);
+//	sTVPScriptEngineStack.push_back(decoder);
 	return decoder;
 }
 
@@ -337,7 +337,7 @@ static XP3FilterDecoder *FetchXP3Decoder() {
 			boost::lock_guard<boost::mutex> lk(_decoders_mtx);
 			auto it = _thread_decoders.find(boost::this_thread::get_id());
 			if (it != _thread_decoders.end()) {
-				_cached_decoders.emplace_back(it->second);
+				_cached_decoders.push_back(it->second);
 				_thread_decoders.erase(it);
 			}
 		});

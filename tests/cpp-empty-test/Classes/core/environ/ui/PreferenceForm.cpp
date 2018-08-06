@@ -192,7 +192,7 @@ void tPreferenceItemSelectList::showForm(cocos2d::Ref*) {
 	for (auto& p_item = list.begin(); p_item != list.end(); ++p_item)
 	{
 		const auto& item = *p_item;
-		lst.emplace_back(item.first);
+		lst.push_back(item.first);
 	}
 	TVPSelectListForm *form = TVPSelectListForm::create(lst, highlightTid, [this](int idx){
 		const std::pair<std::string, std::string>& item = CurInfo->getListInfo()[idx];

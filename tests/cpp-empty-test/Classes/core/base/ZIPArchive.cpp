@@ -2,7 +2,7 @@
 #include "StorageIntf.h"
 #include "UtilStreams.h"
 #include <algorithm>
-#include <boost/container/vector.hpp>
+#include <vector>
 
 #ifndef NOUNCRYPT
         #define NOUNCRYPT
@@ -2045,7 +2045,7 @@ int ZEXPORT unzSetOffset (unzFile file, uLong pos)
 class ZipArchive : public tTVPArchive {
 	unzFile uf;
 	typedef std::pair<ttstr, unz64_file_pos> FileEntry;
-	boost::container::vector<FileEntry> filelist;
+	std::vector<FileEntry> filelist;
 
 public:
 	~ZipArchive();
@@ -2139,7 +2139,7 @@ ZipArchive::ZipArchive(const ttstr & name, tTJSBinaryStream *st, bool normalizeF
 					storeFilename(filename, filename_inzip, name);
 					if (normalizeFileName)
 						NormalizeInArchiveStorageName(filename);
-					filelist.emplace_back(filename, entry);
+					filelist.push_back(std::pair<ttstr, unz64_file_pos>(filename, entry));
 				}
 			}
 		} while (unzGoToNextFile64(uf, NULL, NULL, 0) == UNZ_OK);

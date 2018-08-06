@@ -187,11 +187,11 @@ public:
 			}
 			boost::lock_guard<boost::mutex> lk(_buffer_mtx);
 			_inCachedSamples += buffer.size() / _frame_size;
-			_buffers.emplace_back();
+			_buffers.push_back();
 			_buffers.back().swap(buffer);
 		} else {
 			boost::lock_guard<boost::mutex> lk(_buffer_mtx);
-			_buffers.emplace_back((uint8_t*)_inbuf, ((uint8_t*)_inbuf) + inlen);
+			_buffers.push_back((uint8_t*)_inbuf, ((uint8_t*)_inbuf) + inlen);
 			_inCachedSamples += inlen / _frame_size;
 		}
 	}
@@ -284,7 +284,7 @@ public:
 
 		tTVPSoundBuffer* s = new tTVPSoundBuffer(fmt.BytesPerSample * fmt.Channels, cvt);
 		boost::lock_guard<boost::mutex> lk(_streams_mtx);
-		_streams.emplace(s);
+		_streams.push_back(s);
 		return s;
 	}
 
@@ -680,7 +680,7 @@ public:
 			ttstr log(TJS_W("(info) Sound Driver/Device found : "));
 			while (*devices) {
 				TVPAddImportantLog(log + devices);
-				alldev.emplace_back(devices);
+				alldev.push_back(devices);
 				devices += alldev.back().length();
 			}
 			_device = alcOpenDevice(alldev[0].c_str());
@@ -695,7 +695,7 @@ public:
 
 	virtual tTVPSoundBuffer* CreateStream(tTVPWaveFormat &fmt, int bufcount) override {
 		tTVPSoundBuffer* s = new tTVPSoundBufferAL(fmt, bufcount);
-		_streams.emplace(s);
+		_streams.push_back(s);
 		return s;
 	}
     

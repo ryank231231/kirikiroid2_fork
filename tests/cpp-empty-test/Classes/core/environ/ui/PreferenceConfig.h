@@ -32,7 +32,7 @@ public:
 class tTVPPreferenceInfoSelectList : public tTVPPreferenceInfo<std::string>, tPreferenceItemSelectListInfo {
 public:
 	tTVPPreferenceInfoSelectList(const std::string &cap, const std::string &key, const std::string &defval,
-		const boost::container::vector/*initializer_list*/<std::pair<std::string, std::string> > &listinfo)
+		const std::vector/*initializer_list*/<std::pair<std::string, std::string> > &listinfo)
 		: tTVPPreferenceInfo<std::string>(cap, key, defval), ListInfo(listinfo){}
 	virtual iPreferenceItem *createItem(int idx) override {
 		LocaleConfigManager *locmgr = LocaleConfigManager::GetInstance();
@@ -43,24 +43,24 @@ public:
 			item->_setter = [/*this*/=](std::string v){ onSetValue(v); };
 		});
 	}
-	virtual const boost::container::vector<std::pair<std::string, std::string> >& getListInfo() override {
+	virtual const std::vector<std::pair<std::string, std::string> >& getListInfo() override {
 		return ListInfo;
 	}
 	virtual void onSetValue(const std::string &v) {
 		PreferenceSetValueString(Key, v);
 	}
-	boost::container::vector<std::pair<std::string, std::string> > ListInfo;
+	std::vector<std::pair<std::string, std::string> > ListInfo;
 };
 
 class tTVPPreferenceInfoTextureCompressionSelectList : public tTVPPreferenceInfoSelectList {
 public:
 	tTVPPreferenceInfoTextureCompressionSelectList(const std::string &cap, const std::string &key, const std::string &defval,
-		const boost::container::vector/*initializer_list*/<std::tuple<std::string, std::string, unsigned int> > &listinfo)
-	: tTVPPreferenceInfoSelectList(cap, key, defval, boost::container::vector/*initializer_list*/<std::pair<std::string, std::string> >())
+		const std::vector/*initializer_list*/<std::tuple<std::string, std::string, unsigned int> > &listinfo)
+	: tTVPPreferenceInfoSelectList(cap, key, defval, std::vector/*initializer_list*/<std::pair<std::string, std::string> >())
 	, TextFmtList(listinfo), ListInited(false)
 	{}
 
-	virtual const boost::container::vector<std::pair<std::string, std::string> >& getListInfo() override {
+	virtual const std::vector<std::pair<std::string, std::string> >& getListInfo() override {
 		if (!ListInited) {
 			ListInited = true;
 			TVPInitTextureFormatList();
@@ -70,7 +70,7 @@ public:
 				const auto& it = *p_it;
 				unsigned int fmt = std::get<2>(it);
 				if (!fmt || TVPIsSupportTextureFormat(fmt)) {
-					ListInfo.emplace_back(std::get<0>(it), std::get<1>(it));
+					ListInfo.push_back(std::pair<std::string, std::string>(std::get<0>(it), std::get<1>(it)));
 				}
 			}
 		}
@@ -78,7 +78,7 @@ public:
 	}
 
 	bool ListInited/* = false*/;
-	boost::container::vector<std::tuple<std::string, std::string, unsigned int> > TextFmtList;
+	std::vector<std::tuple<std::string, std::string, unsigned int> > TextFmtList;
 };
 
 // class tTVPPreferenceInfoSelectRenderer : public tTVPPreferenceInfoSelectList {
@@ -134,7 +134,7 @@ public:
 class tTVPPreferenceInfoSubPref : public iTVPPreferenceInfo {
 	tPreferenceScreen Preference;
 public:
-	tTVPPreferenceInfoSubPref(const std::string &title, const boost::container::vector/*initializer_list*/<iTVPPreferenceInfo*> &elem)
+	tTVPPreferenceInfoSubPref(const std::string &title, const std::vector/*initializer_list*/<iTVPPreferenceInfo*> &elem)
 		: Preference(title, elem)
 	{
 		Caption = title;
@@ -205,12 +205,12 @@ public:
 static void initAllConfig() {
 	if (!RootPreference.Preferences.empty()) return;
 	RootPreference.Title = "preference_title";
-	RootPreference.Preferences = boost::container::vector<iTVPPreferenceInfo*>();
+	RootPreference.Preferences = std::vector<iTVPPreferenceInfo*>();
 	RootPreference.Preferences.push_back(new tTVPPreferenceInfoCheckBox("preference_output_log", "outputlog", true));
 	RootPreference.Preferences.push_back(new tTVPPreferenceInfoCheckBox("preference_show_fps", "showfps", false));
 
 
-	boost::container::vector/*initializer_list*/<std::pair<std::string, std::string> > listinfo;
+	std::vector/*initializer_list*/<std::pair<std::string, std::string> > listinfo;
 	listinfo.push_back(std::pair<std::string, std::string>("preference_opengl", "opengl"));
 	listinfo.push_back(std::pair<std::string, std::string>("preference_software", "software"));
 	RootPreference.Preferences.push_back(new tTVPPreferenceInfoSelectList("preference_select_renderer", "renderer", "software", listinfo));
@@ -218,7 +218,7 @@ static void initAllConfig() {
 	RootPreference.Preferences.push_back(new tTVPPreferenceInfoSelectFile("preference_default_font", "default_font", ""));
 	RootPreference.Preferences.push_back(new tTVPPreferenceInfoCheckBox("preference_force_def_font", "force_default_font", false));
 
-	boost::container::vector/*initializer_list*/<std::pair<std::string, std::string> > listinfo44;
+	std::vector/*initializer_list*/<std::pair<std::string, std::string> > listinfo44;
 	listinfo44.push_back(std::pair<std::string, std::string>("preference_mem_unlimited", "unlimited"));
 	listinfo44.push_back(std::pair<std::string, std::string>("preference_mem_high", "high"));
 	listinfo44.push_back(std::pair<std::string, std::string>("preference_mem_medium", "medium"));
@@ -245,9 +245,9 @@ static void initAllConfig() {
 #endif
 
 	SoftRendererOptPreference.Title = "preference_soft_renderer_opt";
-	SoftRendererOptPreference.Preferences = boost::container::vector<iTVPPreferenceInfo*>();
+	SoftRendererOptPreference.Preferences = std::vector<iTVPPreferenceInfo*>();
 
-	boost::container::vector/*initializer_list*/<std::pair<std::string, std::string> > listinfo23;
+	std::vector/*initializer_list*/<std::pair<std::string, std::string> > listinfo23;
 	listinfo23.push_back(std::pair<std::string, std::string>("preference_draw_thread_auto", "0"));
 	listinfo23.push_back(std::pair<std::string, std::string>("preference_draw_thread_1", "1"));
 	listinfo23.push_back(std::pair<std::string, std::string>("preference_draw_thread_2", "2"));
@@ -259,7 +259,7 @@ static void initAllConfig() {
 	listinfo23.push_back(std::pair<std::string, std::string>("preference_draw_thread_8", "8"));
 	SoftRendererOptPreference.Preferences.push_back(new tTVPPreferenceInfoSelectList("preference_multi_draw_thread", "software_draw_thread", "0", listinfo23));
 
-	boost::container::vector/*initializer_list*/<std::pair<std::string, std::string> > listinfo22;
+	std::vector/*initializer_list*/<std::pair<std::string, std::string> > listinfo22;
 	listinfo22.push_back(std::pair<std::string, std::string>("preference_soft_compress_tex_none", "none"));
 	listinfo22.push_back(std::pair<std::string, std::string>("preference_soft_compress_tex_halfline", "halfline"));
  	listinfo22.push_back(std::pair<std::string, std::string>("lz4", "lz4"));
@@ -269,8 +269,8 @@ static void initAllConfig() {
 
 
 	OpenglOptPreference.Title = "preference_opengl_renderer_opt";
-	OpenglOptPreference.Preferences = boost::container::vector<iTVPPreferenceInfo*>();
-	boost::container::vector/*initializer_list*/<iTVPPreferenceInfo*> subs;
+	OpenglOptPreference.Preferences = std::vector<iTVPPreferenceInfo*>();
+	std::vector/*initializer_list*/<iTVPPreferenceInfo*> subs;
 	subs.push_back(new tTVPPreferenceInfoConstant("preference_opengl_extension_desc"));
 #ifdef CC_TARGET_OS_IPHONE
 	subs.push_back(new tTVPPreferenceInfoCheckBox("GL_EXT_shader_framebuffer_fetch", "GL_EXT_shader_framebuffer_fetch", true));
@@ -290,7 +290,7 @@ static void initAllConfig() {
 	OpenglOptPreference.Preferences.push_back(new tTVPPreferenceInfoCheckBox("preference_ogl_accurate_render", "ogl_accurate_render", false));
 //		new tTVPPreferenceInfoCheckBox("preference_opengl_dup_target", "ogl_dup_target", true),
 
-	boost::container::vector/*initializer_list*/<std::pair<std::string, std::string> > listinfo3;
+	std::vector/*initializer_list*/<std::pair<std::string, std::string> > listinfo3;
 	listinfo3.push_back(std::pair<std::string, std::string>("preference_ogl_texsize_auto", "0" ));
 	listinfo3.push_back(std::pair<std::string, std::string>("preference_ogl_texsize_1024", "1024" ));
 	listinfo3.push_back(std::pair<std::string, std::string>("preference_ogl_texsize_2048", "2048" ));
@@ -299,7 +299,7 @@ static void initAllConfig() {
 	listinfo3.push_back(std::pair<std::string, std::string>("preference_ogl_texsize_16384", "16384" ));
 	OpenglOptPreference.Preferences.push_back(new tTVPPreferenceInfoSelectList("preference_ogl_max_texsize", "ogl_max_texsize", "0", listinfo3));
 
-	boost::container::vector/*initializer_list*/<std::tuple<std::string, std::string, unsigned int> > listinfo2;
+	std::vector/*initializer_list*/<std::tuple<std::string, std::string, unsigned int> > listinfo2;
 	listinfo2.push_back(std::make_tuple("preference_ogl_compress_tex_none", "none", 0));
 	listinfo2.push_back(std::make_tuple("preference_ogl_compress_tex_half", "half", 0));
 	listinfo2.push_back(std::make_tuple("ETC2", "etc2", 0x9278)); // GL_COMPRESSED_RGBA8_ETC2_EAC

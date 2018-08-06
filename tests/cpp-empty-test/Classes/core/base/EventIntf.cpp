@@ -696,7 +696,7 @@ void TVPPostWindowUpdate(tTJSNI_BaseWindow *window)
 	}
 
 	// put into queue.
-	TVPWinUpdateEventQueue.emplace_back(window);
+	TVPWinUpdateEventQueue.push_back(window);
 
 	// make sure that the event is to be delivered.
 	TVPInvokeEvents();
@@ -1085,7 +1085,7 @@ void TVPAddContinuousHandler(tTJSVariantClosure clo)
 	{
 		TVPBeginContinuousEvent();
 		clo.AddRef();
-		TVPContinuousHandlerVector.emplace_back(clo);
+		TVPContinuousHandlerVector.push_back(clo);
 	}
 }
 //---------------------------------------------------------------------------

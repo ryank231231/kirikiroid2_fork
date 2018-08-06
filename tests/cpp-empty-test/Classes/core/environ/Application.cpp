@@ -290,15 +290,15 @@ void TVPCheckMemory() {
 }
 
 int TVPShowSimpleMessageBox(const ttstr & text, const ttstr & caption) {
-	std::vector<ttstr> normal; normal.emplace_back(LocaleConfigManager::GetInstance()->GetText("msgbox_ok"));
+	std::vector<ttstr> normal; normal.push_back(LocaleConfigManager::GetInstance()->GetText("msgbox_ok"));
 	return TVPShowSimpleMessageBox(text, caption, normal);
 }
 
 int TVPShowSimpleMessageBoxYesNo(const ttstr & text, const ttstr & caption) {
 	std::vector<ttstr> normal;
 	LocaleConfigManager *mgr = LocaleConfigManager::GetInstance();
-	normal.emplace_back(mgr->GetText("msgbox_yes"));
-	normal.emplace_back(mgr->GetText("msgbox_no"));
+	normal.push_back(mgr->GetText("msgbox_yes"));
+	normal.push_back(mgr->GetText("msgbox_no"));
 	return TVPShowSimpleMessageBox(text, caption, normal);
 }
 
@@ -820,7 +820,7 @@ void tTVPApplication::Run() {
 
 void tTVPApplication::ProcessMessages()
 {
-	boost::container::vector<std::tuple<void*, int, tMsg> > lstUserMsg;
+	std::vector<std::tuple<void*, int, tMsg> > lstUserMsg;
 	{
 		boost::lock_guard<boost::mutex> cs(m_msgQueueLock);
 		m_lstUserMsg.swap(lstUserMsg);
@@ -1005,10 +1005,10 @@ void tTVPApplication::CheckDigitizer() {
 void tTVPApplication::PostUserMessage(const std::function<void()> &func, void* host, int msg)
 {
 	boost::lock_guard<boost::mutex> cs(m_msgQueueLock);
-	m_lstUserMsg.emplace_back(host, msg, func);
+	m_lstUserMsg.push_back(std::tuple<void*, int, tMsg>(host, msg, func));
 }
 
-void tTVPApplication::FilterUserMessage(const std::function<void(boost::container::vector<std::tuple<void*, int, tMsg> > &)> &func)
+void tTVPApplication::FilterUserMessage(const std::function<void(std::vector<std::tuple<void*, int, tMsg> > &)> &func)
 {
 	boost::lock_guard<boost::mutex> cs(m_msgQueueLock);
 	func(m_lstUserMsg);
@@ -1111,7 +1111,7 @@ void tTVPApplication::LoadImageRequest( class iTJSDispatch2 *owner, class tTJSNI
 void tTVPApplication::RegisterActiveEvent(void *host, const std::function<void(void*, eTVPActiveEvent)>& func/*empty = unregister*/)
 {
 	if (func)
-		m_activeEvents.emplace(host, func);
+		m_activeEvents.insert(std::pair< void*, std::function<void(void*, eTVPActiveEvent)> >(host, func));
 	else
 		m_activeEvents.erase(host);
 }

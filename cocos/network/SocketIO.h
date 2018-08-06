@@ -183,7 +183,7 @@ private:
 //c++11 style callbacks entities will be created using CC_CALLBACK (which uses std::bind)
 typedef std::function<void(SIOClient*, const std::string&)> SIOEvent;
 //c++11 map to callbacks
-typedef boost::unordered_map<std::string, SIOEvent> EventRegistry;
+typedef std::unordered_map<std::string, SIOEvent> EventRegistry;
 
 /**
  * A single connection to a socket.io endpoint.

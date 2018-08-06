@@ -120,7 +120,7 @@ public:
 	void releaseActions();
 
 protected:
-	boost::unordered_map<std::string, cocos2d::Vector<ActionObject*>> _actionDic;
+	std::unordered_map<std::string, cocos2d::Vector<ActionObject*>> _actionDic;
 };
 
 }

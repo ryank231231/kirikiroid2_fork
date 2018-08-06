@@ -55,7 +55,7 @@ typedef struct CC_DLL _SpritePolygonInfo
 } SpritePolygonInfo;
 
 typedef std::vector<SpritePolygonInfo*> VecSpritePolygonInfo;
-typedef boost::unordered_map<std::string, VecSpritePolygonInfo> MapSpritePolygonInfo;
+typedef std::unordered_map<std::string, VecSpritePolygonInfo> MapSpritePolygonInfo;
 
 class CC_DLL SpritePolygonCache: public cocos2d::Ref
 {

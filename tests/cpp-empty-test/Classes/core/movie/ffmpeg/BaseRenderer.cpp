@@ -543,7 +543,7 @@ void CBaseRenderer::MarkDirty()
 
 void CBaseRenderer::SettingOptionsRenderMethodsFiller(/*const CSetting *setting,*/ std::vector< std::pair<std::string, int> > &list, int &current, void *data)
 {
-  list.emplace_back("rendermethod_auto"/*g_localizeStrings.Get(13416)*/, RENDER_METHOD_AUTO);
+  list.push_back("rendermethod_auto"/*g_localizeStrings.Get(13416)*/, RENDER_METHOD_AUTO);
 
 #ifdef HAS_DX
   list.push_back(make_pair(g_localizeStrings.Get(16319), RENDER_METHOD_DXVA));

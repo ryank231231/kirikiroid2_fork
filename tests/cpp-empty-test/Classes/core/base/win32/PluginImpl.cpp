@@ -528,7 +528,7 @@ static void TVPSearchPluginsAt(std::vector<tTVPFoundPlugin> &list, std::string f
 				tTVPFoundPlugin fp;
 				fp.Path = folder;
 				fp.Name = filename;
-				list.emplace_back(fp);
+				list.push_back(fp);
 			}
 		}
 	});

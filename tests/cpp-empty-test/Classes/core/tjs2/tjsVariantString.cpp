@@ -129,7 +129,9 @@ static void TJSAddStringHeapBlock(void)
 	// allocate StringHeapBlock
 	tTJSVariantString *h;
 	h = new tTJSVariantString[HEAP_CAPACITY_INC];
+#if 0
 	memset(h, 0, sizeof(tTJSVariantString) * HEAP_CAPACITY_INC);
+#endif
 	TJSStringHeapList->push_back(h);
 
 	// re-allocate TJSFreeCellList
@@ -407,6 +409,47 @@ void TJSCompactStringHeap()
 	}
 }
 //---------------------------------------------------------------------------
+tTJSVariantString_S::tTJSVariantString_S()
+{
+	pthread_mutex_init(&RefCount_lock, NULL);
+	RefCount_pth = 0;
+	LongString = NULL;
+	memset(ShortString, 0, sizeof(ShortString));
+	Length = 0; // string length
+	HeapFlag = 0;
+	Hint = 0;
+}
+
+tTJSVariantString_S::tTJSVariantString_S(const tTJSVariantString_S & c) 
+{
+	pthread_mutex_init(&RefCount_lock, NULL);
+	RefCount_pth = c.RefCount_pth;
+	LongString = c.LongString;
+	memcpy(ShortString, c.ShortString, sizeof(ShortString));
+	Length = c.Length; // string length
+	HeapFlag = c.HeapFlag;
+	Hint = c.Hint;
+}
+tTJSVariantString_S & tTJSVariantString_S::operator=(const tTJSVariantString_S & c)
+{
+    if ( this == &c ) 
+    {
+        return *this;
+    }             
+	pthread_mutex_init(&RefCount_lock, NULL);
+	RefCount_pth = c.RefCount_pth;
+	LongString = c.LongString;
+	memcpy(ShortString, c.ShortString, sizeof(ShortString));
+	Length = c.Length; // string length
+	HeapFlag = c.HeapFlag;
+    return *this;
+}
+
+tTJSVariantString_S::~tTJSVariantString_S() 
+{
+	pthread_mutex_destroy(&RefCount_lock);
+}
+
 tTJSVariantString * TJSAllocStringHeap(void)
 {
 	if(TJSStringHeapAllocCount == 0)
@@ -428,8 +471,13 @@ tTJSVariantString * TJSAllocStringHeap(void)
 		tTJSVariantString *ret =
 			TJSStringHeapFreeCellList[--TJSStringHeapFreeCellListPointer];
 #endif
-
+#if 0
 		ret->RefCount = 0;
+#else
+		pthread_mutex_lock(&ret->RefCount_lock);
+		ret->RefCount_pth = 0;
+		pthread_mutex_unlock(&ret->RefCount_lock);
+#endif
 		ret->Length = 0;
 		ret->LongString = NULL;
 		ret->HeapFlag = HEAP_FLAG_USING;
@@ -500,13 +548,26 @@ void tTJSVariantString::Release()
 		// this is not a REAL remedy, but enough to buster careless misses...
 		// (NULL->Release() problem)
 */
-
+#if 0
 	if(RefCount==0)
 	{
 		TJSDeallocStringHeap(this);
 		return;
 	}
 	RefCount--;
+#else
+	pthread_mutex_lock(&RefCount_lock);
+	tjs_int count = RefCount_pth;
+	pthread_mutex_unlock(&RefCount_lock);
+	if(count==0)
+	{
+		TJSDeallocStringHeap(this);
+		return;
+	}
+	pthread_mutex_lock(&RefCount_lock);
+	RefCount_pth--;
+	pthread_mutex_unlock(&RefCount_lock);
+#endif
 }
 //---------------------------------------------------------------------------
 tTVInteger tTJSVariantString::ToInteger() const
@@ -553,8 +614,14 @@ tjs_int tTJSVariantString::GetLength() const
 tTJSVariantString * tTJSVariantString::FixLength()
 {
 	if(!this) return NULL;
-
+#if 0
 	if(RefCount != 0) TJSThrowStringDeallocError();
+#else
+	pthread_mutex_lock(&RefCount_lock);
+	tjs_int count = RefCount_pth;
+	pthread_mutex_unlock(&RefCount_lock);
+	if(count != 0) TJSThrowStringDeallocError();
+#endif
 	Length = (tjs_int)TJS_strlen(this->operator const tjs_char*());
 	if(!Length)
 	{

@@ -215,7 +215,7 @@ const Size& CCBAnimationManager::getContainerSize(Node *pNode)
 }
 
 // refer to CCBReader::readNodeGraph() for data structure of pSeq
-void CCBAnimationManager::addNode(Node *pNode, const boost::unordered_map<int, Map<std::string, CCBSequenceProperty*>>& seq)
+void CCBAnimationManager::addNode(Node *pNode, const std::unordered_map<int, Map<std::string, CCBSequenceProperty*>>& seq)
 {
     // pNode->retain();
     

@@ -14,7 +14,7 @@
 
 
 #include "drawable.h"
-#include <boost/container/vector.hpp>
+#include <vector>
 
 class tTVPBaseBitmap;
 namespace TJS {
@@ -442,9 +442,9 @@ struct tTVPGraphicMetaInfoPair
 		Name(name), Value(value) {;}
 };
 
-extern iTJSDispatch2 * TVPMetaInfoPairsToDictionary( boost::container::vector<tTVPGraphicMetaInfoPair> *vec );
+extern iTJSDispatch2 * TVPMetaInfoPairsToDictionary( std::vector<tTVPGraphicMetaInfoPair> *vec );
 extern void TVPPushGraphicCache( const ttstr& nname, class tTVPBitmap* bmp,
-	boost::container::vector<tTVPGraphicMetaInfoPair>* meta );
+	std::vector<tTVPGraphicMetaInfoPair>* meta );
 extern tTVPGraphicHandlerType* TVPGetGraphicLoadHandler( const ttstr& ext );
 extern bool TVPCheckImageCache( const ttstr& nname, tTVPBaseBitmap* dest,
 	tTVPGraphicLoadMode mode, tjs_uint dw, tjs_uint dh, tjs_int32 keyidx,

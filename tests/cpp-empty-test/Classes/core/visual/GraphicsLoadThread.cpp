@@ -77,7 +77,7 @@ static void TVPLoadGraphicAsync_MetaInfoPushCallback(void *callbackdata, const t
 {
 	tTVPTmpBitmapImage * img = (tTVPTmpBitmapImage *)callbackdata;
 
-	if(!img->MetaInfo) img->MetaInfo = new boost::container::vector<tTVPGraphicMetaInfoPair>();
+	if(!img->MetaInfo) img->MetaInfo = new std::vector<tTVPGraphicMetaInfoPair>();
 	img->MetaInfo->push_back(tTVPGraphicMetaInfoPair(name, value));
 }
 //---------------------------------------------------------------------------

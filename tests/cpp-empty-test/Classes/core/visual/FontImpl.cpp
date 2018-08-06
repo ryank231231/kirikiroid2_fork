@@ -232,7 +232,7 @@ void TVPInitFontNames()
 		std::vector<ttstr> list;
 		auto lister = [&](const ttstr &name, tTVPLocalFileInfo* s) {
 			if (s->Mode & (S_IFREG | S_IFDIR)) {
-				list.emplace_back(name);
+				list.push_back(name);
 			}
 		};
 #ifdef __ANDROID__

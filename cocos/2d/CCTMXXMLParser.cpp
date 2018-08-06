@@ -27,7 +27,7 @@ THE SOFTWARE.
 ****************************************************************************/
 
 #include "2d/CCTMXXMLParser.h"
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 #include <sstream>
 #include "2d/CCTMXTiledMap.h"
 #include "base/ZipUtils.h"

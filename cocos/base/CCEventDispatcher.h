@@ -27,7 +27,7 @@
 
 #include <functional>
 #include <string>
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 #include <vector>
 #include <set>
 
@@ -292,19 +292,19 @@ protected:
     void visitTarget(Node* node, bool isRootNode);
     
     /** Listeners map */
-    boost::unordered_map<EventListener::ListenerID, EventListenerVector*> _listenerMap;
+    std::unordered_map<EventListener::ListenerID, EventListenerVector*> _listenerMap;
     
     /** The map of dirty flag */
-    boost::unordered_map<EventListener::ListenerID, DirtyFlag> _priorityDirtyFlagMap;
+    std::unordered_map<EventListener::ListenerID, DirtyFlag> _priorityDirtyFlagMap;
     
     /** The map of node and event listeners */
-    boost::unordered_map<Node*, std::vector<EventListener*>*> _nodeListenersMap;
+    std::unordered_map<Node*, std::vector<EventListener*>*> _nodeListenersMap;
     
     /** The map of node and its event priority */
-    boost::unordered_map<Node*, int> _nodePriorityMap;
+    std::unordered_map<Node*, int> _nodePriorityMap;
     
     /** key: Global Z Order, value: Sorted Nodes */
-    boost::unordered_map<float, std::vector<Node*>> _globalZOrderNodeMap;
+    std::unordered_map<float, std::vector<Node*>> _globalZOrderNodeMap;
     
     /** The listeners to be added after dispatching event */
     std::vector<EventListener*> _toAddedListeners;

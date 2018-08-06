@@ -15,7 +15,7 @@
 #include "platform/CCDevice.h"
 #include "base/CCScheduler.h"
 #include "utils/TickCount.h"
-#include <boost/container/vector.hpp>
+#include <vector>
 
 using namespace cocos2d;
 using namespace cocos2d::extension;
@@ -320,7 +320,7 @@ void TVPBaseFileSelectorForm::getShortCutDirList(std::vector<std::string> &pathl
 	for (auto& p_path = paths.begin(); p_path != paths.end(); ++p_path)
 	{
 		const auto& path = *p_path;
-		pathlist.emplace_back(path);
+		pathlist.push_back(path);
 	}
 	std::vector<std::string> appPath = TVPGetAppStoragePath();
 	//for (auto path : appPath) {
@@ -328,7 +328,7 @@ void TVPBaseFileSelectorForm::getShortCutDirList(std::vector<std::string> &pathl
 	{
 		const auto& path = *p_path;
 		cocos2d::log("appPath: %s", path.c_str());
-		pathlist.emplace_back(path);
+		pathlist.push_back(path);
 	}
 }
 
@@ -365,8 +365,8 @@ void TVPBaseFileSelectorForm::onTitleClicked(cocos2d::Ref *owner) {
 		item->setCallbackName(path);
 		item->setTitleText(path);
 		item->addClickEventListener(func);
-		cells.emplace_back(cell);
-		buttons.emplace_back(item);
+		cells.push_back(cell);
+		buttons.push_back(item);
 		//break;
 	}
 	_listform = TVPListForm::create(cells);
@@ -487,7 +487,7 @@ void TVPBaseFileSelectorForm::onCopyClicked(cocos2d::Ref *owner)
 	for (auto& p_idx = _selectedFileIndex.begin(); p_idx != _selectedFileIndex.end(); ++p_idx)
 	{
 		auto& idx = *p_idx;
-		_clipboardForFileManager.emplace_back(CurrentDirList[idx].FullPath);
+		_clipboardForFileManager.push_back(CurrentDirList[idx].FullPath);
 	}
 	_clipboardPath = CurrentPath;
 	_selectedFileIndex.clear();
@@ -552,10 +552,10 @@ void TVPBaseFileSelectorForm::onUnpackClicked(cocos2d::Ref *owner)
 			if (TotalSize > 1024 * 1024) {
 				ProgressForm = TVPSimpleProgressForm::create();
 				TVPMainScene::GetInstance()->pushUIForm(ProgressForm, TVPMainScene::eEnterAniNone);
-				boost::container::vector<std::pair<std::string, std::function<void(cocos2d::Ref*)> > > vecButtons;
-				vecButtons.emplace_back("Stop", [this](Ref*) {
+				std::vector<std::pair<std::string, std::function<void(cocos2d::Ref*)> > > vecButtons;
+				vecButtons.push_back(std::pair<std::string, std::function<void(cocos2d::Ref*)> >("Stop", [this](Ref*) {
 					ArcUnpacker.Stop();
-				});
+				}));
 				ProgressForm->initButtons(vecButtons);
 				ProgressForm->setTitle("Unpacking...");
 				ProgressForm->setPercentOnly(0);
@@ -638,8 +638,8 @@ void TVPBaseFileSelectorForm::onUnpackClicked(cocos2d::Ref *owner)
 		const char *OnPassword() {
 			LocaleConfigManager *localeMgr = LocaleConfigManager::GetInstance();
 			std::vector<ttstr> btns;
-			btns.emplace_back(localeMgr->GetText("ok"));
-			btns.emplace_back(localeMgr->GetText("cancel"));
+			btns.push_back(localeMgr->GetText("ok"));
+			btns.push_back(localeMgr->GetText("cancel"));
 			ttstr text(ArcPath);
 			if (TVPShowSimpleInputBox(text, localeMgr->GetText("please_input_password"), "", btns) == 0) {
 				PasswordBuffer = text.AsStdString();
@@ -730,8 +730,8 @@ void TVPBaseFileSelectorForm::onBtnRenameClicked(cocos2d::Ref *owner)
 	FileInfo &info = CurrentDirList[*_selectedFileIndex.begin()];
 	ttstr name = info.NameForDisplay.c_str();
 	std::vector<ttstr> btns;
-	btns.emplace_back("OK");
-	btns.emplace_back("Cancel");
+	btns.push_back("OK");
+	btns.push_back("Cancel");
 	if (TVPShowSimpleInputBox(name, "Input new name", "", btns) == 0) {
 		ttstr newname = TVPExtractStoragePath(info.FullPath);
 		newname += name;

@@ -25,7 +25,7 @@ THE SOFTWARE.
 #ifndef __CCTIMELINE_ACTION_CACHE_H__
 #define __CCTIMELINE_ACTION_CACHE_H__
 
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 #include "base/CCMap.h"
 
 #include "cocostudio/DictionaryHelper.h"
@@ -124,7 +124,7 @@ protected:
     typedef std::function<Frame*(const rapidjson::Value& json)> FrameCreateFunc;
     typedef std::pair<std::string, FrameCreateFunc> Pair;
 
-    boost::unordered_map<std::string, FrameCreateFunc> _funcs;
+    std::unordered_map<std::string, FrameCreateFunc> _funcs;
     cocos2d::Map<std::string, ActionTimeline*> _animationActions;
 };
 

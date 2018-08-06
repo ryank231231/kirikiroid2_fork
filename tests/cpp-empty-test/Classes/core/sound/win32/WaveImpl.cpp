@@ -2784,9 +2784,9 @@ bool tTJSNI_WaveSoundBuffer::FillBuffer(bool firstwrite, bool allowpause)
 		for(std::deque<tTVPWaveLabel>::const_iterator i = labels.begin();
 			i != labels.end(); i++)
 		{
-			LabelEventQueue.emplace_back(
+			LabelEventQueue.push_back(tTVPWaveLabel(
 				i->Position,
-						i->Name, static_cast<tjs_int>(i->Offset + DecodePos));
+						i->Name, static_cast<tjs_int>(i->Offset + DecodePos)));
 		}
 
 		// sort
@@ -2869,7 +2869,7 @@ tjs_int tTJSNI_WaveSoundBuffer::FireLabelEventsAndGetNearestLabelEventStep(tjs_i
 	while(true)
 	{
 		if(LabelEventQueue.size() == 0) break;
-		boost::container::vector<tTVPWaveLabel>::iterator i = LabelEventQueue.begin();
+		std::vector<tTVPWaveLabel>::iterator i = LabelEventQueue.begin();
 		int diff = (tjs_int32)i->Offset - (tjs_int32)decodepos;
 		if(diff <= 0)
 			InvokeLabelEvent(i->Name);
@@ -2908,7 +2908,7 @@ void tTJSNI_WaveSoundBuffer::FlushAllLabelEvents()
 	// flush all undelivered events.
 	tTJSCriticalSectionHolder holder(BufferCS);
 
-	for(boost::container::vector<tTVPWaveLabel>::iterator i = LabelEventQueue.begin();
+	for(std::vector<tTVPWaveLabel>::iterator i = LabelEventQueue.begin();
 		i != LabelEventQueue.end(); i++)
 		InvokeLabelEvent(i->Name);
 

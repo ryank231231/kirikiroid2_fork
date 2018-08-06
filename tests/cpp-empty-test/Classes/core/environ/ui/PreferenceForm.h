@@ -3,7 +3,7 @@
 #include "ui/UIWidget.h"
 #include "ConfigManager/GlobalConfigManager.h"
 #include <initializer_list>
-#include <boost/container/vector.hpp>
+#include <vector>
 
 namespace tinyxml2 {
 	class XMLElement;
@@ -12,15 +12,15 @@ namespace tinyxml2 {
 class iTVPPreferenceInfo;
 struct tPreferenceScreen {
 	tPreferenceScreen() {}
-	tPreferenceScreen(const std::string &title, const boost::container::vector/*initializer_list*/<iTVPPreferenceInfo*> &elem)
+	tPreferenceScreen(const std::string &title, const std::vector/*initializer_list*/<iTVPPreferenceInfo*> &elem)
 		: Title(title), Preferences(elem) {}
 	~tPreferenceScreen() { clear(); }
 	void clear();
-	void init(const boost::container::vector/*initializer_list*/<iTVPPreferenceInfo*> &elem) {
+	void init(const std::vector/*initializer_list*/<iTVPPreferenceInfo*> &elem) {
 		Preferences = elem;
 	}
 	std::string Title; // as tid
-	boost::container::vector<iTVPPreferenceInfo*> Preferences;
+	std::vector<iTVPPreferenceInfo*> Preferences;
 };
 
 class iPreferenceItem;
@@ -143,7 +143,7 @@ protected:
 
 class tPreferenceItemSelectListInfo {
 public:
-	virtual const boost::container::vector<std::pair<std::string, std::string> >& getListInfo() = 0;
+	virtual const std::vector<std::pair<std::string, std::string> >& getListInfo() = 0;
 };
 
 class tPreferenceItemSelectList : public tPreferenceItem<std::string> {

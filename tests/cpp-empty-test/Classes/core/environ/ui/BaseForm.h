@@ -1,7 +1,6 @@
 #pragma once
 #include "2d/CCNode.h"
 #include <unordered_map>
-#include <boost/unordered_map.hpp>
 #include "ui/UIWidget.h"
 #include "extensions/GUI/CCScrollView/CCTableViewCell.h"
 

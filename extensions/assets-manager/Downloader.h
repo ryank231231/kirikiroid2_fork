@@ -29,7 +29,7 @@
 #include "extensions/ExtensionMacros.h"
 #include "extensions/ExtensionExport.h"
 
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 #include <string>
 #include <functional>
 #include <memory>
@@ -99,7 +99,8 @@ public:
         unsigned char *buffer;
     };
     
-    typedef boost::unordered_map<std::string, DownloadUnit> DownloadUnits;
+    typedef std::unordered_map<std::string, DownloadUnit> DownloadUnits;
+    typedef std::pair<std::string, DownloadUnit> DownloadUnitsPair;
     
     typedef std::function<void(const Downloader::Error &)> ErrorCallback;
     typedef std::function<void(double, double, const std::string &, const std::string &)> ProgressCallback;

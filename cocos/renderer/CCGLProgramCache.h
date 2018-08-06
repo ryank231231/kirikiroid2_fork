@@ -29,7 +29,7 @@ THE SOFTWARE.
 #define __CCGLPROGRAMCACHE_H__
 
 #include <string>
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 #include "base/CCRef.h"
 
@@ -106,7 +106,7 @@ private:
     std::string getShaderMacrosForLight() const;
 
     /**Predefined shaders.*/
-    boost::unordered_map<std::string, GLProgram*> _programs;
+    std::unordered_map<std::string, GLProgram*> _programs;
 };
 
 NS_CC_END

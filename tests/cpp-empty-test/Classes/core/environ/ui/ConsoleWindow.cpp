@@ -25,7 +25,7 @@ void TVPConsoleWindow::addLine(const ttstr &line, cocos2d::Color3B clr) {
 	if (_queuedLines.size() > _maxQueueSize) {
 		_queuedLines.pop_front();
 	}
-	_queuedLines.emplace_back(line, clr);
+	_queuedLines.push_back(std::pair<ttstr, cocos2d::Color3B>(line, clr));
 }
 
 
@@ -59,7 +59,7 @@ void TVPConsoleWindow::visit(Renderer *renderer, const Mat4& parentTransform, ui
 			label->setString(t.AsStdString());
 			label->setPosition(0, height);
 			height += label->getContentSize().height;
-			_queuedLabels.emplace_back(label);
+			_queuedLabels.push_back(label);
 		}
 		Size size = getContentSize();
 		// remove out of range text
@@ -68,7 +68,7 @@ void TVPConsoleWindow::visit(Renderer *renderer, const Mat4& parentTransform, ui
 			const Vec2 &pos = label->getPosition();
 			if (pos.y + height > size.height) {
 				label->setVisible(false);
-				_unusedLabels.emplace_back(label);
+				_unusedLabels.push_back(label);
 				_dispLabels.pop_front();
 			} else {
 				break;
@@ -89,7 +89,7 @@ void TVPConsoleWindow::visit(Renderer *renderer, const Mat4& parentTransform, ui
 		for (auto& p_label = _queuedLabels.begin(); p_label != _queuedLabels.end(); ++p_label)
 		{
 			auto& label = *p_label;
-			_dispLabels.emplace_back(label);
+			_dispLabels.push_back(label);
 		}
 		_queuedLabels.clear();
 		_queuedLines.clear();

@@ -228,7 +228,7 @@ void TVPCheckAndSendDumps(const std::string &dumpdir, const std::string &package
 		if (mask & (S_IFREG | S_IFDIR)) {
 			if (name.size() <= 4) return;
 			if (name.substr(name.size() - 4) != ".dmp") return;
-			allDumps.emplace_back(name);
+			allDumps.push_back(name);
 		}
 	});
 	if (!allDumps.empty()) {

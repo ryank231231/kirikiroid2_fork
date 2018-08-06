@@ -2,7 +2,17 @@
 #include <cmath>
 #include <algorithm>
 #include <assert.h>
+#if 0
 #include <boost/tr1/cmath.hpp>
+#else
+////https://github.com/Mocahteam/SPRED/blob/5f8af28cf517b2bc6e4b7d110231a922cf7d085a/old_versions/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/MathUtil.cpp
+#if defined(_MSC_VER)
+float roundf(float val)
+{
+	return floor(val + 0.5f);
+}
+#endif
+#endif
 #define DCHECK(x) assert(x)
 
 namespace ASTCRealTimeCodec {
@@ -249,9 +259,15 @@ inline vec3i_t floor(vec3f_t color) {
 
 inline vec3i_t round(vec3f_t color) {
 	vec3i_t result;
+#if 0
 	result.r = static_cast<int>(boost::math::tr1::roundf(color.r));
 	result.g = static_cast<int>(boost::math::tr1::roundf(color.g));
 	result.b = static_cast<int>(boost::math::tr1::roundf(color.b));
+#else
+	result.r = static_cast<int>(roundf(color.r));
+	result.g = static_cast<int>(roundf(color.g));
+	result.b = static_cast<int>(roundf(color.b));
+#endif
 	return result;
 }
 

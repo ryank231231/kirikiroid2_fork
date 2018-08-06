@@ -13,6 +13,7 @@
 
 #include "tjsVariant.h"
 #include "tjsString.h"
+#include <pthread.h>
 
 namespace TJS
 {
@@ -70,7 +71,12 @@ typedef tTJSCriticalSectionHolder tTJSCSH;
 typedef tTJSCriticalSection tTJSStaticCriticalSection;
 
 struct tTJSSpinLock {
+#if 0
 	boost::atomic_flag atom_lock;
+#else
+	pthread_spinlock_t atom_lock_spin;
+	virtual ~tTJSSpinLock() { pthread_spin_destroy(&atom_lock_spin); }
+#endif
 	tTJSSpinLock();
 	void lock(); // will stuck if locked in same thread!
 	void unlock();

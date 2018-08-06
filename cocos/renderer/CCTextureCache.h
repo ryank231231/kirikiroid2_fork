@@ -34,7 +34,7 @@ THE SOFTWARE.
 #include <boost/thread/condition_variable.hpp>
 #include <queue>
 #include <string>
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 #include <functional>
 
 #include "base/CCRef.h"
@@ -231,7 +231,7 @@ protected:
 
     int _asyncRefCount;
 
-    boost::unordered_map<std::string, Texture2D*> _textures;
+    std::unordered_map<std::string, Texture2D*> _textures;
 };
 
 #if CC_ENABLE_CACHE_TEXTURE_DATA

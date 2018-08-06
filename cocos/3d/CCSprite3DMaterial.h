@@ -26,7 +26,7 @@
 #define __CCSPRIT3DMATERIAL_H__
 
 #include <string>
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 #include "base/ccTypes.h"
 
 NS_CC_BEGIN
@@ -70,7 +70,7 @@ CC_CONSTRUCTOR_ACCESS:
     
 protected:
     static Sprite3DMaterialCache* _cacheInstance;//instance
-    boost::unordered_map<std::string, Texture2D*> _materials; //cached material
+    std::unordered_map<std::string, Texture2D*> _materials; //cached material
     
 };
 

@@ -174,7 +174,7 @@ void   SpritePolygonCache::removeSpritePolygonCache(const std::string& filePath,
 
 void SpritePolygonCache::removeAllSpritePolygonCache()
 {
-    for (boost::unordered_map<std::string, VecSpritePolygonInfo>::iterator it = _SpritePolygonCacheMap.begin(); it != _SpritePolygonCacheMap.end(); ++it)
+    for (std::unordered_map<std::string, VecSpritePolygonInfo>::iterator it = _SpritePolygonCacheMap.begin(); it != _SpritePolygonCacheMap.end(); ++it)
     {
         for (auto infoIter = it->second.begin(); infoIter != it->second.end(); infoIter++)
         {

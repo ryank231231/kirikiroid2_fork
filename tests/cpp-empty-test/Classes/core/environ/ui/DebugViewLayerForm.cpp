@@ -220,7 +220,7 @@ uint64_t DebugViewLayerForm::addToLayerVec(int indent, const std::string &prefix
 	}
 	std::string name(prefix + lay->GetName().AsStdString());
 	LayerInfo info_ = { name, tex, (size_t)vmemsize, indent++ };
-	_layers.emplace_back(info_);
+	_layers.push_back(info_);
 	std::string _prefix(name);
 	_prefix += "/";
 	//lay->GetOwnerNoAddRef()->AddRef();

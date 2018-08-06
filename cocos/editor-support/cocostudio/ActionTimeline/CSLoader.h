@@ -146,12 +146,12 @@ protected:
     typedef std::function<cocos2d::Node*(const rapidjson::Value& json)> NodeCreateFunc;
     typedef std::pair<std::string, NodeCreateFunc> Pair;
     
-    boost::unordered_map<std::string, NodeCreateFunc> _funcs;
+    std::unordered_map<std::string, NodeCreateFunc> _funcs;
     
     typedef std::function<cocos2d::Component*(const rapidjson::Value& json)> ComponentCreateFunc;
     typedef std::pair<std::string, ComponentCreateFunc> ComponentPair;
     
-    boost::unordered_map<std::string, ComponentCreateFunc> _componentFuncs;
+    std::unordered_map<std::string, ComponentCreateFunc> _componentFuncs;
     
     bool _recordJsonPath;
     

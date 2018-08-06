@@ -14,7 +14,11 @@
 #include "tjsConfig.h"
 #include <stdlib.h>
 #include <string.h>
+#if 0
 #include <boost/atomic.hpp>
+#else
+#include <pthread.h>
+#endif
 
 namespace TJS
 {
@@ -62,8 +66,17 @@ TJS_EXP_FUNC_DEF(void, TJSVS_free, (tjs_char *buf));
 #pragma pack(push, 4)
 struct tTJSVariantString_S
 {
+#if 0
 	//tjs_int RefCount; // reference count - 1
 	boost::atomic_long  RefCount;
+#else
+	pthread_mutex_t RefCount_lock; // reference count - 1
+	tjs_int RefCount_pth;
+	tTJSVariantString_S();
+	tTJSVariantString_S(const tTJSVariantString_S & c);
+	virtual ~tTJSVariantString_S();
+	tTJSVariantString_S &operator=(const tTJSVariantString_S & c);
+#endif
 	tjs_char *LongString;
 	tjs_char ShortString[TJS_VS_SHORT_LEN +1];
 	tjs_int Length; // string length
@@ -81,7 +94,13 @@ public:
 
 	TJS_METHOD_DEF(void, AddRef, ())
 	{
+#if 0
 		RefCount++;
+#else
+		pthread_mutex_lock(&RefCount_lock);
+		RefCount_pth++;
+		pthread_mutex_unlock(&RefCount_lock);
+#endif
 	}
 
 	TJS_METHOD_DEF(void, Release, ());
@@ -230,9 +249,18 @@ public:
 	TJS_CONST_METHOD_DEF(tTVReal, ToReal, ());
 	TJS_CONST_METHOD_DEF(void, ToNumber, (tTJSVariant &dest));
 
+#if 0
 	TJS_CONST_METHOD_DEF(tjs_int, GetRefCount, ())
 	{
 		return RefCount;
+#else
+	TJS_METHOD_DEF(tjs_int, GetRefCount, ())
+	{
+		pthread_mutex_lock(&RefCount_lock);
+		tjs_int result = RefCount_pth;
+		pthread_mutex_unlock(&RefCount_lock);
+		return result;
+#endif
 	}
 
 	tjs_int QueryPersistSize() const
