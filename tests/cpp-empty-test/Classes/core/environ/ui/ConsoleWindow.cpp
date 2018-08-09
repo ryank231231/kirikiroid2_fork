@@ -22,7 +22,11 @@ TVPConsoleWindow* TVPConsoleWindow::create(int fontSize, cocos2d::Node *parent) 
 
 extern pthread_t *TVPMainThreadID;
 void TVPConsoleWindow::addLine(const ttstr &line, cocos2d::Color3B clr) {
+#if 0
 	assert(TVPMainThreadID == boost::this_thread::get_id());
+#else
+	assert(pthread_equal(*TVPMainThreadID, pthread_self()));
+#endif
 	if (_queuedLines.size() > _maxQueueSize) {
 		_queuedLines.pop_front();
 	}

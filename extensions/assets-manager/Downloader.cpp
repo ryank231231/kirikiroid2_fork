@@ -315,8 +315,9 @@ void Downloader::downloadToBufferAsync(const std::string &srcUrl, unsigned char 
         streamBuffer.total = size;
         streamBuffer.offset = 0;
         
-        auto t = boost::thread(&Downloader::downloadToBuffer, this, srcUrl, customId, streamBuffer, pData);
-        t.detach();
+        pthread_t t;
+		pthread_create(&t, NULL, &Downloader::downloadToBuffer_entry, new downloadToBufferStruct(this, srcUrl, customId, streamBuffer, pData));
+        pthread_detach(t);
     }
 }
 
@@ -395,8 +396,9 @@ void Downloader::downloadAsync(const std::string &srcUrl, const std::string &sto
     prepareDownload(srcUrl, storagePath, customId, false, &fDesc, &pData);
     if (fDesc.fp != NULL)
     {
-        auto t = boost::thread(&Downloader::download, this, srcUrl, customId, fDesc, pData);
-        t.detach();
+        pthread_t t;
+		pthread_create(&t, NULL, &Downloader::download_entry, new downloadStruct(this, srcUrl, customId, fDesc, pData));
+        pthread_detach(t);
     }
 }
 

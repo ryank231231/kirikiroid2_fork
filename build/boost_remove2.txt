@@ -1,5 +1,28 @@
+(3)
+			pthread_t id = pthread_self();
+			for (auto &p_it = _thread_decoders.begin(); p_it != _thread_decoders.end(); ++p_it)
+			{
+				const auto &it = *p_it;
+				if (pthread_equal(*(it.first), id)) {
+					_cached_decoders.push_back(it.second);
+----------->					_thread_decoders.erase(p_it); //FIXME:???
+					break;
+				}
+			}
+			
+			
+			
+(2)
+remove mciplayer.cpp
+
+(1)
 delete ~~_struct
 remove audioengine
+
+
+
+
+-----------------------------
 
 boost/thread/thread.hpp
 	boost::thread::id tid = boost::this_thread::get_id();

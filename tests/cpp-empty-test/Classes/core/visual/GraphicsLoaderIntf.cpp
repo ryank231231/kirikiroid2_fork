@@ -2135,6 +2135,7 @@ private:
 	static void* _thread_loop_entry(void *pthis) {
 	  TVPGraphicPreload *obj = static_cast<TVPGraphicPreload *>(pthis);
 	  obj->_thread_loop();
+	  delete obj;
 	  return NULL;
 	}
     void _thread_loop() {

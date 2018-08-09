@@ -498,6 +498,7 @@ class tTVPUnpackArchiveImpl {
 	static void* Entry_entry(void *pthis) {
 	  tTVPUnpackArchiveImpl *obj = static_cast<tTVPUnpackArchiveImpl *>(pthis);
 	  obj->Entry();
+	  delete obj;
 	  return NULL;
 	}
 

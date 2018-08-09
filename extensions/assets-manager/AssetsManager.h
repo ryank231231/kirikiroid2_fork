@@ -172,6 +172,7 @@ protected:
 	static void* downloadAndUncompress_entry(void *pthis) {
 	  AssetsManager *obj = static_cast<AssetsManager *>(pthis);
 	  obj->downloadAndUncompress();
+	  delete obj;
 	  return NULL;
 	}
 

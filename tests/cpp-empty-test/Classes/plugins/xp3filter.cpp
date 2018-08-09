@@ -325,21 +325,46 @@ static boost::mutex _decoders_mtx;
 static std::vector<XP3FilterDecoder*> _cached_decoders;
 static XP3FilterDecoder *FetchXP3Decoder() {
 	boost::lock_guard<boost::mutex> lk(_decoders_mtx);
+#if 0
 	auto it = _thread_decoders.find(boost::this_thread::get_id());
 	if (it != _thread_decoders.end()) {
 		XP3FilterDecoder *ret = it->second;
 		return ret;
 	}
+#else
+	pthread_t id = pthread_self();
+	for (auto &p_it = _thread_decoders.begin(); p_it != _thread_decoders.end(); ++p_it)
+	{
+		const auto &it = *p_it;
+		if (pthread_equal(*(it.first), id)) {
+			XP3FilterDecoder *ret = it.second;
+			return ret;
+		}
+	}
+#endif
 	static bool Inited = false;
 	if (!Inited) {
 		Inited = true;
 		TVPAddOnThreadExitEvent([](){
 			boost::lock_guard<boost::mutex> lk(_decoders_mtx);
+#if 0
 			auto it = _thread_decoders.find(boost::this_thread::get_id());
 			if (it != _thread_decoders.end()) {
 				_cached_decoders.push_back(it->second);
 				_thread_decoders.erase(it);
 			}
+#else
+			pthread_t id = pthread_self();
+			for (auto &p_it = _thread_decoders.begin(); p_it != _thread_decoders.end(); ++p_it)
+			{
+				const auto &it = *p_it;
+				if (pthread_equal(*(it.first), id)) {
+					_cached_decoders.push_back(it.second);
+					_thread_decoders.erase(p_it); //FIXME:???
+					break;
+				}
+			}
+#endif
 		});
 	}
 	XP3FilterDecoder *ret;
@@ -349,7 +374,13 @@ static XP3FilterDecoder *FetchXP3Decoder() {
 	} else {
 		ret = AddXP3Decoder();
 	}
+#if 0
 	_thread_decoders[boost::this_thread::get_id()] = ret;
+#else
+	pthread_t *id_p = new pthread_t();
+	*id_p = pthread_self();
+	_thread_decoders[id_p] = ret;
+#endif
 	return ret;
 }
 #else

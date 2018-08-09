@@ -61,7 +61,7 @@ static void _do_compact() {
 static void _no_memory_cb() {
 	tTJSCSH lock(_NoMemCallBackCS);
 	free(_reservedMem);
-	if (TVPMainThreadID == boost::this_thread::get_id()) {
+	if (pthread_equal(*TVPMainThreadID, pthread_self())) {
 		_do_compact();
 	} else {
 		Application->PostUserMessage(_do_compact);
@@ -558,7 +558,8 @@ bool tTVPApplication::StartApplication(ttstr path) {
 	}
 #endif
 	TVPTerminateCode = 0;
-	TVPMainThreadID = boost::this_thread::get_id();
+	TVPMainThreadID = new pthread_t();
+	*TVPMainThreadID = pthread_self();
 	LocaleConfigManager *mgr = LocaleConfigManager::GetInstance();
 	_retry = mgr->GetText("retry");
 	_cancel = mgr->GetText("cancel");

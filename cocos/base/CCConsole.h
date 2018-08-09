@@ -114,6 +114,7 @@ protected:
 	static void* loop_entry(void *pthis) {
 	  Console *obj = static_cast<Console *>(pthis);
 	  obj->loop();
+	  delete obj;
 	  return NULL;
 	}
     ssize_t readline(int fd, char *buf, size_t maxlen);

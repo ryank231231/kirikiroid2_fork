@@ -38,6 +38,8 @@
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
 #include "win32/AudioEngine-win32.h"
 #endif
+#else
+#define MAX_AUDIOINSTANCES 32
 #endif
 
 #define TIME_DELAY_PRECISION 0.0001
@@ -51,7 +53,7 @@ using namespace cocos2d::experimental;
 
 const int AudioEngine::INVALID_AUDIO_ID = -1;
 const float AudioEngine::TIME_UNKNOWN = -1.0f;
-#if 0
+
 //audio file path,audio IDs
 std::unordered_map<std::string,std::list<int>> AudioEngine::_audioPathIDMap;
 //profileName,ProfileHelper
@@ -60,7 +62,6 @@ unsigned int AudioEngine::_maxInstances = MAX_AUDIOINSTANCES;
 AudioEngine::ProfileHelper* AudioEngine::_defaultProfileHelper = nullptr;
 std::unordered_map<int, AudioEngine::AudioInfo> AudioEngine::_audioIDInfoMap;
 AudioEngineImpl* AudioEngine::_audioEngineImpl = nullptr;
-#endif
 
 void AudioEngine::end()
 {/*

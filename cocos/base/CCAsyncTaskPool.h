@@ -115,6 +115,7 @@ protected:
 		static void* loadData_entry(void *pthis) {
 		  ThreadTasks *obj = static_cast<ThreadTasks *>(pthis);
 		  obj->loadData();
+		  delete obj;
 		  return NULL;
 		}
 		void loadData()

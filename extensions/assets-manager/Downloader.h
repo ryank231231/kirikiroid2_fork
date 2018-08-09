@@ -147,7 +147,7 @@ public:
 	static void* batchDownloadSync_entry(void *pthis) {
 	  batchDownloadSyncStruct *obj = static_cast<batchDownloadSyncStruct *>(pthis);
 	  obj->this_->batchDownloadSync(obj->units, obj->batchId);
-	  delete(obj);
+	  delete obj;
 	  return NULL;
 	}
 
@@ -170,8 +170,32 @@ protected:
     
     bool prepareHeader(void *curl, const std::string &srcUrl) const;
     
+	struct downloadToBufferStruct {
+		Downloader *this_; const std::string &srcUrl; const std::string &customId; const StreamData &buffer; const ProgressData &data;
+		downloadToBufferStruct(Downloader *this__, const std::string &srcUrl_, const std::string &customId_, const StreamData &buffer_, const ProgressData &data_)
+		: this_(this__), srcUrl(srcUrl_), customId(customId_), buffer(buffer_), data(data_)
+		{ }
+	};
+	static void* downloadToBuffer_entry(void *pthis) {
+	  downloadToBufferStruct *obj = static_cast<downloadToBufferStruct *>(pthis);
+	  obj->this_->downloadToBuffer(obj->srcUrl, obj->customId, obj->buffer, obj->data);
+	  delete obj;
+	  return NULL;
+	}
     void downloadToBuffer(const std::string &srcUrl, const std::string &customId, const StreamData &buffer, const ProgressData &data);
 
+	struct downloadStruct {
+		Downloader *this_; const std::string &srcUrl; const std::string &customId; const FileDescriptor &fDesc; const ProgressData &data;
+		downloadStruct(Downloader *this__,const std::string &srcUrl_, const std::string &customId_, const FileDescriptor &fDesc_, const ProgressData &data_)
+		: this_(this__), srcUrl(srcUrl_), customId(customId_), fDesc(fDesc_), data(data_)
+		{ }
+	};
+	static void* download_entry(void *pthis) {
+	  downloadStruct *obj = static_cast<downloadStruct *>(pthis);
+	  obj->this_->download(obj->srcUrl, obj->customId, obj->fDesc, obj->data);
+	  delete obj;
+	  return NULL;
+	}
     void download(const std::string &srcUrl, const std::string &customId, const FileDescriptor &fDesc, const ProgressData &data);
     
     void groupBatchDownload(const DownloadUnits &units);

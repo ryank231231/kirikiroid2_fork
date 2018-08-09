@@ -200,6 +200,7 @@ protected:
 	static void* loadData_entry(void *pthis) {
 	  DataReaderHelper *obj = static_cast<DataReaderHelper *>(pthis);
 	  obj->loadData();
+	  delete obj;
 	  return NULL;
 	}
 

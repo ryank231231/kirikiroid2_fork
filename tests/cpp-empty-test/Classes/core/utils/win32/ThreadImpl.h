@@ -22,7 +22,7 @@
 class tTVPThread
 {
 	bool Terminated;
-	pthread_t *Handle;
+	pthread_t Handle;
 	//DWORD ThreadId;
 	boost::mutex _mutex; // for suspend
 	boost::condition_variable _cond;

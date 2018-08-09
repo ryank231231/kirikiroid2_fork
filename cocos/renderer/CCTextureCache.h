@@ -202,6 +202,7 @@ private:
 	static void* loadImage_entry(void *pthis) {
 	  TextureCache *obj = static_cast<TextureCache *>(pthis);
 	  obj->loadImage();
+	  delete obj;
 	  return NULL;
 	}
 
