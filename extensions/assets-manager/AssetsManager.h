@@ -169,6 +169,11 @@ protected:
     bool createDirectory(const char *path);
     void setSearchPath();
     void downloadAndUncompress();
+	static void* downloadAndUncompress_entry(void *pthis) {
+	  AssetsManager *obj = static_cast<AssetsManager *>(pthis);
+	  obj->downloadAndUncompress();
+	  return NULL;
+	}
 
 private:
     /** @brief Initializes storage path.

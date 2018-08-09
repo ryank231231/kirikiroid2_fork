@@ -42,9 +42,6 @@
     <Filter Include="Classes\core\movie">
       <UniqueIdentifier>{5a5b1bf4-9add-4ae5-9397-955d0ee292d1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\core\movie\ffmpeg">
-      <UniqueIdentifier>{84784336-31f4-426a-92b8-b5dfc7b2f666}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\core\msg">
       <UniqueIdentifier>{ea3a2834-86d5-4a25-a635-6c3aca91f48c}</UniqueIdentifier>
     </Filter>
@@ -140,9 +137,6 @@
     <ClCompile Include="..\Classes\core\tjs2\tjsDateParser.cpp">
       <Filter>Classes\core\tjs2</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\core\tjs2\tjsDateWordMap.cc">
-      <Filter>Classes\core\tjs2</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\core\tjs2\tjsDebug.cpp">
       <Filter>Classes\core\tjs2</Filter>
     </ClCompile>
@@ -224,9 +218,6 @@
     <ClCompile Include="..\Classes\core\tjs2\tjsVariantString.cpp">
       <Filter>Classes\core\tjs2</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\core\base\7zArchive.cpp">
-      <Filter>Classes\core\base</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\core\base\BinaryStream.cpp">
       <Filter>Classes\core\base</Filter>
     </ClCompile>
@@ -272,9 +263,6 @@
     <ClCompile Include="..\Classes\core\base\win32\FileSelector.cpp">
       <Filter>Classes\core\base\win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\core\base\win32\FuncStubs.cpp">
-      <Filter>Classes\core\base\win32</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\core\base\win32\NativeEventQueue.cpp">
       <Filter>Classes\core\base\win32</Filter>
     </ClCompile>
@@ -285,9 +273,6 @@
       <Filter>Classes\core\base\win32</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\core\base\win32\StorageImpl.cpp">
-      <Filter>Classes\core\base\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\base\win32\SusieArchive.cpp">
       <Filter>Classes\core\base\win32</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\core\base\win32\SysInitImpl.cpp">
@@ -305,9 +290,6 @@
     <ClCompile Include="..\Classes\core\environ\DumpSend.cpp">
       <Filter>Classes\core\environ</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\core\environ\XP3ArchiveRepack.cpp">
-      <Filter>Classes\core\environ</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\core\environ\cocos2d\AppDelegate.cpp">
       <Filter>Classes\core\environ\cocos2d</Filter>
     </ClCompile>
@@ -315,9 +297,6 @@
       <Filter>Classes\core\environ\cocos2d</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\core\environ\cocos2d\MainScene.cpp">
-      <Filter>Classes\core\environ\cocos2d</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\environ\cocos2d\YUVSprite.cpp">
       <Filter>Classes\core\environ\cocos2d</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\core\environ\android\AndroidUtils.cpp">
@@ -362,13 +341,7 @@
     <ClCompile Include="..\Classes\core\environ\ui\SeletListForm.cpp">
       <Filter>Classes\core\environ\ui</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\core\environ\ui\SimpleMediaFilePlayer.cpp">
-      <Filter>Classes\core\environ\ui</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\core\environ\ui\TipsHelpForm.cpp">
-      <Filter>Classes\core\environ\ui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\environ\ui\XP3RepackForm.cpp">
       <Filter>Classes\core\environ\ui</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\core\environ\ui\extension\ActionExtension.cpp">
@@ -382,111 +355,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\core\movie\krmovie.cpp">
       <Filter>Classes\core\movie</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\AEChannelInfo.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\AEFactory.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\AEStreamInfo.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\AEUtil.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\AudioCodecFFmpeg.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\AudioCodecPassthrough.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\AudioDevice.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\BaseRenderer.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\BitstreamStats.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\Clock.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\CodecUtils.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\Demux.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\DemuxFFmpeg.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\DemuxPacket.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\FactoryCodec.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\InputStream.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\krffmpeg.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\KRMovieLayer.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\KRMoviePlayer.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\Message.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\MessageQueue.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\ProcessInfo.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\RenderFlags.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\StreamInfo.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\Thread.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\Timer.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\TimeUtils.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\TVPMediaDemux.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\VideoCodec.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\VideoCodecFFmpeg.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\VideoPlayer.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\VideoPlayerAudio.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\VideoPlayerVideo.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\VideoReferenceClock.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\movie\ffmpeg\VideoRenderer.cpp">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\core\msg\MsgIntf.cpp">
       <Filter>Classes\core\msg</Filter>
@@ -506,16 +374,10 @@
     <ClCompile Include="..\Classes\core\sound\CDDAIntf.cpp">
       <Filter>Classes\core\sound</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\core\sound\FFWaveDecoder.cpp">
-      <Filter>Classes\core\sound</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\core\sound\MathAlgorithms.cpp">
       <Filter>Classes\core\sound</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\core\sound\MIDIIntf.cpp">
-      <Filter>Classes\core\sound</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\sound\PhaseVocoderDSP.cpp">
       <Filter>Classes\core\sound</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\core\sound\PhaseVocoderFilter.cpp">
@@ -524,13 +386,7 @@
     <ClCompile Include="..\Classes\core\sound\SoundBufferBaseIntf.cpp">
       <Filter>Classes\core\sound</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\core\sound\VorbisWaveDecoder.cpp">
-      <Filter>Classes\core\sound</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\core\sound\WaveFormatConverter.cpp">
-      <Filter>Classes\core\sound</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\sound\WaveFormatConverter_SSE.cpp">
       <Filter>Classes\core\sound</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\core\sound\WaveIntf.cpp">
@@ -549,9 +405,6 @@
       <Filter>Classes\core\sound\win32</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\core\sound\win32\SoundBufferBaseImpl.cpp">
-      <Filter>Classes\core\sound\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\core\sound\win32\tvpsnd.c">
       <Filter>Classes\core\sound\win32</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\core\sound\win32\tvpsnd.cpp">
@@ -1243,156 +1096,6 @@
     <ClInclude Include="..\Classes\core\extension\Extension.h">
       <Filter>Classes\core\extension</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\AE.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\AEAudioFormat.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\AEChannelData.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\AEChannelInfo.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\AEFactory.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\AEStream.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\AEStreamData.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\AEStreamInfo.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\AEUtil.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\AudioCodec.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\AudioCodecFFmpeg.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\AudioCodecPassthrough.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\AudioDevice.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\BaseRenderer.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\BitstreamStats.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\Clock.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\Codecs.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\CodecUtils.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\config.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\Demux.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\DemuxFFmpeg.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\DemuxPacket.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\FactoryCodec.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\Geometry.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\IAudioCallback.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\InputStream.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\IVideoPlayer.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\KRMovieDef.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\KRMovieLayer.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\KRMoviePlayer.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\MathUtils.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\Message.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\MessageQueue.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\OptionInfo.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\ProcessInfo.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\Ref.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\RenderFlags.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\RenderFormats.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\StreamInfo.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\Thread.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\Timer.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\TimeUtils.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\TVPMediaDemux.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\VideoCodec.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\VideoCodecFFmpeg.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\VideoPlayer.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\VideoPlayerAudio.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\VideoPlayerVideo.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\VideoReferenceClock.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\movie\ffmpeg\VideoRenderer.h">
-      <Filter>Classes\core\movie\ffmpeg</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\core\msg\MsgIntf.h">
       <Filter>Classes\core\msg</Filter>
     </ClInclude>
@@ -1863,11 +1566,6 @@
     <None Include="..\Classes\core\visual\tvpps.inc">
       <Filter>Classes\core\visual</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Midl Include="..\Classes\core\sound\win32\tvpsnd.idl">
-      <Filter>Classes\core\sound\win32</Filter>
-    </Midl>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />

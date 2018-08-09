@@ -9,8 +9,9 @@
 
 #include <deque>
 #include <boost/thread/thread.hpp>
+#include <pthread.h>
 
-extern boost::thread::id TVPMainThreadID;
+extern pthread_t TVPMainThreadID;
 NS_KRMOVIE_BEGIN
 
 DispDeviceDesc g_graphicsContext;

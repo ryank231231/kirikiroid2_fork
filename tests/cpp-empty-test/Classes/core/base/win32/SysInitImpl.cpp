@@ -48,6 +48,7 @@
 #endif
 #define uint32_t unsigned int
 #include <boost/thread/thread.hpp>
+#include <pthread.h>
 #undef uint32_t
 #include "Platform.h"
 #include "ConfigManager/IndividualConfigManager.h"
@@ -888,7 +889,7 @@ static void TVPInitRandomGenerator()
 #endif
 	tjs_uint32 tick = TVPGetRoughTickCount32();
 	TVPPushEnvironNoise(&tick, sizeof(tick));
-	boost::thread::id tid = boost::this_thread::get_id();
+	pthread_t tid = pthread_self();
 	TVPPushEnvironNoise(&tid, sizeof(tid));
 	time_t curtime = time(NULL);
 	TVPPushEnvironNoise(&curtime, sizeof(curtime));

@@ -279,8 +279,9 @@ void AssetsManager::update()
     // Is package already downloaded?
     _downloadedVersion = UserDefault::getInstance()->getStringForKey(keyOfDownloadedVersion().c_str());
     
-    auto t = boost::thread(&AssetsManager::downloadAndUncompress, this);
-    t.detach();
+    pthread_t t;
+	pthread_create(&t, NULL, &AssetsManager::downloadAndUncompress_entry, this);
+    pthread_detach(t);
 }
 
 bool AssetsManager::uncompress()

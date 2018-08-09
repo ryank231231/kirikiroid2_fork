@@ -28,6 +28,7 @@
 #include "Platform.h"
 #include "EventIntf.h"
 #include <boost/thread/thread.hpp>
+#include <pthread.h>
 #include "ConfigManager/LocaleConfigManager.h"
 #include "StorageIntf.h"
 #ifndef _MSC_VER
@@ -47,7 +48,7 @@ kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32
 */
 
 tTVPApplication* Application = new tTVPApplication;
-boost::thread::id TVPMainThreadID;
+pthread_t *TVPMainThreadID;
 static tTJSCriticalSection _NoMemCallBackCS;
 static void *_reservedMem = malloc(1024 * 1024 * 4); // 4M reserved mem
 static bool _project_startup = false;

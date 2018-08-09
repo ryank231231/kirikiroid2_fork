@@ -117,6 +117,19 @@ static std::string url_encode(const std::string &value) {
 	return escaped.str();
 }
 
+static void SendDumps(std::string dumpdir, std::vector<std::string> allDumps, std::string packageName, std::string versionStr);
+struct SendDumps_struct {
+	std::string dumpdir; std::vector<std::string> allDumps; std::string packageName; std::string versionStr;
+	SendDumps_struct(std::string dumpdir_, std::vector<std::string> allDumps_, std::string packageName_, std::string versionStr_)
+		: dumpdir(dumpdir_), allDumps(allDumps_), packageName(packageName_), versionStr(versionStr_) { }
+};
+static void* SendDumps_entry(void *pthis) {
+  SendDumps_struct *obj = static_cast<SendDumps_struct *>(pthis);
+  SendDumps(obj->dumpdir, obj->allDumps, obj->packageName, obj->versionStr);
+  delete obj;
+  return NULL;
+}
+
 #define FLAG_UTF8 (1<<11)
 static void SendDumps(std::string dumpdir, std::vector<std::string> allDumps, std::string packageName, std::string versionStr) {
 	boost::mutex _mutex;
@@ -237,8 +250,8 @@ void TVPCheckAndSendDumps(const std::string &dumpdir, const std::string &package
 		char buf[256];
 		sprintf(buf, msgfmt.c_str(), allDumps.size());
 		if (TVPShowSimpleMessageBoxYesNo(buf, title) == 0) {
-			static boost::thread dumpthread;
-			dumpthread = boost::thread(std::bind(SendDumps, dumpdir, allDumps, packageName, versionStr));
+			static pthread_t dumpthread;
+			pthread_create(&dumpthread, NULL, &SendDumps_entry, new SendDumps_struct(dumpdir, allDumps, packageName, versionStr));
 		} else {
 			ClearDumps(dumpdir, allDumps);
 		}

@@ -18,6 +18,7 @@
 #include <boost/thread/thread.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/condition_variable.hpp>
+#include <pthread.h>
 #include "Platform.h"
 
 
@@ -482,7 +483,7 @@ static FILE *_fileopen(ttstr path) {
 }
 
 class tTVPUnpackArchiveImpl {
-	boost::thread *ThreadObj;
+	pthread_t *ThreadObj;
 	boost::mutex Mutex;
 	boost::condition_variable Cond;
 	tTVPUnpackArchive *Owner;
@@ -494,17 +495,24 @@ class tTVPUnpackArchiveImpl {
 		}
 		Owner->Process();
 	}
+	static void* Entry_entry(void *pthis) {
+	  tTVPUnpackArchiveImpl *obj = static_cast<tTVPUnpackArchiveImpl *>(pthis);
+	  obj->Entry();
+	  return NULL;
+	}
 
 public:
 	tTVPUnpackArchiveImpl(tTVPUnpackArchive *owner) : Owner(owner) {
-		ThreadObj = new boost::thread(&tTVPUnpackArchiveImpl::Entry, this);
+		ThreadObj = new pthread_t();
+		pthread_create(ThreadObj, NULL, &tTVPUnpackArchiveImpl::Entry_entry, this);
 	}
 
 	~tTVPUnpackArchiveImpl() {
-		if (ThreadObj->joinable()) {
-			ThreadObj->join();
+		if (ThreadObj) {
+			pthread_join(*ThreadObj, NULL);
 		}
 		delete ThreadObj;
+		ThreadObj = NULL;
 	}
 
 	void Start() {

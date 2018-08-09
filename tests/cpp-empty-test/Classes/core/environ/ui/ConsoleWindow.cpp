@@ -1,5 +1,6 @@
 #include "ConsoleWindow.h"
 #include "cocos2d/MainScene.h"
+#include <pthread.h>
 
 using namespace cocos2d;
 
@@ -19,7 +20,7 @@ TVPConsoleWindow* TVPConsoleWindow::create(int fontSize, cocos2d::Node *parent) 
 	return ret;
 }
 
-extern boost::thread::id TVPMainThreadID;
+extern pthread_t *TVPMainThreadID;
 void TVPConsoleWindow::addLine(const ttstr &line, cocos2d::Color3B clr) {
 	assert(TVPMainThreadID == boost::this_thread::get_id());
 	if (_queuedLines.size() > _maxQueueSize) {

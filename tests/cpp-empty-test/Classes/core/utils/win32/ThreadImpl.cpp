@@ -167,11 +167,45 @@ static std::vector<tjs_int> TVPProcesserIdList;
 static tjs_int TVPThreadTaskNum, TVPThreadTaskCount;
 
 //---------------------------------------------------------------------------
+//https://stackoverflow.com/questions/150355/programmatically-find-the-number-of-cores-on-a-machine
+#ifdef _WIN32
+#include <windows.h>
+#elif MACOS
+#include <sys/param.h>
+#include <sys/sysctl.h>
+#else
+#include <unistd.h>
+#endif
+
+static int getNumCores() {
+#ifdef WIN32
+    SYSTEM_INFO sysinfo;
+    GetSystemInfo(&sysinfo);
+    return sysinfo.dwNumberOfProcessors;
+#elif MACOS
+    int nm[2];
+    size_t len = 4;
+    uint32_t count;
+
+    nm[0] = CTL_HW; nm[1] = HW_AVAILCPU;
+    sysctl(nm, 2, &count, &len, NULL, 0);
+
+    if(count < 1) {
+        nm[1] = HW_NCPU;
+        sysctl(nm, 2, &count, &len, NULL, 0);
+        if(count < 1) { count = 1; }
+    }
+    return count;
+#else
+    return sysconf(_SC_NPROCESSORS_ONLN);
+#endif
+}
+
 static tjs_int GetProcesserNum(void)
 {
   static tjs_int processor_num = 0;
   if (! processor_num) {
-	  processor_num = boost::thread::hardware_concurrency();
+	  processor_num = pthread_num_processors_np();
 	tjs_char tmp[34];
 	TVPAddLog(ttstr(TJS_W("Detected CPU core(s): ")) + TJS_tTVInt_to_str(processor_num, tmp));
   }

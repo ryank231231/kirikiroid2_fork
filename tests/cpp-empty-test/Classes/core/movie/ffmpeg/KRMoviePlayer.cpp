@@ -1,4 +1,5 @@
 #include <boost/thread/thread.hpp>
+#include <pthread.h>
 extern "C" {
 #include "libswscale/swscale.h"
 }
@@ -12,7 +13,7 @@ extern "C" {
 #include "VideoOvlImpl.h"
 #include "cocos2d/YUVSprite.h"
 
-extern boost::thread::id TVPMainThreadID;
+extern pthread_t TVPMainThreadID;
 
 NS_KRMOVIE_BEGIN
 

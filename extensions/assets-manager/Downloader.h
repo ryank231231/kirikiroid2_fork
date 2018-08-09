@@ -136,6 +136,21 @@ public:
     
     void batchDownloadSync(const DownloadUnits &units, const std::string &batchId = "");
 
+	struct batchDownloadSyncStruct {
+		Downloader *this_; const DownloadUnits &units; const std::string &batchId;
+		batchDownloadSyncStruct(Downloader *this__, const DownloadUnits &units_, const std::string &batchId_)
+		: this_(this__)
+		, units(units_)
+		, batchId(batchId_)
+		{ }
+	};
+	static void* batchDownloadSync_entry(void *pthis) {
+	  batchDownloadSyncStruct *obj = static_cast<batchDownloadSyncStruct *>(pthis);
+	  obj->this_->batchDownloadSync(obj->units, obj->batchId);
+	  delete(obj);
+	  return NULL;
+	}
+
     /**
      *  The default constructor.
      */

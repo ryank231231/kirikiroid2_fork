@@ -9,13 +9,14 @@ extern "C" {
 #include "libavfilter/avfilter.h"
 }
 #include <boost/thread/mutex.hpp>
+#include <pthread.h>
 #include "MsgIntf.h"
 #include "StorageIntf.h"
 #include "VideoOvlImpl.h"
 #include "KRMoviePlayer.h"
 #include "KRMovieLayer.h"
 
-extern boost::thread::id TVPMainThreadID;
+extern pthread_t TVPMainThreadID;
 
 static int lockmgr(void **arg, enum AVLockOp op)
 {

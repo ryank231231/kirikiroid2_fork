@@ -1,0 +1,153 @@
+delete ~~_struct
+remove audioengine
+
+boost/thread/thread.hpp
+	boost::thread::id tid = boost::this_thread::get_id();
+	boost::thread *ThreadObj;
+	ThreadObj = new boost::thread(&tTVPUnpackArchiveImpl::Entry, this);
+	if (ThreadObj->joinable()) {
+		ThreadObj->join();
+	}
+	static boost::thread dumpthread;
+	dumpthread = boost::thread(std::bind(SendDumps, dumpdir, allDumps, packageName, versionStr));
+	boost::thread::id id = boost::this_thread::get_id();	
+	processor_num = boost::thread::hardware_concurrency();
+	_rotateBufferThread = boost::thread(&AudioPlayer::rotateBufferThread,this, _audioCache->_queBufferFrames * QUEUEBUFFER_NUM + 1);
+	boost::this_thread::sleep_for(boost::chrono::milliseconds(remain));
+	(x) boost::this_thread::yield();
+	
+boost/thread/mutex.hpp
+	boost::mutex Mutex;
+	boost::unique_lock<boost::mutex> lk(Mutex);
+
+boost/thread/condition_variable.hpp
+	boost::condition_variable Cond;
+	Cond.wait(lk);
+	Cond.notify_all();
+	boost::unique_lock<boost::mutex> lk(MessageBoxLock);
+	MessageBoxCond.wait(lk);
+	static boost::condition_variable_any s_SleepCondition;
+	s_SleepCondition.notify_one();
+	s_SleepCondition.wait(s_requestQueueMutex);
+	 
+(x??) boost/thread/recursive_mutex.hpp
+	boost::lock_guard<boost::recursive_mutex> lock(m_critSection);
+	boost::recursive_mutex m_critSection;
+	typedef boost::unique_lock<boost::recursive_mutex> CSingleLock;
+
+boost/thread/lock_guard.hpp
+	boost::lock_guard<boost::mutex> cs(m_msgQueueLock);
+
+boost/thread/future.hpp
+	boost::BOOST_THREAD_FUTURE<void> m_load;
+	m_load = boost::async(boost::launch::async, [this, &bmp, w, h]() mutable {
+	uint32* Data() { if (m_load.valid()) m_load.wait(); return m_data; }
+	const uint32* Data() const { if (m_load.valid()) m_load.wait(); return m_data; }
+	
+
+
+
+
+
+
+
+
+
+
+
+----------------
+
+//https://github.com/leoc/ppthread/blob/master/src/thread.cpp
+
+
+//  static void* entry(void* pthis);
+/* static */
+void* Thread::entry(void *pthis) {
+  Thread *obj = static_cast<Thread *>(pthis);
+  obj->run();
+  return NULL;
+}
+
+int Thread::start() {
+  if (status_ != THREAD_STOPPED)
+    return 1;
+
+  status_ = THREAD_PENDING;
+  int ret = pthread_create(&thread_, NULL, &Thread::entry, this);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------
+
+
+
+
+
+
+boost/container/vector.hpp
+	ListInfo.emplace_back(std::get<0>(it), std::get<1>(it));
+boost/container/deque.hpp
+	if (_queuedLines.size() > _maxQueueSize) {
+		_queuedLines.pop_front();
+	}
+	_queuedLines.emplace_back(line, clr);
+boost/container/map.hpp
+	_RenderManagerFactory->emplace(name, std::make_pair(func, nullptr));
+
+boost/unordered_map.hpp
+	_indicesVertexZNumber.erase(iter.first);
+
+boost/atomic.hpp
+	boost::atomic_long  RefCount;
+		TJS_METHOD_DEF(void, AddRef, ())
+		{
+			RefCount++;
+		}
+	boost::atomic_flag atom_lock;
+		while (atom_lock.test_and_set(boost::memory_order_acquire)) {
+		atom_lock.clear(boost::memory_order_release);
+	(x) boost::atomic<bool> m_bStop, m_bRunning;
+		if (m_bRunning.exchange(true)) {
+		
+
+boost/tr1/cmath.hpp
+	result.r = static_cast<int>(boost::math::tr1::roundf(color.r));
+	result.g = static_cast<int>(boost::math::tr1::roundf(color.g));
+	result.b = static_cast<int>(boost::math::tr1::roundf(color.b));
+
+boost/function.hpp
+	(???x)
+
+(x) boost/regex.hpp
+	if (boost::regex_match(child->_name, boost::regex(searchName)))
+	boost::regex pat("\\/");
+	std::string _old = boost::regex_replace(oldPath, pat, "\\");
+	std::string _new = boost::regex_replace(newPath, pat, "\\");
+		
+boost/chrono.hpp
+	boost::chrono::high_resolution_clock::time_point _startTime;
+	boost::this_thread::sleep_for(boost::chrono::milliseconds(50));
+	inline const boost::chrono::high_resolution_clock::time_point& getStartTime(void) { return _startTime; };
+	long duration = static_cast<long>(boost::chrono::duration_cast<boost::chrono::microseconds>(now - timer->_startTime).count());
+	_startTime = boost::chrono::high_resolution_clock::now();
+	m_condPicture.wait_for(lk, boost::chrono::milliseconds(10));
+	boost::this_thread::sleep_for(boost::chrono::milliseconds(remain));
+	_cond.wait_for(lk, boost::chrono::milliseconds(10));
+	if (m_p->condition.wait_for(lock, boost::chrono::milliseconds(milliseconds)) != std::cv_status::timeout)
+	m_presentevent.wait_for(lock, boost::chrono::milliseconds(endtime.MillisLeft()));
+	long duration = static_cast<long>(boost::chrono::duration_cast<boost::chrono::microseconds>(now - timer->_startTime).count());
+	

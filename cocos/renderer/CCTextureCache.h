@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/thread.hpp>
 #include <boost/thread/condition_variable.hpp>
+#include <pthread.h>
 #include <queue>
 #include <string>
 #include <unordered_map>
@@ -198,6 +199,11 @@ public:
 private:
     void addImageAsyncCallBack(float dt);
     void loadImage();
+	static void* loadImage_entry(void *pthis) {
+	  TextureCache *obj = static_cast<TextureCache *>(pthis);
+	  obj->loadImage();
+	  return NULL;
+	}
 
 public:
     struct AsyncStruct
@@ -216,7 +222,7 @@ protected:
         Image        *image;
     } ImageInfo;
     
-    boost::thread* _loadingThread;
+    pthread_t *_loadingThread;
 
     std::queue<AsyncStruct*>* _asyncStructQueue;
     std::deque<ImageInfo*>* _imageInfoQueue;

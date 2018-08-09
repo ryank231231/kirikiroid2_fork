@@ -40,6 +40,7 @@ typedef SSIZE_T ssize_t;
 #endif
 
 #include <boost/thread/thread.hpp>
+#include <pthread.h>
 #include <vector>
 #include <map>
 #include <functional>
@@ -110,6 +111,11 @@ public:
  
 protected:
     void loop();
+	static void* loop_entry(void *pthis) {
+	  Console *obj = static_cast<Console *>(pthis);
+	  obj->loop();
+	  return NULL;
+	}
     ssize_t readline(int fd, char *buf, size_t maxlen);
     ssize_t readBytes(int fd, char* buffer, size_t maxlen, bool* more);
     bool parseCommand(int fd);
@@ -136,7 +142,7 @@ protected:
     int _listenfd;
     int _maxfd;
     std::vector<int> _fds;
-    boost::thread _thread;
+    pthread_t *_thread;
 
     fd_set _read_set;
 

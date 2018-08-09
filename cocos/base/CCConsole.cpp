@@ -669,7 +669,8 @@ bool Console::listenOnFileDescriptor(int fd)
     }
 
     _listenfd = fd;
-    _thread = boost::thread( std::bind( &Console::loop, this) );
+    _thread = new pthread_t();
+	pthread_create(_thread, NULL, &Console::loop_entry, this);
 
     return true;
 }
@@ -678,7 +679,7 @@ void Console::stop()
 {
     if( _running ) {
         _endThread = true;
-        _thread.join();
+        pthread_join(*_thread, NULL);
     }
 }
 

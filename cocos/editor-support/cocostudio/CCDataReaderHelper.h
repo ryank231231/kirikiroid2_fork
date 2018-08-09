@@ -39,6 +39,7 @@ THE SOFTWARE.
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/thread.hpp>
 #include <boost/thread/condition_variable.hpp>
+#include <pthread.h>
 
 namespace tinyxml2
 {
@@ -196,13 +197,18 @@ public:
     
 protected:
 	void loadData();
+	static void* loadData_entry(void *pthis) {
+	  DataReaderHelper *obj = static_cast<DataReaderHelper *>(pthis);
+	  obj->loadData();
+	  return NULL;
+	}
 
 
 
 
 	boost::condition_variable		_sleepCondition;
 
-	boost::thread     *_loadingThread;
+	pthread_t     *_loadingThread;
 
 	boost::mutex      _sleepMutex;
 

@@ -35,6 +35,7 @@ THE SOFTWARE.
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/condition_variable.hpp>
 #include <boost/thread/future.hpp>
+#include <pthread.h>
 #include <functional>
 #include <stdexcept>
 
@@ -109,8 +110,13 @@ protected:
         ThreadTasks()
         : _stop(false)
         {
-            _thread = boost::thread(&ThreadTasks::loadData, this);
+            pthread_create(&_thread, NULL, &ThreadTasks::loadData_entry, this);
         }
+		static void* loadData_entry(void *pthis) {
+		  ThreadTasks *obj = static_cast<ThreadTasks *>(pthis);
+		  obj->loadData();
+		  return NULL;
+		}
 		void loadData()
 		{
 			for(;;)
@@ -144,7 +150,7 @@ protected:
                     _taskCallBacks.pop();
             }
             _condition.notify_all();
-            _thread.join();
+            pthread_join(_thread, NULL);
         }
         void clear()
         {
@@ -180,7 +186,7 @@ protected:
     private:
         
         // need to keep track of thread so we can join them
-        boost::thread _thread;
+        pthread_t _thread;
         // the task queue
         std::queue< std::function<void()> > _tasks;
         std::queue<AsyncTaskCallBack>            _taskCallBacks;

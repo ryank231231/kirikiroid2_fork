@@ -28,6 +28,7 @@
 #include <curl/easy.h>
 #include <cstdio>
 #include <cerrno>
+#include <pthread.h>
 
 NS_CC_EXT_BEGIN
 
@@ -466,8 +467,9 @@ void Downloader::download(const std::string &srcUrl, const std::string &customId
 
 void Downloader::batchDownloadAsync(const DownloadUnits &units, const std::string &batchId/* = ""*/)
 {
-    auto t = boost::thread(&Downloader::batchDownloadSync, this, units, batchId);
-    t.detach();
+    pthread_t t;
+	pthread_create(&t, NULL, &Downloader::batchDownloadSync_entry, new batchDownloadSyncStruct(this, units, batchId));
+    pthread_detach(t);
 }
 
 void Downloader::batchDownloadSync(const DownloadUnits &units, const std::string &batchId/* = ""*/)

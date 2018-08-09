@@ -32,6 +32,7 @@
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/thread.hpp>
 #include <boost/thread/condition_variable.hpp>
+#include <pthread.h>
 #include "Application.h"
 #include "BitmapIntf.h"
 #include "GraphicsLoadThread.h"
@@ -2121,15 +2122,21 @@ private:
     tTJSCriticalSection CSTask;
     bool ReqInterrupt;
     
-    boost::thread *ThreadID;
+    pthread_t *ThreadID;
     TVPGraphicPreload()
     {
 //         TaskCond = SDL_CreateCond();
 //         TaskMutex = SDL_CreateMutex();
-		ThreadID = new boost::thread(std::bind(&TVPGraphicPreload::_thread_loop, this));
+		ThreadID = new pthread_t();
+		pthread_create(ThreadID, NULL, &TVPGraphicPreload::_thread_loop_entry, this);
         ReqInterrupt = false;
     }
 
+	static void* _thread_loop_entry(void *pthis) {
+	  TVPGraphicPreload *obj = static_cast<TVPGraphicPreload *>(pthis);
+	  obj->_thread_loop();
+	  return NULL;
+	}
     void _thread_loop() {
         while(true) {
             ReqInterrupt = false;

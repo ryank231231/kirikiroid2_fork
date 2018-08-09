@@ -261,7 +261,7 @@ DataReaderHelper::~DataReaderHelper()
     need_quit = true;
 
 	_sleepCondition.notify_one();
-	if (_loadingThread) _loadingThread->join();
+	if (_loadingThread) pthread_join(*_loadingThread, NULL);
 
 	CC_SAFE_DELETE(_loadingThread);
 	_dataReaderHelper = nullptr;
@@ -379,7 +379,8 @@ void DataReaderHelper::addDataFromFileAsync(const std::string& imagePath, const 
         _dataQueue = new std::queue<DataInfo *>();
 
 		// create a new thread to load images
-		_loadingThread = new boost::thread(&DataReaderHelper::loadData, this);
+		_loadingThread = new pthread_t();
+		pthread_create(_loadingThread, NULL, DataReaderHelper::loadData_entry, this);
 
         need_quit = false;
     }
