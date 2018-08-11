@@ -25,6 +25,60 @@ THE SOFTWARE.
 ****************************************************************************/
 #include "base/CCProfiling.h"
 
+#ifdef _MSC_VER
+//https://github.com/LarryIII/Larry_Vcpkg/blob/fa94febc7cc9c68f2743ba87acfbea2e86785d69/ports/gettimeofday/gettimeofday.c
+
+#include <winsock2.h>
+#include <time.h>
+
+/* FILETIME of Jan 1 1970 00:00:00. */
+static const unsigned __int64 epoch = 116444736000000000Ui64;
+
+/*
+ * timezone information is stored outside the kernel so tzp isn't used anymore.
+ *
+ * Note: this function is not for Win32 high precision timing purpose. See
+ * elapsed_time().
+ */
+static int
+gettimeofday__(struct timeval * tp, struct timezone * tzp)
+{
+	FILETIME	file_time;
+	SYSTEMTIME	system_time;
+	ULARGE_INTEGER ularge;
+
+	GetSystemTime(&system_time);
+	SystemTimeToFileTime(&system_time, &file_time);
+	ularge.LowPart = file_time.dwLowDateTime;
+	ularge.HighPart = file_time.dwHighDateTime;
+
+	tp->tv_sec = (long) ((ularge.QuadPart - epoch) / 10000000L);
+	tp->tv_usec = (long) (system_time.wMilliseconds * 1000);
+
+	return 0;
+}
+#else
+#include <sys/time.h>
+#endif
+
+static void my_StartTicks(struct timeval& start)
+{
+#ifdef _MSC_VER
+	gettimeofday__(&start, NULL);
+#else
+	gettimeofday(&start, NULL);
+#endif
+}
+
+static uint32_t my_GetTicks(struct timeval& start, struct timeval &now)
+{
+	uint32_t ticks;
+	ticks=(now.tv_sec-start.tv_sec)*1000+(now.tv_usec-start.tv_usec)/1000;
+	return(ticks);
+}
+
+
+
 using namespace std;
 
 NS_CC_BEGIN
@@ -132,7 +186,7 @@ void ProfilingTimer::reset()
     totalTime = 0;
     minTime = 100000000;
     maxTime = 0;
-    _startTime = boost::chrono::high_resolution_clock::now();
+    my_StartTicks(_startTime);
 }
 
 void ProfilingBeginTimingBlock(const char *timerName)
@@ -147,13 +201,14 @@ void ProfilingBeginTimingBlock(const char *timerName)
     timer->numberOfCalls++;
 
     // should be the last instruction in order to be more reliable
-    timer->_startTime = boost::chrono::high_resolution_clock::now();
+    my_StartTicks(timer->_startTime);
 }
 
 void ProfilingEndTimingBlock(const char *timerName)
 {
     // should be the 1st instruction in order to be more reliable
-    auto now = boost::chrono::high_resolution_clock::now();
+    struct timeval now;
+	my_StartTicks(now);
 
     Profiler* p = Profiler::getInstance();
     ProfilingTimer* timer = p->_activeTimers.at(timerName);
@@ -161,7 +216,7 @@ void ProfilingEndTimingBlock(const char *timerName)
     CCASSERT(timer, "CCProfilingTimer  not found");
 
 
-    long duration = static_cast<long>(boost::chrono::duration_cast<boost::chrono::microseconds>(now - timer->_startTime).count());
+    long duration = my_GetTicks(timer->_startTime, now);
 
     timer->totalTime += duration;
     timer->_averageTime1 = (timer->_averageTime1 + duration) / 2.0f;

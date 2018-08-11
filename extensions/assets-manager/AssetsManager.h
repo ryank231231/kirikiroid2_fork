@@ -27,8 +27,6 @@
 
 #include <string>
 
-#include <boost/thread/mutex.hpp>
-
 #include "2d/CCNode.h"
 #include "extensions/ExtensionMacros.h"
 #include "extensions/ExtensionExport.h"
@@ -172,7 +170,6 @@ protected:
 	static void* downloadAndUncompress_entry(void *pthis) {
 	  AssetsManager *obj = static_cast<AssetsManager *>(pthis);
 	  obj->downloadAndUncompress();
-	  delete obj;
 	  return NULL;
 	}
 

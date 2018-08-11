@@ -6,7 +6,7 @@
 #include "tjsString.h"
 #include <vector>
 #include <functional>
-#include <boost/thread/mutex.hpp>
+#include <pthread.h>
 #include <tuple>
 #include <map>
 #include <vector>
@@ -190,7 +190,7 @@ public:
 	void RegisterActiveEvent(void *host, const std::function<void(void*, eTVPActiveEvent)>& func/*empty = unregister*/);
 
 private:
-	boost::mutex m_msgQueueLock;
+	pthread_mutex_t m_msgQueueLock;
 
 	std::vector<std::tuple<void*, int, tMsg> > m_lstUserMsg;
 	std::map<void*, std::function<void(void*, eTVPActiveEvent)> > m_activeEvents;

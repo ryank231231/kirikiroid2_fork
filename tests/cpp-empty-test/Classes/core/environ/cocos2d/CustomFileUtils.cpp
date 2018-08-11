@@ -374,13 +374,16 @@ unsigned char* CustomFileUtils::getFileDataFromArchive(const std::string& filena
 {
 	auto it = _autoSearchArchive.find(filename);
 	if (_autoSearchArchive.end() != it) {
-		_lock.lock();
-		if (unzGoToFilePos(it->second.first, &it->second.second) != UNZ_OK) return nullptr;
+		pthread_mutex_lock(&_lock);
+		if (unzGoToFilePos(it->second.first, &it->second.second) != UNZ_OK) {
+			pthread_mutex_unlock(&_lock); //FIXME:added
+			return nullptr;
+		}
 		unz_file_info fileInfo;
 		if (unzGetCurrentFileInfo(it->second.first, &fileInfo, NULL, 0, NULL, 0, NULL, 0) != UNZ_OK) return nullptr;
 		unsigned char *buffer = (unsigned char*)malloc(fileInfo.uncompressed_size);
 		int readedSize = unzReadCurrentFile(it->second.first, buffer, static_cast<unsigned>(fileInfo.uncompressed_size));
-		_lock.unlock();
+		pthread_mutex_unlock(&_lock);
 		CCASSERT(readedSize == 0 || readedSize == (int)fileInfo.uncompressed_size, "the file size is wrong");
 		*size = fileInfo.uncompressed_size;
 		return buffer;

@@ -15,9 +15,6 @@
 #include "DebugIntf.h"
 #include "EventIntf.h"
 #include "StorageIntf.h"
-#include <boost/thread/thread.hpp>
-#include <boost/thread/mutex.hpp>
-#include <boost/thread/condition_variable.hpp>
 #include <pthread.h>
 #include "Platform.h"
 
@@ -484,26 +481,28 @@ static FILE *_fileopen(ttstr path) {
 
 class tTVPUnpackArchiveImpl {
 	pthread_t *ThreadObj;
-	boost::mutex Mutex;
-	boost::condition_variable Cond;
+	pthread_mutex_t Mutex;
+	pthread_cond_t Cond;
 	tTVPUnpackArchive *Owner;
 
 	void Entry() {
 		{
-			boost::unique_lock<boost::mutex> lk(Mutex);
-			Cond.wait(lk);
+			pthread_mutex_lock(&Mutex);
+			pthread_cond_wait(&Cond, &Mutex);
+			pthread_mutex_unlock(&Mutex);
 		}
 		Owner->Process();
 	}
 	static void* Entry_entry(void *pthis) {
 	  tTVPUnpackArchiveImpl *obj = static_cast<tTVPUnpackArchiveImpl *>(pthis);
 	  obj->Entry();
-	  delete obj;
 	  return NULL;
 	}
 
 public:
 	tTVPUnpackArchiveImpl(tTVPUnpackArchive *owner) : Owner(owner) {
+		pthread_mutex_init(&Mutex, NULL);
+		pthread_cond_init(&Cond, NULL);
 		ThreadObj = new pthread_t();
 		pthread_create(ThreadObj, NULL, &tTVPUnpackArchiveImpl::Entry_entry, this);
 	}
@@ -517,7 +516,7 @@ public:
 	}
 
 	void Start() {
-		Cond.notify_all();
+		pthread_cond_broadcast(&Cond);
 	}
 };
 

@@ -520,10 +520,6 @@ xcopy "$(OutDir)..\*.dll" "$(OutDir)" /D /Y</Command>
     <ClCompile Include="..\Classes\plugins\getSample.cpp" />
     <ClCompile Include="..\Classes\plugins\InternalPlugins.cpp" />
     <ClCompile Include="..\Classes\plugins\LayerExBase.cpp" />
-    <ClCompile Include="..\Classes\plugins\layerExMovie.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\Classes\plugins\layerExPerspective.cpp" />
     <ClCompile Include="..\Classes\plugins\ncbind\ncbind.cpp" />
     <ClCompile Include="..\Classes\plugins\saveStruct.cpp" />

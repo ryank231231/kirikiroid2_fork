@@ -24,7 +24,7 @@
 
 #include "base/CCConsole.h"
 
-#include <boost/thread/thread.hpp>
+#include <pthread.h>
 #include <algorithm>
 #include <functional>
 #include <cctype>
@@ -536,6 +536,7 @@ Console::Console()
 		_commands[commands[i].name] = commands[i];
 	}
 	_writablePath = FileUtils::getInstance()->getWritablePath();
+	pthread_mutex_init(&_DebugStringsMutex, NULL);
 }
 
 void Console::commandDebugmsg(int fd, const std::string& args)
@@ -1296,9 +1297,9 @@ void Console::addClient()
 void Console::log(const char* buf)
 {
     if( _sendDebugStrings ) {
-        _DebugStringsMutex.lock();
+        pthread_mutex_lock(&_DebugStringsMutex);
         _DebugStrings.push_back(buf);
-        _DebugStringsMutex.unlock();
+        pthread_mutex_unlock(&_DebugStringsMutex);
     }
 }
 
@@ -1395,7 +1396,7 @@ void Console::loop()
 
         /* Any message for the remote console ? send it! */
         if( !_DebugStrings.empty() ) {
-            _DebugStringsMutex.lock();
+            pthread_mutex_lock(&_DebugStringsMutex);
             //for(const auto &str : _DebugStrings) {
 			for (auto p_str = _DebugStrings.begin(); p_str != _DebugStrings.end(); ++p_str)
 			{
@@ -1408,7 +1409,7 @@ void Console::loop()
                 }
             }
             _DebugStrings.clear();
-            _DebugStringsMutex.unlock();
+            pthread_mutex_unlock(&_DebugStringsMutex);
         }
     }
 

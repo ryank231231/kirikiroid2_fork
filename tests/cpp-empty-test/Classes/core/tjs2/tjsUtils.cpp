@@ -11,8 +11,6 @@
 #include "tjsCommHead.h"
 
 #include "tjsUtils.h"
-#include <boost/thread/mutex.hpp>
-#include <boost/thread/thread.hpp>
 #include <pthread.h>
 #include "TickCount.h"
 #include "Platform.h"
@@ -21,9 +19,11 @@ namespace TJS
 {
 
 struct tTJSCriticalSectionImpl {
-	boost::mutex _mutex;
+	pthread_mutex_t _mutex;
 	pthread_t* _tid;
-	tTJSCriticalSectionImpl() : _tid(NULL) {}
+	tTJSCriticalSectionImpl() : _tid(NULL) {
+		pthread_mutex_init(&_mutex, NULL);
+	}
 	bool lock();
 	void unlock();
 };
@@ -32,7 +32,7 @@ bool tTJSCriticalSectionImpl::lock() {
 	pthread_t *id = new pthread_t();
 	*id = pthread_self();
 	if (_tid != NULL && pthread_equal(*_tid, *id)) return false;
-	_mutex.lock();
+	pthread_mutex_lock(&_mutex);
 	_tid = id;
 	return true;
 }
@@ -40,7 +40,7 @@ bool tTJSCriticalSectionImpl::lock() {
 void tTJSCriticalSectionImpl::unlock() {
 	delete _tid;
 	_tid = NULL;
-	_mutex.unlock();
+	pthread_mutex_unlock(&_mutex);
 }
 
 bool tTJSCriticalSection::lock() {

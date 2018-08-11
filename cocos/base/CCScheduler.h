@@ -29,7 +29,7 @@ THE SOFTWARE.
 #define __CCSCHEDULER_H__
 
 #include <functional>
-#include <boost/thread/mutex.hpp>
+#include <pthread.h>
 #include <set>
 
 #include "base/CCRef.h"
@@ -531,7 +531,7 @@ protected:
     
     // Used for "perform Function"
     std::vector<std::function<void()>> _functionsToPerform;
-    boost::mutex _performMutex;
+    pthread_mutex_t _performMutex;
 };
 
 // end of base group

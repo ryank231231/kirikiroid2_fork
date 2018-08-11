@@ -14,11 +14,7 @@
 #include "tjsConfig.h"
 #include <stdlib.h>
 #include <string.h>
-#if 0
-#include <boost/atomic.hpp>
-#else
 #include <pthread.h>
-#endif
 
 namespace TJS
 {

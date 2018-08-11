@@ -52,10 +52,24 @@ public:
 	std::vector<std::pair<std::string, std::string> > ListInfo;
 };
 
+class my_tuple {
+public:
+	std::string first;
+	std::string second;
+	unsigned int third;
+
+	my_tuple(std::string first_,
+		std::string second_,
+		unsigned int third_) : first(first_)
+		,second(second_)
+		,third(third_){ }
+};
+
 class tTVPPreferenceInfoTextureCompressionSelectList : public tTVPPreferenceInfoSelectList {
 public:
 	tTVPPreferenceInfoTextureCompressionSelectList(const std::string &cap, const std::string &key, const std::string &defval,
-		const std::vector/*initializer_list*/<std::tuple<std::string, std::string, unsigned int> > &listinfo)
+		//std::tuple<std::string, std::string, unsigned int>
+		const std::vector/*initializer_list*/<my_tuple> &listinfo)
 	: tTVPPreferenceInfoSelectList(cap, key, defval, std::vector/*initializer_list*/<std::pair<std::string, std::string> >())
 	, TextFmtList(listinfo), ListInited(false)
 	{}
@@ -68,9 +82,9 @@ public:
 			for (auto& p_it = TextFmtList.begin(); p_it != TextFmtList.end(); ++p_it)
 			{
 				const auto& it = *p_it;
-				unsigned int fmt = std::get<2>(it);
+				unsigned int fmt = it.third;//std::get<2>(it);
 				if (!fmt || TVPIsSupportTextureFormat(fmt)) {
-					ListInfo.push_back(std::pair<std::string, std::string>(std::get<0>(it), std::get<1>(it)));
+					ListInfo.push_back(std::pair<std::string, std::string>(it.first, it.second));//(std::get<0>(it), std::get<1>(it)));
 				}
 			}
 		}
@@ -78,7 +92,8 @@ public:
 	}
 
 	bool ListInited/* = false*/;
-	std::vector<std::tuple<std::string, std::string, unsigned int> > TextFmtList;
+	//std::vector<std::tuple<std::string, std::string, unsigned int> > TextFmtList;
+	std::vector<my_tuple> TextFmtList;
 };
 
 // class tTVPPreferenceInfoSelectRenderer : public tTVPPreferenceInfoSelectList {
@@ -299,6 +314,7 @@ static void initAllConfig() {
 	listinfo3.push_back(std::pair<std::string, std::string>("preference_ogl_texsize_16384", "16384" ));
 	OpenglOptPreference.Preferences.push_back(new tTVPPreferenceInfoSelectList("preference_ogl_max_texsize", "ogl_max_texsize", "0", listinfo3));
 
+#if 0
 	std::vector/*initializer_list*/<std::tuple<std::string, std::string, unsigned int> > listinfo2;
 	listinfo2.push_back(std::make_tuple("preference_ogl_compress_tex_none", "none", 0));
 	listinfo2.push_back(std::make_tuple("preference_ogl_compress_tex_half", "half", 0));
@@ -310,7 +326,14 @@ static void initAllConfig() {
 // 			{ "preference_ogl_render_tex_quality_75", "0.75" },
 // 			{ "preference_ogl_render_tex_quality_50", "0.5" }
 // 		}),
-
+#else
+	std::vector<my_tuple> listinfo2;
+	listinfo2.push_back(my_tuple("preference_ogl_compress_tex_none", "none", 0));
+	listinfo2.push_back(my_tuple("preference_ogl_compress_tex_half", "half", 0));
+	listinfo2.push_back(my_tuple("ETC2", "etc2", 0x9278)); // GL_COMPRESSED_RGBA8_ETC2_EAC
+	listinfo2.push_back(my_tuple("PVRTC", "pvrtc", 0x8C02)); // GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG
+	OpenglOptPreference.Preferences.push_back(new tTVPPreferenceInfoTextureCompressionSelectList("preference_ogl_compress_tex", "ogl_compress_tex", "none", listinfo2));
+#endif
 
 
 }

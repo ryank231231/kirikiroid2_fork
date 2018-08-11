@@ -31,10 +31,6 @@ THE SOFTWARE.
 #include <vector>
 #include <queue>
 #include <memory>
-#include <boost/thread/thread.hpp>
-#include <boost/thread/mutex.hpp>
-#include <boost/thread/condition_variable.hpp>
-#include <boost/thread/future.hpp>
 #include <pthread.h>
 #include <functional>
 #include <stdexcept>
@@ -110,12 +106,13 @@ protected:
         ThreadTasks()
         : _stop(false)
         {
+			pthread_mutex_init(&_queueMutex, NULL);
+			pthread_cond_init(&_condition, NULL);
             pthread_create(&_thread, NULL, &ThreadTasks::loadData_entry, this);
         }
 		static void* loadData_entry(void *pthis) {
 		  ThreadTasks *obj = static_cast<ThreadTasks *>(pthis);
 		  obj->loadData();
-		  delete obj;
 		  return NULL;
 		}
 		void loadData()
@@ -125,16 +122,22 @@ protected:
                 std::function<void()> task;
                 AsyncTaskCallBack callback;
                 {
-                    boost::unique_lock<boost::mutex> lock(this->_queueMutex);
-                    this->_condition.wait(lock,
-                                        [this]{ return this->_stop || !this->_tasks.empty(); });
-                    if(this->_stop && this->_tasks.empty())
-                        return;
+                    pthread_mutex_lock(&this->_queueMutex);
+					while (true) {
+						//see https://zh.cppreference.com/w/cpp/thread/condition_variable/wait
+						if (this->_stop || !this->_tasks.empty()) break;
+						pthread_cond_wait(&this->_condition, &this->_queueMutex);
+					}
+                    if(this->_stop && this->_tasks.empty()) {
+                        pthread_mutex_unlock(&this->_queueMutex);
+						return;
+					}
                     task = std::move(this->_tasks.front());
                     callback = std::move(this->_taskCallBacks.front());
                     this->_tasks.pop();
                     this->_taskCallBacks.pop();
-                }                    
+					pthread_mutex_unlock(&this->_queueMutex);
+				}                    
                 task();
                 Director::getInstance()->getScheduler()->performFunctionInCocosThread([&, callback]{ callback.callback(callback.callbackParam); });
             }
@@ -142,24 +145,26 @@ protected:
         ~ThreadTasks()
         {
             {
-                boost::unique_lock<boost::mutex> lock(_queueMutex);
+                pthread_mutex_lock(&_queueMutex);
                 _stop = true;
                 
                 while(_tasks.size())
                     _tasks.pop();
                 while (_taskCallBacks.size())
                     _taskCallBacks.pop();
+				pthread_mutex_unlock(&_queueMutex);            
             }
-            _condition.notify_all();
+            pthread_cond_signal(&_condition);
             pthread_join(_thread, NULL);
         }
         void clear()
         {
-            boost::unique_lock<boost::mutex> lock(_queueMutex);
+            pthread_mutex_lock(&_queueMutex);
             while(_tasks.size())
                 _tasks.pop();
             while (_taskCallBacks.size())
                 _taskCallBacks.pop();
+			pthread_mutex_unlock(&_queueMutex);
         }
         template<class F>
         void enqueue(const TaskCallBack& callback, void* callbackParam, F&& f)
@@ -167,13 +172,14 @@ protected:
             auto task = f;//std::bind(std::forward<F>(f), std::forward<Args>(args)...);
             
             {
-                boost::unique_lock<boost::mutex> lock(_queueMutex);
+                pthread_mutex_lock(&_queueMutex);
                 
                 // don't allow enqueueing after stopping the pool
                 if(_stop)
                 {
-                    CC_ASSERT(0 && "already stop");
-                    return;
+                    pthread_mutex_unlock(&_queueMutex);
+					CC_ASSERT(0 && "already stop");
+					return;
                 }
                 
                 AsyncTaskCallBack taskCallBack;
@@ -181,8 +187,9 @@ protected:
                 taskCallBack.callbackParam = callbackParam;
                 _tasks.push([task](){ task(); });
                 _taskCallBacks.push(taskCallBack);
+				pthread_mutex_unlock(&_queueMutex);
             }
-            _condition.notify_one();
+            pthread_cond_signal(&_condition);
         }
     private:
         
@@ -193,8 +200,8 @@ protected:
         std::queue<AsyncTaskCallBack>            _taskCallBacks;
         
         // synchronization
-        boost::mutex _queueMutex;
-        boost::condition_variable _condition;
+        pthread_mutex_t _queueMutex;
+        pthread_cond_t _condition;
         bool _stop;
     };
     

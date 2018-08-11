@@ -29,7 +29,13 @@ THE SOFTWARE.
 /// @cond DO_NOT_SHOW
 
 #include <string>
-#include <boost/chrono.hpp>
+//#include <boost/chrono.hpp>
+#ifdef _MSC_VER
+#include <winsock2.h>
+#include <time.h>
+#else
+#include <sys/time.h>
+#endif
 #include "base/ccConfig.h"
 #include "base/CCRef.h"
 #include "base/CCMap.h"
@@ -127,7 +133,7 @@ public:
      * @js NA
      * @lua NA
      */
-    inline const boost::chrono::high_resolution_clock::time_point& getStartTime(void) { return _startTime; };
+    inline const struct timeval& getStartTime(void) { return _startTime; };
 
     /** resets the timer properties
      * @js NA
@@ -136,7 +142,7 @@ public:
     void reset();
 
     std::string _nameStr;
-    boost::chrono::high_resolution_clock::time_point _startTime;
+    struct timeval _startTime;
     long _averageTime1;
     long _averageTime2;
     long minTime;

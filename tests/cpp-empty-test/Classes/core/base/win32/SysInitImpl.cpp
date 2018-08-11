@@ -47,7 +47,6 @@
 #undef IID
 #endif
 #define uint32_t unsigned int
-#include <boost/thread/thread.hpp>
 #include <pthread.h>
 #undef uint32_t
 #include "Platform.h"

@@ -2,16 +2,12 @@
 #include <cmath>
 #include <algorithm>
 #include <assert.h>
-#if 0
-#include <boost/tr1/cmath.hpp>
-#else
 ////https://github.com/Mocahteam/SPRED/blob/5f8af28cf517b2bc6e4b7d110231a922cf7d085a/old_versions/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/MathUtil.cpp
 #if defined(_MSC_VER)
 float roundf(float val)
 {
 	return floor(val + 0.5f);
 }
-#endif
 #endif
 #define DCHECK(x) assert(x)
 

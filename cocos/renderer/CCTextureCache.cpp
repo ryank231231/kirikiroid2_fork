@@ -65,6 +65,10 @@ TextureCache::TextureCache()
 , _needQuit(false)
 , _asyncRefCount(0)
 {
+	pthread_mutex_init(&_asyncStructQueueMutex, NULL);
+	pthread_mutex_init(&_imageInfoMutex, NULL);
+	pthread_mutex_init(&_sleepMutex, NULL);
+	pthread_cond_init(&_sleepCondition, NULL);
 }
 
 TextureCache::~TextureCache()
@@ -135,16 +139,16 @@ void TextureCache::addImageAsync(const std::string &path, const std::function<vo
     AsyncStruct *data = new (std::nothrow) AsyncStruct(fullpath, callback);
 
     // add async struct into queue
-    _asyncStructQueueMutex.lock();
+    pthread_mutex_lock(&_asyncStructQueueMutex);
     _asyncStructQueue->push(data);
-    _asyncStructQueueMutex.unlock();
+    pthread_mutex_unlock(&_asyncStructQueueMutex);
 
-    _sleepCondition.notify_one();
+    pthread_cond_signal(&_sleepCondition);
 }
 
 void TextureCache::unbindImageAsync(const std::string& filename)
 {
-    _imageInfoMutex.lock();
+    pthread_mutex_lock(&_imageInfoMutex);
     if (_imageInfoQueue && !_imageInfoQueue->empty())
     {
         std::string fullpath = FileUtils::getInstance()->fullPathForFilename(filename);
@@ -154,17 +158,17 @@ void TextureCache::unbindImageAsync(const std::string& filename)
             (*found)->asyncStruct->callback = nullptr;
         }
     }
-    _imageInfoMutex.unlock();
+    pthread_mutex_unlock(&_imageInfoMutex);
 }
 
 void TextureCache::unbindAllImageAsync()
 {
-    _imageInfoMutex.lock();
+    pthread_mutex_lock(&_imageInfoMutex);
     if (_imageInfoQueue && !_imageInfoQueue->empty())
     {
         std::for_each(_imageInfoQueue->begin(), _imageInfoQueue->end(), [](ImageInfo* ptr) { ptr->asyncStruct->callback = nullptr; });
     }
-    _imageInfoMutex.unlock();
+    pthread_mutex_unlock(&_imageInfoMutex);
 }
 
 void TextureCache::loadImage()
@@ -174,24 +178,25 @@ void TextureCache::loadImage()
     while (true)
     {
         std::queue<AsyncStruct*> *pQueue = _asyncStructQueue;
-        _asyncStructQueueMutex.lock();
+        pthread_mutex_lock(&_asyncStructQueueMutex);
         if (pQueue->empty())
         {
-            _asyncStructQueueMutex.unlock();
+            pthread_mutex_unlock(&_asyncStructQueueMutex);
             if (_needQuit) {
                 break;
             }
             else {
-                boost::unique_lock<boost::mutex> lk(_sleepMutex);
-                _sleepCondition.wait(lk);
-                continue;
+                pthread_mutex_lock(&_sleepMutex);
+                pthread_cond_wait(&_sleepCondition, &_sleepMutex);
+                pthread_mutex_unlock(&_sleepMutex);
+				continue;
             }
         }
         else
         {
             asyncStruct = pQueue->front();
             pQueue->pop();
-            _asyncStructQueueMutex.unlock();
+            pthread_mutex_unlock(&_asyncStructQueueMutex);
         }        
 
         Image *image = nullptr;
@@ -200,7 +205,7 @@ void TextureCache::loadImage()
         auto it = _textures.find(asyncStruct->filename);
         if( it == _textures.end() )
         {
-           _imageInfoMutex.lock();
+           pthread_mutex_lock(&_imageInfoMutex);
            ImageInfo *imageInfo;
            size_t pos = 0;
            size_t infoSize = _imageInfoQueue->size();
@@ -210,7 +215,7 @@ void TextureCache::loadImage()
                if(imageInfo->asyncStruct->filename.compare(asyncStruct->filename) == 0)
                    break;
            }
-           _imageInfoMutex.unlock();
+           pthread_mutex_unlock(&_imageInfoMutex);
            if(infoSize == 0 || pos == infoSize)
                generateImage = true;
         }
@@ -234,9 +239,9 @@ void TextureCache::loadImage()
         imageInfo->image = image;
 
         // put the image info into the queue
-        _imageInfoMutex.lock();
+        pthread_mutex_lock(&_imageInfoMutex);
         _imageInfoQueue->push_back(imageInfo);
-        _imageInfoMutex.unlock();
+        pthread_mutex_unlock(&_imageInfoMutex);
     }
     
 	if(_asyncStructQueue != nullptr)
@@ -253,16 +258,16 @@ void TextureCache::addImageAsyncCallBack(float dt)
     // the image is generated in loading thread
     std::deque<ImageInfo*> *imagesQueue = _imageInfoQueue;
 
-    _imageInfoMutex.lock();
+    pthread_mutex_lock(&_imageInfoMutex);
     if (imagesQueue->empty())
     {
-        _imageInfoMutex.unlock();
+        pthread_mutex_unlock(&_imageInfoMutex);
     }
     else
     {
         ImageInfo *imageInfo = imagesQueue->front();
         imagesQueue->pop_front();
-        _imageInfoMutex.unlock();
+        pthread_mutex_unlock(&_imageInfoMutex);
 
         AsyncStruct *asyncStruct = imageInfo->asyncStruct;
         Image *image = imageInfo->image;
@@ -529,7 +534,7 @@ void TextureCache::waitForQuit()
 {
     // notify sub thread to quick
     _needQuit = true;
-    _sleepCondition.notify_one();
+    pthread_cond_signal(&_sleepCondition);
     if (_loadingThread) pthread_join(*_loadingThread, NULL);
 }
 

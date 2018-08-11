@@ -16,6 +16,9 @@
 #include "base/CCScheduler.h"
 #include "utils/TickCount.h"
 #include <vector>
+#ifndef _MSC_VER
+#include <unistd.h> //usleep
+#endif
 
 using namespace cocos2d;
 using namespace cocos2d::extension;
@@ -895,7 +898,12 @@ std::string TVPShowFileSelector(const std::string &title, const std::string &ini
 		TVPProcessInputEvents();
 		int remain = TVPDrawSceneOnce(30); // 30 fps
 		if (remain > 0) {
-            boost::this_thread::sleep_for(boost::chrono::milliseconds(remain));
+            //boost::this_thread::sleep_for(boost::chrono::milliseconds(remain));
+#ifndef _MSC_VER
+			usleep(remain * 1000);
+#else
+			Sleep(remain);
+#endif
 		}
 	}
 	return _fileSelectorResult;

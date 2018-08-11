@@ -743,9 +743,6 @@
     <ClCompile Include="..\Classes\plugins\LayerExBase.cpp">
       <Filter>Classes\plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\plugins\layerExMovie.cpp">
-      <Filter>Classes\plugins</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\plugins\layerExPerspective.cpp">
       <Filter>Classes\plugins</Filter>
     </ClCompile>

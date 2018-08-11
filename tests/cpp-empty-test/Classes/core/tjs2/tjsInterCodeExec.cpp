@@ -23,7 +23,7 @@
 #include "tjsOctPack.h"
 #include "tjsGlobalStringMap.h"
 #include <set>
-#include <boost/thread/mutex.hpp>
+#include <pthread.h>
 #ifdef _MSC_VER
 extern void TVPOutputDebugString(const char*);
 #endif
@@ -35,7 +35,6 @@ static bool isDebuggerPresent() {
 }
 #define IsDebuggerPresent isDebuggerPresent
 #endif // ENABLE_DEBUGGER
-#include <boost/thread/thread.hpp>
 
 namespace TJS
 {
@@ -551,7 +550,7 @@ public:
 #define TJS_VA_ONE_ALLOC_MAX 1024
 #define TJS_COMPACT_FREQ 10000
 static tjs_int TJSCompactVariantArrayMagic = 0;
-static boost::mutex TJSVariantArrayStackMutex;
+static pthread_mutex_t *TJSVariantArrayStackMutex = NULL;
 static std::set<tTJSVariantArrayStack*> TJSVariantArrayStacks;
 //---------------------------------------------------------------------------
 tTJSVariantArrayStack::tTJSVariantArrayStack()
@@ -561,8 +560,13 @@ tTJSVariantArrayStack::tTJSVariantArrayStack()
 	Current = NULL;
 	OperationDisabledCount = 0;
 	CompactVariantArrayMagic = TJSCompactVariantArrayMagic;
-	boost::lock_guard<boost::mutex> lk(TJSVariantArrayStackMutex);
+	if (TJSVariantArrayStackMutex == NULL) {
+		TJSVariantArrayStackMutex = new pthread_mutex_t();
+		pthread_mutex_init(TJSVariantArrayStackMutex, NULL);
+	}
+	pthread_mutex_lock(TJSVariantArrayStackMutex);
 	TJSVariantArrayStacks.insert(this);
+	pthread_mutex_unlock(TJSVariantArrayStackMutex);
 }
 //---------------------------------------------------------------------------
 tTJSVariantArrayStack::~tTJSVariantArrayStack()
@@ -574,8 +578,9 @@ tTJSVariantArrayStack::~tTJSVariantArrayStack()
 		delete [] Arrays[i].Array;
 	}
 	TJS_free(Arrays), Arrays = NULL;
-	boost::lock_guard<boost::mutex> lk(TJSVariantArrayStackMutex);
+	pthread_mutex_lock(TJSVariantArrayStackMutex);
 	TJSVariantArrayStacks.erase(this);
+	pthread_mutex_unlock(TJSVariantArrayStackMutex);
 }
 //---------------------------------------------------------------------------
 void tTJSVariantArrayStack::IncreaseVariantArray(tjs_int num)

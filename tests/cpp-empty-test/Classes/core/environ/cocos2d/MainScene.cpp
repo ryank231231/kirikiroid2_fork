@@ -31,6 +31,9 @@
 #include "VideoOvlIntf.h"
 #include "Exception.h"
 #include "win32/SystemControl.h"
+#ifndef _MSC_VER
+#include <unistd.h> //usleep
+#endif
 
 USING_NS_CC;
 
@@ -804,7 +807,12 @@ public:
 			} else if (modal_result_ != 0) {
 				break;
 			} else if (remain > 0) {
-				boost::this_thread::sleep_for(boost::chrono::milliseconds(remain));
+				//boost::this_thread::sleep_for(boost::chrono::milliseconds(remain));
+#ifdef _MSC_VER
+				Sleep(remain);
+#else
+				usleep(remain * 1000);
+#endif
 			}
 		}
 		in_mode_ = false;

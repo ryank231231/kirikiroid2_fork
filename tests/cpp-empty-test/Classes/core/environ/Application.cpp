@@ -27,7 +27,6 @@
 #include "GraphicsLoadThread.h"
 #include "Platform.h"
 #include "EventIntf.h"
-#include <boost/thread/thread.hpp>
 #include <pthread.h>
 #include "ConfigManager/LocaleConfigManager.h"
 #include "StorageIntf.h"
@@ -455,6 +454,7 @@ int APIENTRY WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 tTVPApplication::tTVPApplication() : is_attach_console_(false), tarminate_(false), application_activating_(true)
 	 , image_load_thread_(NULL), has_map_report_process_(false)
 {
+	pthread_mutex_init(&m_msgQueueLock, NULL);
 }
 tTVPApplication::~tTVPApplication() {
 // 	while( windows_list_.size() ) {
@@ -824,8 +824,9 @@ void tTVPApplication::ProcessMessages()
 {
 	std::vector<std::tuple<void*, int, tMsg> > lstUserMsg;
 	{
-		boost::lock_guard<boost::mutex> cs(m_msgQueueLock);
+		pthread_mutex_lock(&m_msgQueueLock);
 		m_lstUserMsg.swap(lstUserMsg);
+		pthread_mutex_unlock(&m_msgQueueLock);
 	}
 	//for (std::tuple<void*, int, tMsg>& it : lstUserMsg) {
 	for (auto& p_it = lstUserMsg.begin(); p_it != lstUserMsg.end(); ++p_it)
@@ -1006,14 +1007,16 @@ void tTVPApplication::CheckDigitizer() {
 
 void tTVPApplication::PostUserMessage(const std::function<void()> &func, void* host, int msg)
 {
-	boost::lock_guard<boost::mutex> cs(m_msgQueueLock);
+	pthread_mutex_lock(&m_msgQueueLock);
 	m_lstUserMsg.push_back(std::tuple<void*, int, tMsg>(host, msg, func));
+	pthread_mutex_unlock(&m_msgQueueLock);
 }
 
 void tTVPApplication::FilterUserMessage(const std::function<void(std::vector<std::tuple<void*, int, tMsg> > &)> &func)
 {
-	boost::lock_guard<boost::mutex> cs(m_msgQueueLock);
+	pthread_mutex_lock(&m_msgQueueLock);
 	func(m_lstUserMsg);
+	pthread_mutex_unlock(&m_msgQueueLock);
 }
 
 void tTVPApplication::OnActivate()

@@ -32,9 +32,6 @@ THE SOFTWARE.
 
 #include <algorithm>
 #include <string>
-#if 0
-#include <boost/regex.hpp>
-#endif
 
 #include "base/CCDirector.h"
 #include "base/CCScheduler.h"

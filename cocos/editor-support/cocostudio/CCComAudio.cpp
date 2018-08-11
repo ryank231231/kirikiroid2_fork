@@ -23,7 +23,9 @@ THE SOFTWARE.
 ****************************************************************************/
 
 #include "cocostudio/CCComAudio.h"
+#if 0
 #include "audio/include/SimpleAudioEngine.h"
+#endif
 #include "platform/CCFileUtils.h"
 
 namespace cocostudio {
@@ -169,142 +171,209 @@ ComAudio* ComAudio::create(void)
 
 void ComAudio::end()
 {
+#if 0
    CocosDenshion::SimpleAudioEngine::end();
+#endif
 }
 
 void ComAudio::preloadBackgroundMusic(const char* pszFilePath)
 {
+#if 0
     CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(pszFilePath);
-    setFile(pszFilePath);
+#endif
+	setFile(pszFilePath);
 	setLoop(false);
 }
 
 void ComAudio::playBackgroundMusic(const char* pszFilePath, bool loop)
 {
+#if 0
     CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(pszFilePath, loop);
-    
+#endif    
 }
 
 void ComAudio::playBackgroundMusic(const char* pszFilePath)
 {
+#if 0
     CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(pszFilePath);
+#endif
 }
 
 void ComAudio::playBackgroundMusic()
 {
+#if 0
     CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(_filePath.c_str(), _loop);
+#endif
 }
 
 void ComAudio::stopBackgroundMusic(bool bReleaseData)
 {
+#if 0
     CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic(bReleaseData);
+#endif
 }
 
 void ComAudio::stopBackgroundMusic()
 {
+#if 0
     CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+#endif
 }
 
 void ComAudio::pauseBackgroundMusic()
 {
+#if 0
     CocosDenshion::SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
+#endif
 }
 
 void ComAudio::resumeBackgroundMusic()
 {
+#if 0
     CocosDenshion::SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
+#endif
 }
 
 void ComAudio::rewindBackgroundMusic()
 {
+#if 0
     CocosDenshion::SimpleAudioEngine::getInstance()->rewindBackgroundMusic();
+#endif
 }
 
 bool ComAudio::willPlayBackgroundMusic()
 {
+#if 0
     return CocosDenshion::SimpleAudioEngine::getInstance()->willPlayBackgroundMusic();
+#else
+	return false;
+#endif
 }
 
 bool ComAudio::isBackgroundMusicPlaying()
 {
+#if 0
     return CocosDenshion::SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying();
+#else
+	return false;
+#endif
 }
 
 float ComAudio::getBackgroundMusicVolume()
 {
+#if 0
     return CocosDenshion::SimpleAudioEngine::getInstance()->getBackgroundMusicVolume();
+#else
+	return 0;
+#endif
 }
 
 void ComAudio::setBackgroundMusicVolume(float volume)
 {
+#if 0
     CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(volume);
+#endif
 }
 
 float ComAudio::getEffectsVolume()
 {
+#if 0
     return CocosDenshion::SimpleAudioEngine::getInstance()->getEffectsVolume();
+#else
+	return 0;
+#endif
 }
 
 void ComAudio::setEffectsVolume(float volume)
 {
+#if 0
     CocosDenshion::SimpleAudioEngine::getInstance()->setEffectsVolume(volume);
+#endif
 }
 
 unsigned int ComAudio::playEffect(const char* pszFilePath, bool loop)
 {
+#if 0
     return CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(pszFilePath, loop);
+#else
+	return 0;
+#endif
 }
 
 unsigned int ComAudio::playEffect(const char* pszFilePath)
 {
+#if 0
     return CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(pszFilePath);
+#else
+	return 0;
+#endif
 }
 
 unsigned int ComAudio::playEffect()
 {
+#if 0
 	return CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(_filePath.c_str(), _loop);
+#else
+	return 0;
+#endif
 }
 
 void ComAudio::pauseEffect(unsigned int nSoundId)
 {
+#if 0
     return CocosDenshion::SimpleAudioEngine::getInstance()->pauseEffect(nSoundId);
+#endif
 }
 
 void ComAudio::pauseAllEffects()
 {
+#if 0
     CocosDenshion::SimpleAudioEngine::getInstance()->pauseAllEffects();
+#endif
 }
 
 void ComAudio::resumeEffect(unsigned int nSoundId)
 {
+#if 0
     CocosDenshion::SimpleAudioEngine::getInstance()->resumeEffect(nSoundId);
+#endif
 }
 
 void ComAudio::resumeAllEffects()
 {
+#if 0
     CocosDenshion::SimpleAudioEngine::getInstance()->resumeAllEffects();
+#endif
 }
 
 void ComAudio::stopEffect(unsigned int nSoundId)
 {
+#if 0
     CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(nSoundId);
+#endif
 }
 
 void ComAudio::stopAllEffects()
 {
+#if 0
     CocosDenshion::SimpleAudioEngine::getInstance()->stopAllEffects();
+#endif
 }
 
 void ComAudio::preloadEffect(const char* pszFilePath)
 {
+#if 0
     CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(pszFilePath);
+#endif
     setFile(pszFilePath);
     setLoop(false);
 }
 
 void ComAudio::unloadEffect(const char *pszFilePath)
 {
+#if 0
     CocosDenshion::SimpleAudioEngine::getInstance()->unloadEffect(pszFilePath);
+#endif
 }
 
 void ComAudio::setFile(const char* pszFilePath)

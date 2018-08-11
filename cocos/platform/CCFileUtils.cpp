@@ -43,7 +43,7 @@ THE SOFTWARE.
 
 #if 0
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_WINRT || CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
-#include <boost/regex.hpp>
+//#include <boost/regex.hpp>
 #endif
 #endif
 

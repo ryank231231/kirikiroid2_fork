@@ -12,8 +12,7 @@
 
 #include "tjsGlobalStringMap.h"
 #include "tjsHashSearch.h"
-#include <boost/thread/mutex.hpp>
-#include <boost/thread/lock_guard.hpp>
+#include <pthread.h>
 
 /*
 	Global String Map is a large string hash table, to share the string
@@ -118,12 +117,19 @@ void TJSReleaseGlobalStringMap()
 	tTJSGlobalStringMap::Release();
 }
 //---------------------------------------------------------------------------
-static boost::mutex _mutex;
+static pthread_mutex_t *_mutex = NULL;
 ttstr TJSMapGlobalStringMap(const ttstr & string)
 {
 	// for multi-thread
-	boost::lock_guard<boost::mutex> lk(_mutex);
-	return tTJSGlobalStringMap::Map(string);
+	if (_mutex == NULL)
+	{
+		_mutex = new pthread_mutex_t();
+		pthread_mutex_init(_mutex, NULL);
+	}
+	pthread_mutex_lock(_mutex);
+	ttstr str = tTJSGlobalStringMap::Map(string);
+	pthread_mutex_unlock(_mutex);
+	return str;
 }
 //---------------------------------------------------------------------------
 

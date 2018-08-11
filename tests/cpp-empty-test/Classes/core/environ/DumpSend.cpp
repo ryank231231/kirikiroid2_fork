@@ -11,7 +11,6 @@
 #include "minizip/zip.h"
 #include <sstream>
 #include <iomanip>
-#include <boost/thread/condition_variable.hpp>
 
 static void ClearDumps(const std::string &dumpdir, std::vector<std::string> &allDumps) {
 	//for (const std::string &path : allDumps) {
@@ -132,6 +131,7 @@ static void* SendDumps_entry(void *pthis) {
 
 #define FLAG_UTF8 (1<<11)
 static void SendDumps(std::string dumpdir, std::vector<std::string> allDumps, std::string packageName, std::string versionStr) {
+#ifndef _MSC_VER
 	boost::mutex _mutex;
 	boost::condition_variable _cond;
 	//for (const std::string &filename : allDumps) {
@@ -188,7 +188,6 @@ static void SendDumps(std::string dumpdir, std::vector<std::string> allDumps, st
 			zipWriteInFileInZip(zf, (const Bytef *)&buf[0], buf.size());
 			zipCloseFileInZip(zf);
 			zipClose(zf, NULL);
-#ifndef _MSC_VER
 			cocos2d::network::HttpRequest* pRequest = new cocos2d::network::HttpRequest();
 			std::string strUrl = 
 #ifdef _DEBUG
@@ -218,10 +217,6 @@ static void SendDumps(std::string dumpdir, std::vector<std::string> allDumps, st
 			cocos2d::network::HttpClient::getInstance()->send(pRequest);
 			_cond.wait(lk);
 			pRequest->release();
-#else
-			__debugbreak(); throw;
-			OutputDebugStringA("=========================HttpRequest not imp\n");
-#endif
 		} while (false);
 		remove(fullpath.c_str());
 		//for (auto it : _inmemFiles) {
@@ -233,6 +228,10 @@ static void SendDumps(std::string dumpdir, std::vector<std::string> allDumps, st
 		_inmemFiles.clear();
 	}
 	//allDumps.clear();
+#else
+	__debugbreak(); throw;
+	OutputDebugStringA("=========================HttpRequest not imp\n");
+#endif
 }
 
 void TVPCheckAndSendDumps(const std::string &dumpdir, const std::string &packageName, const std::string &versionStr) {

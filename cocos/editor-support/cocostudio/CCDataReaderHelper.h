@@ -36,9 +36,6 @@ THE SOFTWARE.
 
 #include <string>
 #include <queue>
-#include <boost/thread/mutex.hpp>
-#include <boost/thread/thread.hpp>
-#include <boost/thread/condition_variable.hpp>
 #include <pthread.h>
 
 namespace tinyxml2
@@ -200,25 +197,24 @@ protected:
 	static void* loadData_entry(void *pthis) {
 	  DataReaderHelper *obj = static_cast<DataReaderHelper *>(pthis);
 	  obj->loadData();
-	  delete obj;
 	  return NULL;
 	}
 
 
 
 
-	boost::condition_variable		_sleepCondition;
+	pthread_cond_t		_sleepCondition;
 
 	pthread_t     *_loadingThread;
 
-	boost::mutex      _sleepMutex;
+	pthread_mutex_t      _sleepMutex;
 
-	boost::mutex      _asyncStructQueueMutex;
-	boost::mutex      _dataInfoMutex;
+	pthread_mutex_t      _asyncStructQueueMutex;
+	pthread_mutex_t      _dataInfoMutex;
 
-	boost::mutex      _addDataMutex;
+	pthread_mutex_t      _addDataMutex;
 
-    boost::mutex      _getFileMutex;
+    pthread_mutex_t      _getFileMutex;
 
 	  
 	unsigned long _asyncRefCount;

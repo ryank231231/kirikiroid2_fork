@@ -27,13 +27,51 @@
 #ifdef USING_THREADPOOL11
 #include "threadpool11/pool.hpp"
 #endif
-#include <boost/thread/thread.hpp>
+#include <pthread.h>
+#ifdef _MSC_VER
+//https://github.com/LarryIII/Larry_Vcpkg/blob/fa94febc7cc9c68f2743ba87acfbea2e86785d69/ports/gettimeofday/gettimeofday.c
+
+#include <winsock2.h>
+#include <time.h>
+
+/* FILETIME of Jan 1 1970 00:00:00. */
+static const unsigned __int64 epoch = 116444736000000000Ui64;
+
+/*
+ * timezone information is stored outside the kernel so tzp isn't used anymore.
+ *
+ * Note: this function is not for Win32 high precision timing purpose. See
+ * elapsed_time().
+ */
+static int
+gettimeofday__(struct timeval * tp, struct timezone * tzp)
+{
+	FILETIME	file_time;
+	SYSTEMTIME	system_time;
+	ULARGE_INTEGER ularge;
+
+	GetSystemTime(&system_time);
+	SystemTimeToFileTime(&system_time, &file_time);
+	ularge.LowPart = file_time.dwLowDateTime;
+	ularge.HighPart = file_time.dwHighDateTime;
+
+	tp->tv_sec = (long) ((ularge.QuadPart - epoch) / 10000000L);
+	tp->tv_usec = (long) (system_time.wMilliseconds * 1000);
+
+	return 0;
+}
+#else
+#include <sys/time.h>
+#endif
 
 //---------------------------------------------------------------------------
 // tTVPThread : a wrapper class for thread
 //---------------------------------------------------------------------------
 tTVPThread::tTVPThread(bool suspended)
 {
+	pthread_mutex_init(&_mutex, NULL);
+	pthread_cond_init(&_cond, NULL);
+
 	Terminated = false;
 	Suspended = suspended;
 
@@ -57,8 +95,9 @@ void * tTVPThread::StartProc(void * arg)
 {
 	tTVPThread* _this = ((tTVPThread*)arg);
 	if (_this->Suspended) {
-		boost::unique_lock<boost::mutex> lk(_this->_mutex);
-		_this->_cond.wait(lk);
+		pthread_mutex_lock(&_this->_mutex);
+		pthread_cond_wait(&_this->_cond, &_this->_mutex);
+		pthread_mutex_unlock(&_this->_mutex);
 	}
 	_this->Execute();
 	TVPOnThreadExited();
@@ -119,7 +158,7 @@ void tTVPThread::SetPriority(tTVPThreadPriority pri)
 void tTVPThread::Resume()
 {
 	Suspended = false;
-	_cond.notify_one();
+	pthread_cond_signal(&_cond);
 	//while((tjs_int32)ResumeThread(Handle) > 1) ;
 }
 //---------------------------------------------------------------------------
@@ -135,8 +174,9 @@ void tTVPThread::Resume()
 //---------------------------------------------------------------------------
 void tTVPThreadEvent::Set()
 {
-	boost::unique_lock<boost::mutex> lk(Mutex);
-	Handle.notify_one();
+	pthread_mutex_lock(&Mutex);
+	pthread_cond_signal(&Handle);
+	pthread_mutex_unlock(&Mutex);
 }
 //---------------------------------------------------------------------------
 void tTVPThreadEvent::WaitFor(tjs_uint timeout)
@@ -144,12 +184,35 @@ void tTVPThreadEvent::WaitFor(tjs_uint timeout)
 	// wait for event;
 	// returns true if the event is set, otherwise (when timed out) returns false.
 
-	boost::unique_lock<boost::mutex> lk(Mutex);
+	pthread_mutex_lock(&Mutex);
 	if (timeout != 0) {
-		Handle.wait_for(lk, boost::chrono::milliseconds(timeout));
+		//https://github.com/JIANGJZ/DCR/blob/f55f8835c97e11d855d4e6453b1da73fcb80216e/src/util/condition_variable.cpp
+		struct timeval tv;
+#ifdef _MSC_VER
+		gettimeofday__(&tv, NULL);
+#else
+		gettimeofday(&tv, NULL);
+#endif
+
+		tv.tv_sec += timeout / 1000;
+		tv.tv_usec += (timeout % 1000) * 1000;
+    
+		int32_t million = 1000000;
+		if (tv.tv_usec >= million) {
+			tv.tv_sec += tv.tv_usec / million;
+			tv.tv_usec %= million;
+		}
+    
+		struct timespec ts;
+		ts.tv_sec = tv.tv_sec;
+		ts.tv_nsec = tv.tv_usec * 1000;
+
+		pthread_cond_timedwait(&Handle, &Mutex, &ts);
 	} else {
-		Handle.wait(lk);
+		pthread_cond_wait(&Handle, &Mutex);
 	}
+	pthread_mutex_unlock(&Mutex);
+	
 #if 0
 	DWORD state = WaitForSingleObject(Handle, timeout == 0 ? INFINITE : timeout);
 

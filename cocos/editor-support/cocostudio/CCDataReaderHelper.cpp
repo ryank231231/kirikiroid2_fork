@@ -160,18 +160,19 @@ void DataReaderHelper::loadData()
     while (true)
     {
         std::queue<AsyncStruct *> *pQueue = _asyncStructQueue;
-        _asyncStructQueueMutex.lock(); // get async struct from queue
+        pthread_mutex_lock(&_asyncStructQueueMutex); // get async struct from queue
         if (pQueue->empty())
         {
-            _asyncStructQueueMutex.unlock();
+            pthread_mutex_unlock(&_asyncStructQueueMutex);
             if (need_quit)
             {
                 break;
             }
             else
             {
-				boost::unique_lock<boost::mutex> lk(_sleepMutex);
-				_sleepCondition.wait(lk);
+				pthread_mutex_lock(&_sleepMutex);
+				pthread_cond_wait(&_sleepCondition, &_sleepMutex);
+				pthread_mutex_unlock(&_sleepMutex);
                 continue;
             }
         }
@@ -179,7 +180,7 @@ void DataReaderHelper::loadData()
         {
             pAsyncStruct = pQueue->front();
             pQueue->pop();
-            _asyncStructQueueMutex.unlock();
+            pthread_mutex_unlock(&_asyncStructQueueMutex);
         }
 
         // generate data info
@@ -202,9 +203,9 @@ void DataReaderHelper::loadData()
         }
 
         // put the image info into the queue
-        _dataInfoMutex.lock();
+        pthread_mutex_lock(&_dataInfoMutex);
         _dataQueue->push(pDataInfo);
-        _dataInfoMutex.unlock();
+        pthread_mutex_unlock(&_dataInfoMutex);
     }
 
     if( _asyncStructQueue != nullptr )
@@ -253,14 +254,19 @@ DataReaderHelper::DataReaderHelper()
 	, _asyncStructQueue(nullptr)
 	, _dataQueue(nullptr)
 {
-
+	pthread_cond_init(&_sleepCondition, NULL);
+	pthread_mutex_init(&_sleepMutex, NULL);
+	pthread_mutex_init(&_asyncStructQueueMutex, NULL);
+	pthread_mutex_init(&_dataInfoMutex, NULL);
+	pthread_mutex_init(&_addDataMutex, NULL);
+    pthread_mutex_init(&_getFileMutex, NULL);
 }
 
 DataReaderHelper::~DataReaderHelper()
 {
     need_quit = true;
 
-	_sleepCondition.notify_one();
+	pthread_cond_signal(&_sleepCondition);
 	if (_loadingThread) pthread_join(*_loadingThread, NULL);
 
 	CC_SAFE_DELETE(_loadingThread);
@@ -308,10 +314,10 @@ void DataReaderHelper::addDataFromFile(const std::string& filePath)
         filemode += "b";
     ssize_t filesize;
     
-    _dataReaderHelper->_getFileMutex.lock();
+    pthread_mutex_lock(&_dataReaderHelper->_getFileMutex);
     unsigned char *pBytes = FileUtils::getInstance()->getFileData(filePath, filemode.c_str(), &filesize);
     std::string contentStr((const char*)pBytes,filesize);
-    _dataReaderHelper->_getFileMutex.unlock();
+    pthread_mutex_unlock(&_dataReaderHelper->_getFileMutex);
     
     DataInfo dataInfo;
     dataInfo.filename = filePathStr;
@@ -425,9 +431,9 @@ void DataReaderHelper::addDataFromFileAsync(const std::string& imagePath, const 
     
     // This getFileData only read exportJson file, it takes only a little time.
     // Large image files are loaded in DataReaderHelper::addDataFromJsonCache(dataInfo) asynchronously.
-    _dataReaderHelper->_getFileMutex.lock();
+    pthread_mutex_lock(&_dataReaderHelper->_getFileMutex);
     unsigned char *pBytes = FileUtils::getInstance()->getFileData(fullPath.c_str() , filereadmode.c_str(), &size);
-    _dataReaderHelper->_getFileMutex.unlock();
+    pthread_mutex_unlock(&_dataReaderHelper->_getFileMutex);
     
 	Data bytecpy;
     bytecpy.copy(pBytes, size);
@@ -451,11 +457,11 @@ void DataReaderHelper::addDataFromFileAsync(const std::string& imagePath, const 
 
 
     // add async struct into queue
-    _asyncStructQueueMutex.lock();
+    pthread_mutex_lock(&_asyncStructQueueMutex);
     _asyncStructQueue->push(data);
-    _asyncStructQueueMutex.unlock();
+    pthread_mutex_lock(&_asyncStructQueueMutex);
 
-    _sleepCondition.notify_one();
+    pthread_cond_signal(&_sleepCondition);
 }
 
 void DataReaderHelper::addDataAsyncCallBack(float dt)
@@ -463,33 +469,33 @@ void DataReaderHelper::addDataAsyncCallBack(float dt)
     // the data is generated in loading thread
     std::queue<DataInfo *> *dataQueue = _dataQueue;
 
-    _dataInfoMutex.lock();
+    pthread_mutex_lock(&_dataInfoMutex);
     if (dataQueue->empty())
     {
-        _dataInfoMutex.unlock();
+        pthread_mutex_unlock(&_dataInfoMutex);
     }
     else
     {
         DataInfo *pDataInfo = dataQueue->front();
         dataQueue->pop();
-        _dataInfoMutex.unlock();
+        pthread_mutex_unlock(&_dataInfoMutex);
 
         AsyncStruct *pAsyncStruct = pDataInfo->asyncStruct;
 
 
         if (pAsyncStruct->imagePath != "" && pAsyncStruct->plistPath != "")
         {
-            _getFileMutex.lock();
+            pthread_mutex_lock(&_getFileMutex);
             ArmatureDataManager::getInstance()->addSpriteFrameFromFile(pAsyncStruct->plistPath.c_str(), pAsyncStruct->imagePath.c_str(), pDataInfo->filename.c_str());
-            _getFileMutex.unlock();
+            pthread_mutex_unlock(&_getFileMutex);
         }
 
         while (!pDataInfo->configFileQueue.empty())
         {
             std::string configPath = pDataInfo->configFileQueue.front();
-            _getFileMutex.lock();
+            pthread_mutex_lock(&_getFileMutex);
             ArmatureDataManager::getInstance()->addSpriteFrameFromFile((pAsyncStruct->baseFilePath + configPath + ".plist").c_str(), (pAsyncStruct->baseFilePath + configPath + ".png").c_str(),pDataInfo->filename.c_str());
-            _getFileMutex.unlock();
+            pthread_mutex_unlock(&_getFileMutex);
             pDataInfo->configFileQueue.pop();
         }
 
@@ -559,13 +565,13 @@ void DataReaderHelper::addDataFromCache(const std::string& pFileContent, DataInf
 
         if (dataInfo->asyncStruct)
         {
-            _dataReaderHelper->_addDataMutex.lock();
+            pthread_mutex_lock(&_dataReaderHelper->_addDataMutex);
         }
         ArmatureDataManager::getInstance()->addArmatureData(armatureData->name.c_str(), armatureData, dataInfo->filename.c_str());
         armatureData->release();
         if (dataInfo->asyncStruct)
         {
-            _dataReaderHelper->_addDataMutex.unlock();
+            pthread_mutex_unlock(&_dataReaderHelper->_addDataMutex);
         }
 
         armatureXML = armatureXML->NextSiblingElement(ARMATURE);
@@ -582,13 +588,13 @@ void DataReaderHelper::addDataFromCache(const std::string& pFileContent, DataInf
         AnimationData *animationData = DataReaderHelper::decodeAnimation(animationXML, dataInfo);
         if (dataInfo->asyncStruct)
         {
-            _dataReaderHelper->_addDataMutex.lock();
+            pthread_mutex_lock(&_dataReaderHelper->_addDataMutex);
         }
         ArmatureDataManager::getInstance()->addAnimationData(animationData->name.c_str(), animationData, dataInfo->filename.c_str());
         animationData->release();
         if (dataInfo->asyncStruct)
         {
-            _dataReaderHelper->_addDataMutex.unlock();
+            pthread_mutex_unlock(&_dataReaderHelper->_addDataMutex);
         }
         animationXML = animationXML->NextSiblingElement(ANIMATION);
     }
@@ -605,13 +611,13 @@ void DataReaderHelper::addDataFromCache(const std::string& pFileContent, DataInf
 
         if (dataInfo->asyncStruct)
         {
-            _dataReaderHelper->_addDataMutex.lock();
+            pthread_mutex_lock(&_dataReaderHelper->_addDataMutex);
         }
         ArmatureDataManager::getInstance()->addTextureData(textureData->name.c_str(), textureData, dataInfo->filename.c_str());
         textureData->release();
         if (dataInfo->asyncStruct)
         {
-            _dataReaderHelper->_addDataMutex.unlock();
+            pthread_mutex_unlock(&_dataReaderHelper->_addDataMutex);
         }
         textureXML = textureXML->NextSiblingElement(SUB_TEXTURE);
     }
@@ -1262,13 +1268,13 @@ void DataReaderHelper::addDataFromJsonCache(const std::string& fileContent, Data
 
         if (dataInfo->asyncStruct)
         {
-            _dataReaderHelper->_addDataMutex.lock();
+            pthread_mutex_lock(&_dataReaderHelper->_addDataMutex);
         }
         ArmatureDataManager::getInstance()->addArmatureData(armatureData->name.c_str(), armatureData, dataInfo->filename.c_str());
         armatureData->release();
         if (dataInfo->asyncStruct)
         {
-            _dataReaderHelper->_addDataMutex.unlock();
+            pthread_mutex_unlock(&_dataReaderHelper->_addDataMutex);
         }
     }
 
@@ -1281,13 +1287,13 @@ void DataReaderHelper::addDataFromJsonCache(const std::string& fileContent, Data
 
         if (dataInfo->asyncStruct)
         {
-            _dataReaderHelper->_addDataMutex.lock();
+            pthread_mutex_lock(&_dataReaderHelper->_addDataMutex);
         }
         ArmatureDataManager::getInstance()->addAnimationData(animationData->name.c_str(), animationData, dataInfo->filename.c_str());
         animationData->release();
         if (dataInfo->asyncStruct)
         {
-            _dataReaderHelper->_addDataMutex.unlock();
+            pthread_mutex_unlock(&_dataReaderHelper->_addDataMutex);
         }
     }
 
@@ -1300,13 +1306,13 @@ void DataReaderHelper::addDataFromJsonCache(const std::string& fileContent, Data
 
         if (dataInfo->asyncStruct)
         {
-            _dataReaderHelper->_addDataMutex.lock();
+            pthread_mutex_lock(&_dataReaderHelper->_addDataMutex);
         }
         ArmatureDataManager::getInstance()->addTextureData(textureData->name.c_str(), textureData, dataInfo->filename.c_str());
         textureData->release();
         if (dataInfo->asyncStruct)
         {
-            _dataReaderHelper->_addDataMutex.unlock();
+            pthread_mutex_unlock(&_dataReaderHelper->_addDataMutex);
         }
     }
 
@@ -1787,13 +1793,13 @@ void DataReaderHelper::decodeNode(BaseData *node, const rapidjson::Value& json, 
                             armatureData = decodeArmature(&tCocoLoader, &pDataArray[ii], dataInfo);
                             if (dataInfo->asyncStruct)
                             {
-                                _dataReaderHelper->_addDataMutex.lock();
+                                pthread_mutex_lock(&_dataReaderHelper->_addDataMutex);
                             }
                             ArmatureDataManager::getInstance()->addArmatureData(armatureData->name.c_str(), armatureData, dataInfo->filename.c_str());
                             armatureData->release();
                             if (dataInfo->asyncStruct)
                             {
-                                _dataReaderHelper->_addDataMutex.unlock();
+                                pthread_mutex_unlock(&_dataReaderHelper->_addDataMutex);
                             }
                         }
                     }
@@ -1807,13 +1813,13 @@ void DataReaderHelper::decodeNode(BaseData *node, const rapidjson::Value& json, 
                             animationData = decodeAnimation(&tCocoLoader, &pDataArray[ii], dataInfo);
                             if (dataInfo->asyncStruct)
                             {
-                                _dataReaderHelper->_addDataMutex.lock();
+                                pthread_mutex_lock(&_dataReaderHelper->_addDataMutex);
                             }
                             ArmatureDataManager::getInstance()->addAnimationData(animationData->name.c_str(), animationData, dataInfo->filename.c_str());
                             animationData->release();
                             if (dataInfo->asyncStruct)
                             {
-                                _dataReaderHelper->_addDataMutex.unlock();
+                                pthread_mutex_unlock(&_dataReaderHelper->_addDataMutex);
                             }
                         }
                     }
@@ -1826,13 +1832,13 @@ void DataReaderHelper::decodeNode(BaseData *node, const rapidjson::Value& json, 
                             TextureData *textureData = decodeTexture(&tCocoLoader, &pDataArray[ii]);
                             if (dataInfo->asyncStruct)
                             {
-                                _dataReaderHelper->_addDataMutex.lock();
+                                pthread_mutex_lock(&_dataReaderHelper->_addDataMutex);
                             }
                             ArmatureDataManager::getInstance()->addTextureData(textureData->name.c_str(), textureData, dataInfo->filename.c_str());
                             textureData->release();
                             if (dataInfo->asyncStruct)
                             {
-                                _dataReaderHelper->_addDataMutex.unlock();
+                                pthread_mutex_unlock(&_dataReaderHelper->_addDataMutex);
                             }
                         }
                     }

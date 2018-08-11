@@ -9,7 +9,7 @@
 #include "SysInitIntf.h"
 #include "ThreadIntf.h"
 #include <memory>
-#include <boost/thread/thread.hpp>
+#include <pthread.h>
 
 #define NCB_MODULE_NAME TJS_W("xp3filter.dll")
 
@@ -321,14 +321,19 @@ static XP3FilterDecoder* AddXP3Decoder() {
 
 static std::map<pthread_t*, XP3FilterDecoder*> _thread_decoders;
 #if 1 || (defined(_MSC_VER) /*&& _MSC_VER <= 1800*/) || defined(CC_TARGET_OS_IPHONE)
-static boost::mutex _decoders_mtx;
+static pthread_mutex_t *_decoders_mtx = NULL;
 static std::vector<XP3FilterDecoder*> _cached_decoders;
 static XP3FilterDecoder *FetchXP3Decoder() {
-	boost::lock_guard<boost::mutex> lk(_decoders_mtx);
+	if (_decoders_mtx == NULL) { 
+		_decoders_mtx = new pthread_mutex_t();
+		pthread_mutex_init(_decoders_mtx, NULL);
+	}
+	pthread_mutex_lock(_decoders_mtx);
 #if 0
 	auto it = _thread_decoders.find(boost::this_thread::get_id());
 	if (it != _thread_decoders.end()) {
 		XP3FilterDecoder *ret = it->second;
+		pthread_mutex_unlock(_decoders_mtx);
 		return ret;
 	}
 #else
@@ -338,6 +343,7 @@ static XP3FilterDecoder *FetchXP3Decoder() {
 		const auto &it = *p_it;
 		if (pthread_equal(*(it.first), id)) {
 			XP3FilterDecoder *ret = it.second;
+			pthread_mutex_unlock(_decoders_mtx);
 			return ret;
 		}
 	}
@@ -346,7 +352,7 @@ static XP3FilterDecoder *FetchXP3Decoder() {
 	if (!Inited) {
 		Inited = true;
 		TVPAddOnThreadExitEvent([](){
-			boost::lock_guard<boost::mutex> lk(_decoders_mtx);
+			pthread_mutex_lock(_decoders_mtx);
 #if 0
 			auto it = _thread_decoders.find(boost::this_thread::get_id());
 			if (it != _thread_decoders.end()) {
@@ -365,6 +371,7 @@ static XP3FilterDecoder *FetchXP3Decoder() {
 				}
 			}
 #endif
+			pthread_mutex_unlock(_decoders_mtx);
 		});
 	}
 	XP3FilterDecoder *ret;
@@ -381,6 +388,7 @@ static XP3FilterDecoder *FetchXP3Decoder() {
 	*id_p = pthread_self();
 	_thread_decoders[id_p] = ret;
 #endif
+	pthread_mutex_unlock(_decoders_mtx);
 	return ret;
 }
 #else

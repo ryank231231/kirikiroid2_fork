@@ -12,8 +12,7 @@
 #define ThreadImplH
 #include "tjsNative.h"
 #include "ThreadIntf.h"
-#include <boost/thread/condition_variable.hpp>
-#include "pthread.h"
+#include <pthread.h>
 
 
 //---------------------------------------------------------------------------
@@ -24,8 +23,8 @@ class tTVPThread
 	bool Terminated;
 	pthread_t Handle;
 	//DWORD ThreadId;
-	boost::mutex _mutex; // for suspend
-	boost::condition_variable _cond;
+	pthread_mutex_t _mutex; // for suspend
+	pthread_cond_t _cond;
 	bool Suspended;
 
 	static void* /*__stdcall*/ StartProc(void * arg);
@@ -63,12 +62,16 @@ public:
 //---------------------------------------------------------------------------
 class tTVPThreadEvent
 {
-	boost::condition_variable Handle;
-	boost::mutex Mutex;
+	pthread_cond_t Handle;
+	pthread_mutex_t Mutex;
 
 public:
 	void Set();
 	void WaitFor(tjs_uint timeout);
+	tTVPThreadEvent() {
+		pthread_cond_init(&Handle, NULL);
+		pthread_mutex_init(&Mutex, NULL);
+	}
 };
 //---------------------------------------------------------------------------
 

@@ -18,6 +18,7 @@
 #endif
 #endif
 #include <unordered_map>
+#include <pthread.h>
 
 NS_CC_BEGIN
 
@@ -100,7 +101,9 @@ FileUtilsInherit;
 class CustomFileUtils : public FileUtilsInherit
 {
 public:
-	CustomFileUtils() {}
+	CustomFileUtils() {
+		pthread_mutex_init(&_lock, NULL);
+	}
 	
 	void addAutoSearchArchive(const std::string& path);
 	virtual std::string fullPathForFilename(const std::string &filename) const override;
@@ -117,7 +120,7 @@ private:
 	unsigned char* getFileDataFromArchive(const std::string& filename, ssize_t *size);
 
 	std::unordered_map<std::string, std::pair<unzFile, unz_file_pos> > _autoSearchArchive;
-	boost::mutex _lock;
+	pthread_mutex_t _lock;
 };
 
 NS_CC_END

@@ -29,9 +29,6 @@
 #include "ScriptMgnIntf.h"
 #include "RenderManager.h"
 #include "ConfigManager/LocaleConfigManager.h"
-#include <boost/thread/mutex.hpp>
-#include <boost/thread/thread.hpp>
-#include <boost/thread/condition_variable.hpp>
 #include <pthread.h>
 #include "Application.h"
 #include "BitmapIntf.h"
@@ -2112,13 +2109,13 @@ public:
 			clearTask(); // drop all unfinished tasks
 			TaskList.push_back(param);
 		}
-		TaskCond.notify_one();
+		pthread_cond_signal(&TaskCond);
     }
 
 private:
     std::list<tParam*> TaskList;
-    boost::condition_variable TaskCond;
-	boost::mutex TaskMutex;
+    pthread_cond_t TaskCond;
+	pthread_mutex_t TaskMutex;
     tTJSCriticalSection CSTask;
     bool ReqInterrupt;
     
@@ -2127,6 +2124,8 @@ private:
     {
 //         TaskCond = SDL_CreateCond();
 //         TaskMutex = SDL_CreateMutex();
+		pthread_cond_init(&TaskCond, NULL);
+		pthread_mutex_init(&TaskMutex, NULL);
 		ThreadID = new pthread_t();
 		pthread_create(ThreadID, NULL, &TVPGraphicPreload::_thread_loop_entry, this);
         ReqInterrupt = false;
@@ -2135,7 +2134,6 @@ private:
 	static void* _thread_loop_entry(void *pthis) {
 	  TVPGraphicPreload *obj = static_cast<TVPGraphicPreload *>(pthis);
 	  obj->_thread_loop();
-	  delete obj;
 	  return NULL;
 	}
     void _thread_loop() {
@@ -2150,8 +2148,9 @@ private:
 				}
 			}
             if(!CurrentTask) {
-				boost::unique_lock<boost::mutex> lk(TaskMutex);
-				TaskCond.wait(lk);
+				pthread_mutex_lock(&TaskMutex);
+				pthread_cond_wait(&TaskCond, &TaskMutex);
+				pthread_mutex_unlock(&TaskMutex);
                 continue;
             }
 

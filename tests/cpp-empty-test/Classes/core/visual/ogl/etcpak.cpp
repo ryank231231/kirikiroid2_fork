@@ -3,10 +3,8 @@
 #include <assert.h>
 #include <cstdint>
 #include <algorithm>
-#include <boost/thread/condition_variable.hpp>
-#include <boost/thread/mutex.hpp>
-#include <boost/thread/future.hpp>
 #include <cmath>
+#include <pthread.h>
 #include "ThreadIntf.h"
 #include "tvpgl.h"
 
@@ -580,7 +578,6 @@ enum Channels
 	RGB,
 	Alpha
 };
-#include <boost/thread/future.hpp>
 class Bitmap
 {
 public:
@@ -588,8 +585,8 @@ public:
 	Bitmap(const v2i& size, const void *pixelData, int pitch, uint lines);
 	virtual ~Bitmap();
 
-	uint32* Data() { if (m_load.valid()) m_load.wait(); return m_data; }
-	const uint32* Data() const { if (m_load.valid()) m_load.wait(); return m_data; }
+	uint32* Data() { if (m_load) { pthread_join(*m_load, NULL); } return m_data; }
+	const uint32* Data() const { if (m_load) { pthread_join(*m_load, NULL); } return m_data; }
 	const v2i& Size() const { return m_size; }
 	bool Alpha() const { return m_alpha; }
 
@@ -606,7 +603,7 @@ protected:
 	bool m_alpha;
 //	Semaphore m_sema;
 //	boost::mutex m_lock;
-	boost::BOOST_THREAD_FUTURE<void> m_load;
+	pthread_t *m_load;
 };
 
 typedef std::shared_ptr<Bitmap> BitmapPtr;
@@ -1436,6 +1433,7 @@ Bitmap::Bitmap(const v2i& size)
 	, m_linesLeft(size.y / 4)
 	, m_size(size)
 //	, m_sema(0)
+	, m_load(NULL)
 {
 }
 
@@ -1443,6 +1441,7 @@ Bitmap::Bitmap(const Bitmap& src, uint lines)
 	: m_lines(lines)
 	, m_alpha(src.Alpha())
 //	, m_sema(0)
+	, m_load(NULL)
 {
 }
 
@@ -1453,6 +1452,7 @@ Bitmap::Bitmap(const v2i& size, const void *pixelData, int pitch, uint lines)
 	, m_linesLeft(size.y / 4)
 	, m_size(size)
 //	, m_sema(0)
+	, m_load(NULL)
 {
 
 }
@@ -1479,6 +1479,28 @@ class BitmapDownsampled : public Bitmap
 public:
 	BitmapDownsampled(const Bitmap& bmp, uint lines);
 	~BitmapDownsampled();
+
+private:
+	struct asyncStruct {
+		BitmapDownsampled* this_;
+		const Bitmap& bmp;
+		int w;
+		int h;
+		asyncStruct(BitmapDownsampled* this__, const Bitmap& bmp_, int w_, int h_)
+			: this_(this__), bmp(bmp_), w(w_), h(h_)
+		{
+			
+		}
+	};
+	static void* async_entry(void *pthis) {
+	  asyncStruct *obj = static_cast<asyncStruct *>(pthis);
+	  obj->this_->async(obj->bmp, obj->w, obj->h);
+	  delete obj->this_->m_load;
+	  obj->this_->m_load = NULL;
+	  delete obj;
+	  return NULL;
+	}
+	void async(const Bitmap& bmp_, int w_, int h_);
 };
 
 BitmapDownsampled::BitmapDownsampled(const Bitmap& bmp, uint lines)
@@ -1518,47 +1540,50 @@ BitmapDownsampled::BitmapDownsampled(const Bitmap& bmp, uint lines)
 	} else
 	{
 		m_linesLeft = h / 4;
-		m_load = boost::async(boost::launch::async, [this, &bmp, w, h]() mutable
-		{
-			auto ptr = m_data;
-			auto src1 = bmp.Data();
-			auto src2 = src1 + bmp.Size().x;
-			uint lines = 0;
-			for (int i = 0; i < h / 4; i++)
-			{
-				for (int j = 0; j < 4; j++)
-				{
-					for (int k = 0; k < m_size.x; k++)
-					{
-						int r = ((*src1 & 0x000000FF) + (*(src1 + 1) & 0x000000FF) + (*src2 & 0x000000FF) + (*(src2 + 1) & 0x000000FF)) / 4;
-						int g = (((*src1 & 0x0000FF00) + (*(src1 + 1) & 0x0000FF00) + (*src2 & 0x0000FF00) + (*(src2 + 1) & 0x0000FF00)) / 4) & 0x0000FF00;
-						int b = (((*src1 & 0x00FF0000) + (*(src1 + 1) & 0x00FF0000) + (*src2 & 0x00FF0000) + (*(src2 + 1) & 0x00FF0000)) / 4) & 0x00FF0000;
-						int a = (((((*src1 & 0xFF000000) >> 8) + ((*(src1 + 1) & 0xFF000000) >> 8) + ((*src2 & 0xFF000000) >> 8) + ((*(src2 + 1) & 0xFF000000) >> 8)) / 4) & 0x00FF0000) << 8;
-						*ptr++ = r | g | b | a;
-						src1 += 2;
-						src2 += 2;
-					}
-					src1 += m_size.x * 2;
-					src2 += m_size.x * 2;
-				}
-				lines++;
-				if (lines >= m_lines)
-				{
-					lines = 0;
-				//	m_sema.unlock();
-				}
-			}
-
-			if (lines != 0)
-			{
-			//	m_sema.unlock();
-			}
-		});
+		m_load = new pthread_t();
+		pthread_create(m_load, NULL, &BitmapDownsampled::async_entry, new asyncStruct(this, bmp, w, h));
 	}
 }
 
 BitmapDownsampled::~BitmapDownsampled()
 {
+}
+
+void BitmapDownsampled::async(const Bitmap& bmp, int w, int h)
+{
+	auto ptr = m_data;
+	auto src1 = bmp.Data();
+	auto src2 = src1 + bmp.Size().x;
+	uint lines = 0;
+	for (int i = 0; i < h / 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			for (int k = 0; k < m_size.x; k++)
+			{
+				int r = ((*src1 & 0x000000FF) + (*(src1 + 1) & 0x000000FF) + (*src2 & 0x000000FF) + (*(src2 + 1) & 0x000000FF)) / 4;
+				int g = (((*src1 & 0x0000FF00) + (*(src1 + 1) & 0x0000FF00) + (*src2 & 0x0000FF00) + (*(src2 + 1) & 0x0000FF00)) / 4) & 0x0000FF00;
+				int b = (((*src1 & 0x00FF0000) + (*(src1 + 1) & 0x00FF0000) + (*src2 & 0x00FF0000) + (*(src2 + 1) & 0x00FF0000)) / 4) & 0x00FF0000;
+				int a = (((((*src1 & 0xFF000000) >> 8) + ((*(src1 + 1) & 0xFF000000) >> 8) + ((*src2 & 0xFF000000) >> 8) + ((*(src2 + 1) & 0xFF000000) >> 8)) / 4) & 0x00FF0000) << 8;
+				*ptr++ = r | g | b | a;
+				src1 += 2;
+				src2 += 2;
+			}
+			src1 += m_size.x * 2;
+			src2 += m_size.x * 2;
+		}
+		lines++;
+		if (lines >= m_lines)
+		{
+			lines = 0;
+		//	m_sema.unlock();
+		}
+	}
+
+	if (lines != 0)
+	{
+	//	m_sema.unlock();
+	}
 }
 
 static uint8 e5[32];

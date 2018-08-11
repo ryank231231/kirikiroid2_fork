@@ -29,9 +29,6 @@ THE SOFTWARE.
 #define __CCTEXTURE_CACHE_H__
 
 #include <string>
-#include <boost/thread/mutex.hpp>
-#include <boost/thread/thread.hpp>
-#include <boost/thread/condition_variable.hpp>
 #include <pthread.h>
 #include <queue>
 #include <string>
@@ -202,7 +199,6 @@ private:
 	static void* loadImage_entry(void *pthis) {
 	  TextureCache *obj = static_cast<TextureCache *>(pthis);
 	  obj->loadImage();
-	  delete obj;
 	  return NULL;
 	}
 
@@ -228,11 +224,11 @@ protected:
     std::queue<AsyncStruct*>* _asyncStructQueue;
     std::deque<ImageInfo*>* _imageInfoQueue;
 
-    boost::mutex _asyncStructQueueMutex;
-    boost::mutex _imageInfoMutex;
+    pthread_mutex_t _asyncStructQueueMutex;
+    pthread_mutex_t _imageInfoMutex;
 
-    boost::mutex _sleepMutex;
-    boost::condition_variable _sleepCondition;
+    pthread_mutex_t _sleepMutex;
+    pthread_cond_t _sleepCondition;
 
     bool _needQuit;
 
