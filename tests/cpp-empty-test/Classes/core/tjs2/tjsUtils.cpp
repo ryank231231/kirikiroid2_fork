@@ -23,6 +23,7 @@ namespace TJS
 struct tTJSCriticalSectionImpl {
 	boost::mutex _mutex;
 	pthread_t* _tid;
+	tTJSCriticalSectionImpl() : _tid(NULL) {}
 	bool lock();
 	void unlock();
 };
