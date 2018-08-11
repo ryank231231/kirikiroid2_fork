@@ -1,0 +1,76 @@
+Windows EXE/DLL: what is a ※packed image§
+https://stackoverflow.com/questions/35447443/windows-exe-dll-what-is-a-packed-image
+
+
+Windows EXE/DLL: what is a ※packed image§
+Ask Question
+up vote
+10
+down vote
+favorite
+Process Explorer sometimes shows an EXE as "packed image", but what does it mean.
+
+What I have found out is: Compiling an exe (using Visual C++ 2010) with /ZI option results in a packed image, but /Zi does not. Why such difference?
+
+BTW: a DLL compiled with /ZI is also considered "packed image" and marked purple.
+
+enter image description here
+
+c++ windows process
+shareimprove this question
+asked Feb 17 '16 at 3:37
+
+Jimm Chen
+1,24231837
+Read the Visual Studio documentation: /Z7, /Zi, /ZI (Debug Information Format), and also see Understanding Process Explorer. 每 Remy Lebeau Feb 17 '16 at 3:52 
+But that MSDN page states nothing about "packed image"; and that howtogeek page also says nothing about the /Zx compiler options. 每 Jimm Chen Feb 17 '16 at 3:54 
+Files whose code has to be unpacked into memory before it can be executed. Common sign of malware. forum.sysinternals.com/packed-images_topic442.html 每 Ryan Bemrose Feb 17 '16 at 3:56
+Packed images are detected by some heuristic analysis, so maybe the bytes produced by the various /Z options might be throwing off Process Explorer's analyzer. 每 Remy Lebeau Feb 17 '16 at 3:58
+add a comment
+2 Answers
+active oldest votes
+up vote
+10
+down vote
+A "packed image" is one where executable code is compressed with the intention to make the file smaller. Typical file size reduction hovers around 50%. It uses a "loader" at runtime to decompress the data back to executable code before it starts executing. It was useful back in the olden days with limited disk storage capacity and limited network bandwidth.
+
+Today with terabyte disks and megabit networks it is a smell, packing can also be exploited to hide malicious code. Surely the reason why Process Explorer colors it differently.
+
+The exact heuristic that PE uses to detect packing is not documented. Of course not, that would make it too easy to circumvent. It is not trivial, there is no standard way to implement packing. Roughly, it would look at the sections in the executable file and raise the Blue Flag when too much of it looks like non-executable code.
+
+And yes, when you use /ZI then there will be a lot of it. More significant is the linker's /INCREMENTAL option, turned on automatically when you use /ZI. Which allows you to write code while debugging, the Edit+Continue option. And quickly relink the executable file without the linker having to completely re-generate the file. This can only work when there is lots of empty space in the executable file, available to add new machine code bytes. That's a Blue Flag.
+
+Not a real concern of course, your user will only ever see the Release build of your program. Which is built without /ZI and without /INCREMENTAL.
+
+shareimprove this answer
+answered Feb 17 '16 at 9:12
+
+Hans Passant
+766k10412421984
+Thank you for your info, it sounds reasonable. I check the .text section of /ZI ouput and /Zi output. The binaries content looks quite different, the size of .text is 142598 vs 136722, and I think most of which are code from LIBCMT.lib. Just still hard to imagine why that makes the Blue Flag. 每 Jimm Chen Feb 22 '16 at 1:45
+Process Explorer might not make it public how to identify packed images, but Process Hacker does as you can see in my answer 每 Bruno Zell Jan 16 at 9:03
+add a comment
+up vote
+2
+down vote
+From the Process Hacker source code:
+
+An image is packed if:
+
+It references fewer than 3 modules, and
+It imports fewer than 5 functions, and
+It does not use the Native subsystem.
+Or:
+
+The function-to-module ratio is lower than 3 (on average fewer than 3 functions are imported from each module), and
+It references more than 2 modules but fewer than 6 modules.
+Or:
+
+The function-to-module ratio is lower than 2 (on average fewer than 2 functions are imported from each module), and
+It references more than 5 modules but fewer than 31 modules.
+Or:
+
+It does not have a section named ".text".
+An image is not considered to be packed if it has only one import from a module named "mscoree.dll".
+You can also take a look at the soruce code to figure out how to determine if an image is probably packed or if it isn't.
+
