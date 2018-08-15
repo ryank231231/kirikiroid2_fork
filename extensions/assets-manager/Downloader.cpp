@@ -24,8 +24,10 @@
 
 #include "Downloader.h"
 #include "cocos2d.h"
+#if 0
 #include <curl/curl.h>
 #include <curl/easy.h>
+#endif
 #include <cstdio>
 #include <cerrno>
 #include <pthread.h>
@@ -191,12 +193,12 @@ void Downloader::notifyError(ErrorCode code, const std::string &msg/* ="" */, co
         }
     });
 }
-
+#if 0
 void Downloader::notifyError(const std::string &msg, int curlm_code, const std::string &customId/* = ""*/)
 {
     notifyError(Downloader::ErrorCode::CURL_MULTI_ERROR, msg, customId, CURLE_OK, curlm_code);
 }
-
+#endif
 void Downloader::notifyError(const std::string &msg, const std::string &customId, int curle_code)
 {
     notifyError(Downloader::ErrorCode::CURL_EASY_ERROR, msg, customId, curle_code);
@@ -274,6 +276,7 @@ void Downloader::prepareDownload(const std::string &srcUrl, const std::string &s
     }
 }
 
+#if 0
 bool Downloader::prepareHeader(void *curl, const std::string &srcUrl) const
 {
     curl_easy_setopt(curl, CURLOPT_URL, srcUrl.c_str());
@@ -341,7 +344,9 @@ void Downloader::downloadToBufferSync(const std::string &srcUrl, unsigned char *
         downloadToBuffer(srcUrl, customId, streamBuffer, pData);
     }
 }
+#endif
 
+#if 0
 void Downloader::downloadToBuffer(const std::string &srcUrl, const std::string &customId, const StreamData &buffer, const ProgressData &data)
 {
     std::weak_ptr<Downloader> ptr = shared_from_this();
@@ -412,7 +417,9 @@ void Downloader::downloadSync(const std::string &srcUrl, const std::string &stor
         download(srcUrl, customId, fDesc, pData);
     }
 }
+#endif
 
+#if 0
 void Downloader::download(const std::string &srcUrl, const std::string &customId, const FileDescriptor &fDesc, const ProgressData &data)
 {
     std::weak_ptr<Downloader> ptr = shared_from_this();
@@ -689,5 +696,5 @@ void Downloader::groupBatchDownload(const DownloadUnits &units)
     
     clearBatchDownloadData();
 }
-
+#endif
 NS_CC_EXT_END

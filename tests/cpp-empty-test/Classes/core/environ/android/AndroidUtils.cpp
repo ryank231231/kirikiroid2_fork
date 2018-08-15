@@ -882,8 +882,6 @@ std::string TVPGetDeviceID();
 //#include "MsgIntf.h"
 //#include "md5.h"
 //#include "DebugIntf.h"
-#include <boost/thread/condition_variable.hpp>
-#include <boost/thread/mutex.hpp>
 #ifndef _MSC_VER
 #include "platform/android/jni/JniHelper.h"
 #endif

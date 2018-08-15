@@ -26,8 +26,10 @@
 #include "deprecated/CCString.h"
 #include "base/CCDirector.h"
 
+#if 0
 #include <curl/curl.h>
 #include <curl/easy.h>
+#endif
 #include <stdio.h>
 
 #ifdef MINIZIP_FROM_SYSTEM
@@ -440,9 +442,11 @@ void AssetsManagerEx::downloadVersion()
     if (versionUrl.size() > 0)
     {
         _updateState = State::DOWNLOADING_VERSION;
+#if 0
         // Download version file asynchronously
         _downloader->downloadAsync(versionUrl, _cacheVersionPath, VERSION_ID);
-    }
+#endif
+	}
     // No version file found
     else
     {
@@ -497,8 +501,10 @@ void AssetsManagerEx::downloadManifest()
     {
         _updateState = State::DOWNLOADING_MANIFEST;
         // Download version file asynchronously
+#if 0
         _downloader->downloadAsync(manifestUrl, _tempManifestPath, MANIFEST_ID);
-    }
+#endif
+	}
     // No manifest file found
     else
     {
@@ -562,8 +568,9 @@ void AssetsManagerEx::startUpdate()
         _tempManifest->genResumeAssetsList(&_downloadUnits);
         
         _totalWaitToDownload = _totalToDownload = (int)_downloadUnits.size();
+#if 0
         _downloader->batchDownloadAsync(_downloadUnits, BATCH_UPDATE_ID);
-        
+#endif        
         std::string msg = StringUtils::format("Resuming from previous unfinished update, %d files remains to be finished.", _totalToDownload);
         dispatchUpdateEvent(EventAssetsManagerEx::EventCode::UPDATE_PROGRESSION, "", msg);
     }
@@ -620,8 +627,9 @@ void AssetsManagerEx::startUpdate()
             }
             
             _totalWaitToDownload = _totalToDownload = (int)_downloadUnits.size();
+#if 0
             _downloader->batchDownloadAsync(_downloadUnits, BATCH_UPDATE_ID);
-            
+#endif            
             std::string msg = StringUtils::format("Start to update %d files from remote package.", _totalToDownload);
             dispatchUpdateEvent(EventAssetsManagerEx::EventCode::UPDATE_PROGRESSION, "", msg);
         }
@@ -769,8 +777,10 @@ void AssetsManagerEx::updateAssets(const Downloader::DownloadUnits& assets)
             _updateState = State::UPDATING;
             _downloadUnits.clear();
             _downloadUnits = assets;
+#if 0
             _downloader->batchDownloadAsync(_downloadUnits, BATCH_UPDATE_ID);
-        }
+#endif
+		}
         else if (size == 0 && _totalWaitToDownload == 0)
         {
             updateSucceed();

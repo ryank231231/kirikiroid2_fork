@@ -121,7 +121,7 @@ public:
     ProgressCallback getProgressCallback() const { return _onProgress; };
 
     SuccessCallback getSuccessCallback() const { return _onSuccess; };
-    
+#if 0    
     long getContentSize(const std::string &srcUrl) const;
     
     void downloadToBufferAsync(const std::string &srcUrl, unsigned char *buffer, const long &size, const std::string &customId = "");
@@ -131,7 +131,7 @@ public:
     void downloadAsync(const std::string &srcUrl, const std::string &storagePath, const std::string &customId = "");
 
     void downloadSync(const std::string &srcUrl, const std::string &storagePath, const std::string &customId = "");
-    
+ 
     void batchDownloadAsync(const DownloadUnits &units, const std::string &batchId = "");
     
     void batchDownloadSync(const DownloadUnits &units, const std::string &batchId = "");
@@ -150,7 +150,7 @@ public:
 	  delete obj;
 	  return NULL;
 	}
-
+#endif   
     /**
      *  The default constructor.
      */
@@ -168,8 +168,8 @@ protected:
 
     void prepareDownload(const std::string &srcUrl, const std::string &storagePath, const std::string &customId, bool resumeDownload, FileDescriptor *fDesc, ProgressData *pData);
     
+#if 0    
     bool prepareHeader(void *curl, const std::string &srcUrl) const;
-    
 	struct downloadToBufferStruct {
 		Downloader *this_; const std::string &srcUrl; const std::string &customId; const StreamData &buffer; const ProgressData &data;
 		downloadToBufferStruct(Downloader *this__, const std::string &srcUrl_, const std::string &customId_, const StreamData &buffer_, const ProgressData &data_)
@@ -197,13 +197,13 @@ protected:
 	  return NULL;
 	}
     void download(const std::string &srcUrl, const std::string &customId, const FileDescriptor &fDesc, const ProgressData &data);
-    
+ 
     void groupBatchDownload(const DownloadUnits &units);
-
+#endif   
     void notifyError(ErrorCode code, const std::string &msg = "", const std::string &customId = "", int curle_code = 0, int curlm_code = 0);
-    
+#if 0    
     void notifyError(const std::string &msg, int curlm_code, const std::string &customId = "");
-    
+#endif    
     void notifyError(const std::string &msg, const std::string &customId, int curle_code);
 
 private:

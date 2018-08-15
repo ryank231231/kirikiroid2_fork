@@ -88,13 +88,13 @@ public:
     /* @brief To access within scripting environment
      */
     static AssetsManager* create(const char* packageUrl, const char* versionFileUrl, const char* storagePath, ErrorCallback errorCallback, ProgressCallback progressCallback, SuccessCallback successCallback );
-
+#if 0
     /* @brief Check out if there is a new version resource.
      *        You may use this method before updating, then let user determine whether
      *        he wants to update resources.
      */
     virtual bool checkUpdate();
-    
+#endif    
     using Node::update;
     /* @brief Download new package if there is a new version, and uncompress downloaded zip file.
      *        Ofcourse it will set search path that stores downloaded files.
@@ -161,17 +161,21 @@ public:
     friend int assetsManagerProgressFunc(void *, double, double, double, double);
 
 protected:
+#if 0
     bool downLoad();
-    void checkStoragePath();
+#endif
+	void checkStoragePath();
     bool uncompress();
     bool createDirectory(const char *path);
     void setSearchPath();
+#if 0
     void downloadAndUncompress();
 	static void* downloadAndUncompress_entry(void *pthis) {
 	  AssetsManager *obj = static_cast<AssetsManager *>(pthis);
 	  obj->downloadAndUncompress();
 	  return NULL;
 	}
+#endif
 
 private:
     /** @brief Initializes storage path.

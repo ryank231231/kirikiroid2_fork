@@ -58,11 +58,11 @@ extern "C"
 #if CC_USE_PNG
 #include "png.h"
 #endif //CC_USE_PNG
-
+#if 0
 #if CC_USE_TIFF
 #include "tiffio.h"
 #endif //CC_USE_TIFF
-
+#endif
 #include "base/etc1.h"
     
 #if CC_USE_JPEG
@@ -1173,7 +1173,7 @@ bool Image::initWithPngData(const unsigned char * data, ssize_t dataLen)
     return false;
 #endif //CC_USE_PNG
 }
-
+#if 0
 #if CC_USE_TIFF
 namespace
 {
@@ -1285,9 +1285,10 @@ namespace
     }
 }
 #endif // CC_USE_TIFF
-
+#endif
 bool Image::initWithTiffData(const unsigned char * data, ssize_t dataLen)
 {
+#if 0
 #if defined(CC_USE_WIC)
     return decodeWithWIC(data, dataLen);
 #elif defined(CC_USE_TIFF)
@@ -1352,6 +1353,10 @@ bool Image::initWithTiffData(const unsigned char * data, ssize_t dataLen)
     CCLOG("tiff is not enabled, please enable it in ccConfig.h");
     return false;
 #endif //CC_USE_TIFF
+#else
+	CCLOG("tiff is not enabled, please enable it in ccConfig.h");
+    return false;
+#endif
 }
 
 namespace

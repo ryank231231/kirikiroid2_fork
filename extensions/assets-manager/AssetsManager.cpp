@@ -23,8 +23,10 @@
  ****************************************************************************/
 #include "AssetsManager.h"
 
+#if 0
 #include <curl/curl.h>
 #include <curl/easy.h>
+#endif
 #include <stdio.h>
 #include <vector>
 #include <pthread.h>
@@ -142,11 +144,11 @@ static size_t getVersionCode(void *ptr, size_t size, size_t nmemb, void *userdat
     
     return (size * nmemb);
 }
-
+#if 0 
 bool AssetsManager::checkUpdate()
-{
+{ 
     if (_versionFileUrl.size() == 0) return false;
-    
+  
     _curl = curl_easy_init();
     if (! _curl)
     {
@@ -251,6 +253,7 @@ void AssetsManager::downloadAndUncompress()
     
     _isDownloading = false;
 }
+#endif
 
 void AssetsManager::update()
 {
@@ -268,7 +271,7 @@ void AssetsManager::update()
         _isDownloading = false;
         return;
     }
-    
+#if 0    
     // Check if there is a new version.
     if (! checkUpdate())
     {
@@ -282,6 +285,9 @@ void AssetsManager::update()
     pthread_t t;
 	pthread_create(&t, NULL, &AssetsManager::downloadAndUncompress_entry, this);
     pthread_detach(t);
+#else
+	_isDownloading = false;
+#endif
 }
 
 bool AssetsManager::uncompress()
@@ -513,7 +519,7 @@ int assetsManagerProgressFunc(void *ptr, double totalToDownload, double nowDownl
     
     return 0;
 }
-
+#if 0
 bool AssetsManager::downLoad()
 {
     // Create a file to save package.
@@ -560,7 +566,7 @@ bool AssetsManager::downLoad()
     fclose(fp);
     return true;
 }
-
+#endif
 const char* AssetsManager::getPackageUrl() const
 {
     return _packageUrl.c_str();
