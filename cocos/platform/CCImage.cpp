@@ -74,9 +74,11 @@ extern "C"
 #include "base/pvr.h"
 #include "base/TGAlib.h"
 
+#if 0
 #if CC_USE_WEBP
 #include "decode.h"
 #endif // CC_USE_WEBP
+#endif
 
 #include "base/ccMacros.h"
 #include "CCCommon.h"
@@ -2139,6 +2141,7 @@ bool Image::initWithPVRData(const unsigned char * data, ssize_t dataLen)
 
 bool Image::initWithWebpData(const unsigned char * data, ssize_t dataLen)
 {
+#if 0
 #if CC_USE_WEBP
 	bool ret = false;
 
@@ -2183,6 +2186,10 @@ bool Image::initWithWebpData(const unsigned char * data, ssize_t dataLen)
     CCLOG("webp is not enabled, please enable it in ccConfig.h");
     return false;
 #endif // CC_USE_WEBP
+#else
+    CCLOG("webp is not enabled, please enable it in ccConfig.h");
+    return false;
+#endif
 }
 
 
