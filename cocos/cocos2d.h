@@ -165,11 +165,13 @@ THE SOFTWARE.
 #include "renderer/CCTrianglesCommand.h"
 
 // physics
+#if 0
 #include "physics/CCPhysicsBody.h"
 #include "physics/CCPhysicsContact.h"
 #include "physics/CCPhysicsShape.h"
 #include "physics/CCPhysicsJoint.h"
 #include "physics/CCPhysicsWorld.h"
+#endif
 
 // platform
 #include "platform/CCDevice.h"
