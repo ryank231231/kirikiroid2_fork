@@ -51,6 +51,9 @@ void TVPInGameMenuForm::initMenu(const std::string& title, tTJSNI_MenuItem *item
 	int idx = 0;
 	ttstr seperator = TJS::TJSMapGlobalStringMap(TJS_W("-"));
 	for (int i = 0; i < count; ++i) {
+		if (i == 5) {
+			OutputDebugStringA("----------------bp \n");
+		}
 		tTJSNI_MenuItem *subitem = static_cast<tTJSNI_MenuItem*>(item->GetChildren().at(i));
 		ttstr caption; subitem->GetCaption(caption);
 		if (caption.IsEmpty() || caption == TJS_W("+")) continue;
@@ -88,6 +91,7 @@ cocos2d::ui::Widget * TVPInGameMenuForm::createMenuItem(int idx, tTJSNI_MenuItem
 			item->_setter = setter;
 		});
 	} else if(caption == "-") {
+#if 0
 		CSBReader reader;
 		Widget * root = static_cast<Widget*>(reader.Load("ui/comctrl/SeperateItem.csb"));
 		Size rootsize = root->getContentSize();
@@ -95,6 +99,10 @@ cocos2d::ui::Widget * TVPInGameMenuForm::createMenuItem(int idx, tTJSNI_MenuItem
 		root->setContentSize(rootsize);
 		ui::Helper::doLayout(root);
 		return root;
+#else
+		//TODO:FIXME: I don't know why crash in cocos2d-x 3.6
+		ret = CreatePreferenceItem<tPreferenceItemSubDir>(idx, size, "------------------------");
+#endif
 	} else {
 		ret = CreatePreferenceItem<tPreferenceItemConstant>(idx, size, caption);
 		ret->addClickEventListener([=](Ref*){
