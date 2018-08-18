@@ -49,9 +49,6 @@
     <Filter Include="external\xxhash">
       <UniqueIdentifier>{b4e2b1e5-2d79-44a3-af45-728d47b7bdb2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="storage">
-      <UniqueIdentifier>{44bdf58f-4af2-433c-b4af-58dc05ef96b5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="3d">
       <UniqueIdentifier>{63733c51-582a-4f0f-9a82-e066da459a72}</UniqueIdentifier>
     </Filter>
@@ -729,9 +726,6 @@
     </ClCompile>
     <ClCompile Include="CCFastTMXTiledMap.cpp">
       <Filter>2d</Filter>
-    </ClCompile>
-    <ClCompile Include="..\storage\local-storage\LocalStorage.cpp">
-      <Filter>storage</Filter>
     </ClCompile>
     <ClCompile Include="..\platform\CCGLView.cpp">
       <Filter>platform</Filter>
@@ -1874,9 +1868,6 @@
     </ClInclude>
     <ClInclude Include="CCFastTMXLayer.h">
       <Filter>2d</Filter>
-    </ClInclude>
-    <ClInclude Include="..\storage\local-storage\LocalStorage.h">
-      <Filter>storage</Filter>
     </ClInclude>
     <ClInclude Include="..\platform\CCGLView.h">
       <Filter>platform</Filter>
