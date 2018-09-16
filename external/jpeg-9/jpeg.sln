@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "jpeg", "jpeg.vcxproj", "{E98F2F9F-68DB-ED6B-7DBB-9D7F768FFD04}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E98F2F9F-68DB-ED6B-7DBB-9D7F768FFD04}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E98F2F9F-68DB-ED6B-7DBB-9D7F768FFD04}.Debug|Win32.Build.0 = Debug|Win32
+		{E98F2F9F-68DB-ED6B-7DBB-9D7F768FFD04}.Release|Win32.ActiveCfg = Release|Win32
+		{E98F2F9F-68DB-ED6B-7DBB-9D7F768FFD04}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
