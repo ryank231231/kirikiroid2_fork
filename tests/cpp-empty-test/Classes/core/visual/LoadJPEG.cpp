@@ -38,6 +38,7 @@ bool TVPAcceptSaveAsJPG(void* formatdata, const ttstr & type, class iTJSDispatch
 	return result;
 }
 
+#ifndef _MSC_VER
 extern "C"
 {
 #include <turbojpeg.h>
@@ -47,6 +48,12 @@ extern "C"
 #include <jerror.h>
 }
 #define TVP_USE_TURBO_JPEG_API
+#else
+extern "C"
+{
+#include <jpeglib.h>
+}
+#endif
 //---------------------------------------------------------------------------
 // JPEG loading handler
 //---------------------------------------------------------------------------
@@ -113,9 +120,11 @@ fill_input_buffer(j_decompress_ptr cinfo)
 
   if(nbytes <= 0)
   {
+#ifndef _MSC_VER
 	if(src->start_of_file)
 		ERREXIT(cinfo, JERR_INPUT_EMPTY);
 	WARNMS(cinfo, JWRN_JPEG_EOF);
+#endif
 
     src->buffer[0] = (JOCTET) 0xFF;
 	src->buffer[1] = (JOCTET) JPEG_EOI;
@@ -273,10 +282,12 @@ void TVPLoadJPEG(void* formatdata, void *callbackdata, tTVPGraphicSizeCallback s
 	// error handling
 	cinfo.err = jpeg_std_error(&jerr.pub);
 	jerr.pub.error_exit = my_error_exit;
+	/*
 	jerr.pub.emit_message = my_emit_message;
 	jerr.pub.output_message = my_output_message;
 	jerr.pub.format_message = my_format_message;
 	jerr.pub.reset_error_mgr = my_reset_error_mgr;
+	*/
 
 	// create decompress object
 	jpeg_create_decompress(&cinfo);
@@ -312,7 +323,8 @@ void TVPLoadJPEG(void* formatdata, void *callbackdata, tTVPGraphicSizeCallback s
 
 	try
 	{
-		sizecallback(callbackdata, cinfo.output_width, cinfo.output_height);
+		sizecallback(callbackdata, cinfo.output_width, cinfo.output_height, gpfRGB);
+
 		if( mode == glmNormal && cinfo.out_color_space == JCS_RGB ) {
 			buffer = new JSAMPROW[cinfo.output_height];
 			for( unsigned int i = 0; i < cinfo.output_height; i++ ) {
@@ -552,7 +564,11 @@ void TVPSaveAsJPG(void* formatdata, tTJSBinaryStream* dst, const iTVPBaseBitmap*
 		cinfo.image_width = width;
 		cinfo.image_height = height;
 		cinfo.input_components = 4;
+#ifndef _MSC_VER
 		cinfo.in_color_space = JCS_EXT_RGBX;//JCS_RGB;
+#else
+		cinfo.in_color_space = JCS_RGB;
+#endif
 		cinfo.dct_method = opt.dct_method; //JDCT_ISLOW;
 		jpeg_set_defaults( &cinfo );
 		jpeg_set_quality( &cinfo, opt.quality, TRUE );
