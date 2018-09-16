@@ -95,13 +95,11 @@
 xcopy /Y /Q "$(ProjectDir)..\..\external\freetype2\prebuilt\win32\*.*" "$(OutDir)"
 xcopy /Y /Q "$(ProjectDir)..\..\external\glfw3\prebuilt\win32\*.*" "$(OutDir)"
 xcopy /Y /Q "$(ProjectDir)..\..\external\jpeg\prebuilt\win32\*.*" "$(OutDir)"
-xcopy /Y /Q "$(ProjectDir)..\..\external\png\prebuilt\win32\*.*" "$(OutDir)"
-xcopy /Y /Q "$(ProjectDir)..\..\external\win32-specific\zlib\prebuilt\*.*" "$(OutDir)"
 xcopy /Y /Q "$(ProjectDir)..\..\external\win32-specific\gles\prebuilt\*.*" "$(OutDir)"</Command>
     </PreLinkEvent>
     <Link>
       <OutputFile>$(OutDir)$(ProjectName).dll</OutputFile>
-      <AdditionalLibraryDirectories>$(OutDir);$(EngineRoot)external\boost_1_55_0\lib32-msvc-10.0;$(EngineRoot)external\pthreads;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir);$(EngineRoot)external\pthreads;$(EngineRoot)external\zlib-1.2.5\Debug;$(EngineRoot)external\libpng-1.4.5\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>libcmtd.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>

@@ -86,7 +86,7 @@
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
-      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)$(Configuration).win32;..\Classes\core\external\lib;..\Classes\core\external\onig\lib;..\Classes\core\external\libjpeg-turbo\vcproj\lib\Win32;..\Classes\core\external\opencv2\lib;..\..\..\external\pthreads;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)$(Configuration).win32;..\Classes\core\external\lib;..\Classes\core\external\onig\lib;..\Classes\core\external\libjpeg-turbo\vcproj\lib\Win32;..\Classes\core\external\opencv2\lib;..\..\..\external\pthreads;..\..\..\external\zlib-1.2.5\Debug;..\..\..\external\libpng-1.4.5\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
