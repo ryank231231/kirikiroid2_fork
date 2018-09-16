@@ -1,5 +1,12 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libpng", "..\external\libpng-1.4.5\libpng.vcxproj", "{62A18D01-9195-529F-BE39-C68A4EF18E38}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5E990CB7-98AE-C493-54E9-421828CBDD22} = {5E990CB7-98AE-C493-54E9-421828CBDD22}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "..\external\zlib-1.2.5\zlib.vcxproj", "{5E990CB7-98AE-C493-54E9-421828CBDD22}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cpp-empty-test", "..\tests\cpp-empty-test\proj.win32\cpp-empty-test.vcxproj", "{B8BF9E81-35FD-4582-BA1C-B85FA365BABB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcocos2d", "..\cocos\2d\libcocos2d.vcxproj", "{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}"
@@ -7,45 +14,28 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcocos2d", "..\cocos\2d\l
 		{62A18D01-9195-529F-BE39-C68A4EF18E38} = {62A18D01-9195-529F-BE39-C68A4EF18E38}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "..\external\zlib-1.2.5\zlib.vcxproj", "{5E990CB7-98AE-C493-54E9-421828CBDD22}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libpng", "..\external\libpng-1.4.5\libpng.vcxproj", "{62A18D01-9195-529F-BE39-C68A4EF18E38}"
-	ProjectSection(ProjectDependencies) = postProject
-		{5E990CB7-98AE-C493-54E9-421828CBDD22} = {5E990CB7-98AE-C493-54E9-421828CBDD22}
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|ARM = Debug|ARM
 		Debug|Win32 = Debug|Win32
-		Release|ARM = Release|ARM
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B8BF9E81-35FD-4582-BA1C-B85FA365BABB}.Debug|ARM.ActiveCfg = Debug|Win32
-		{B8BF9E81-35FD-4582-BA1C-B85FA365BABB}.Debug|Win32.ActiveCfg = Debug|Win32
-		{B8BF9E81-35FD-4582-BA1C-B85FA365BABB}.Debug|Win32.Build.0 = Debug|Win32
-		{B8BF9E81-35FD-4582-BA1C-B85FA365BABB}.Release|ARM.ActiveCfg = Release|Win32
-		{B8BF9E81-35FD-4582-BA1C-B85FA365BABB}.Release|Win32.ActiveCfg = Release|Win32
-		{B8BF9E81-35FD-4582-BA1C-B85FA365BABB}.Release|Win32.Build.0 = Release|Win32
-		{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}.Debug|ARM.ActiveCfg = Debug|Win32
-		{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}.Debug|Win32.ActiveCfg = Debug|Win32
-		{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}.Debug|Win32.Build.0 = Debug|Win32
-		{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}.Release|ARM.ActiveCfg = Release|Win32
-		{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}.Release|Win32.ActiveCfg = Release|Win32
-		{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}.Release|Win32.Build.0 = Release|Win32
-		{5E990CB7-98AE-C493-54E9-421828CBDD22}.Debug|ARM.ActiveCfg = Debug|Win32
 		{5E990CB7-98AE-C493-54E9-421828CBDD22}.Debug|Win32.ActiveCfg = Debug|Win32
 		{5E990CB7-98AE-C493-54E9-421828CBDD22}.Debug|Win32.Build.0 = Debug|Win32
-		{5E990CB7-98AE-C493-54E9-421828CBDD22}.Release|ARM.ActiveCfg = Release|Win32
 		{5E990CB7-98AE-C493-54E9-421828CBDD22}.Release|Win32.ActiveCfg = Release|Win32
 		{5E990CB7-98AE-C493-54E9-421828CBDD22}.Release|Win32.Build.0 = Release|Win32
-		{62A18D01-9195-529F-BE39-C68A4EF18E38}.Debug|ARM.ActiveCfg = Debug|Win32
 		{62A18D01-9195-529F-BE39-C68A4EF18E38}.Debug|Win32.ActiveCfg = Debug|Win32
 		{62A18D01-9195-529F-BE39-C68A4EF18E38}.Debug|Win32.Build.0 = Debug|Win32
-		{62A18D01-9195-529F-BE39-C68A4EF18E38}.Release|ARM.ActiveCfg = Release|Win32
 		{62A18D01-9195-529F-BE39-C68A4EF18E38}.Release|Win32.ActiveCfg = Release|Win32
 		{62A18D01-9195-529F-BE39-C68A4EF18E38}.Release|Win32.Build.0 = Release|Win32
+		{B8BF9E81-35FD-4582-BA1C-B85FA365BABB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B8BF9E81-35FD-4582-BA1C-B85FA365BABB}.Debug|Win32.Build.0 = Debug|Win32
+		{B8BF9E81-35FD-4582-BA1C-B85FA365BABB}.Release|Win32.ActiveCfg = Release|Win32
+		{B8BF9E81-35FD-4582-BA1C-B85FA365BABB}.Release|Win32.Build.0 = Release|Win32
+		{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}.Debug|Win32.Build.0 = Debug|Win32
+		{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}.Release|Win32.ActiveCfg = Release|Win32
+		{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

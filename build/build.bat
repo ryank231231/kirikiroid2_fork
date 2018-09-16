@@ -3,5 +3,6 @@
 @call vcvarsall.bat
 ::Rebuild
 @MSBuild cocos2d-win32.vc2010.sln /t:Build /p:Configuration=Debug /p:Platform=win32
+::@cmd
 @pause
 
