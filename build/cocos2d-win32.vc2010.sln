@@ -1,17 +1,17 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libpng", "..\external\libpng-1.4.5\libpng.vcxproj", "{62A18D01-9195-529F-BE39-C68A4EF18E38}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libpng", "..\external\libpng-1.4.5\libpng.vcxproj", "{D118AC49-9504-9100-BC90-57B4201D6820}"
 	ProjectSection(ProjectDependencies) = postProject
-		{5E990CB7-98AE-C493-54E9-421828CBDD22} = {5E990CB7-98AE-C493-54E9-421828CBDD22}
+		{8B646469-DA26-B72E-1895-CC4AEBD3EC11} = {8B646469-DA26-B72E-1895-CC4AEBD3EC11}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "..\external\zlib-1.2.5\zlib.vcxproj", "{5E990CB7-98AE-C493-54E9-421828CBDD22}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "..\external\zlib-1.2.5\zlib.vcxproj", "{8B646469-DA26-B72E-1895-CC4AEBD3EC11}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cpp-empty-test", "..\tests\cpp-empty-test\proj.win32\cpp-empty-test.vcxproj", "{B8BF9E81-35FD-4582-BA1C-B85FA365BABB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcocos2d", "..\cocos\2d\libcocos2d.vcxproj", "{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}"
 	ProjectSection(ProjectDependencies) = postProject
-		{62A18D01-9195-529F-BE39-C68A4EF18E38} = {62A18D01-9195-529F-BE39-C68A4EF18E38}
+		{D118AC49-9504-9100-BC90-57B4201D6820} = {D118AC49-9504-9100-BC90-57B4201D6820}
 	EndProjectSection
 EndProject
 Global
@@ -20,14 +20,14 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5E990CB7-98AE-C493-54E9-421828CBDD22}.Debug|Win32.ActiveCfg = Debug|Win32
-		{5E990CB7-98AE-C493-54E9-421828CBDD22}.Debug|Win32.Build.0 = Debug|Win32
-		{5E990CB7-98AE-C493-54E9-421828CBDD22}.Release|Win32.ActiveCfg = Release|Win32
-		{5E990CB7-98AE-C493-54E9-421828CBDD22}.Release|Win32.Build.0 = Release|Win32
-		{62A18D01-9195-529F-BE39-C68A4EF18E38}.Debug|Win32.ActiveCfg = Debug|Win32
-		{62A18D01-9195-529F-BE39-C68A4EF18E38}.Debug|Win32.Build.0 = Debug|Win32
-		{62A18D01-9195-529F-BE39-C68A4EF18E38}.Release|Win32.ActiveCfg = Release|Win32
-		{62A18D01-9195-529F-BE39-C68A4EF18E38}.Release|Win32.Build.0 = Release|Win32
+		{D118AC49-9504-9100-BC90-57B4201D6820}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D118AC49-9504-9100-BC90-57B4201D6820}.Debug|Win32.Build.0 = Debug|Win32
+		{D118AC49-9504-9100-BC90-57B4201D6820}.Release|Win32.ActiveCfg = Release|Win32
+		{D118AC49-9504-9100-BC90-57B4201D6820}.Release|Win32.Build.0 = Release|Win32
+		{8B646469-DA26-B72E-1895-CC4AEBD3EC11}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8B646469-DA26-B72E-1895-CC4AEBD3EC11}.Debug|Win32.Build.0 = Debug|Win32
+		{8B646469-DA26-B72E-1895-CC4AEBD3EC11}.Release|Win32.ActiveCfg = Release|Win32
+		{8B646469-DA26-B72E-1895-CC4AEBD3EC11}.Release|Win32.Build.0 = Release|Win32
 		{B8BF9E81-35FD-4582-BA1C-B85FA365BABB}.Debug|Win32.ActiveCfg = Debug|Win32
 		{B8BF9E81-35FD-4582-BA1C-B85FA365BABB}.Debug|Win32.Build.0 = Debug|Win32
 		{B8BF9E81-35FD-4582-BA1C-B85FA365BABB}.Release|Win32.ActiveCfg = Release|Win32

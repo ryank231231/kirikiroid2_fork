@@ -1,3 +1,35 @@
 ImageInfo *imageInfo = new (std::nothrow) ImageInfo();
 
 atomic,chrono,date_time,math,regex,system,thread
+
+-----------------------
+(2) 
+F:\github2\kirikiroid2_fork\tests\cpp-empty-test\Classes\core\visual\LoadJPEG.cpp
+TVPLoadJPEG
+
+
+TVP_USE_TURBO_JPEG_API
+
+
+#ifndef _MSC_VER
+extern "C"
+{
+#include <turbojpeg.h>
+#define XMD_H
+#include <jinclude.h>
+#include <jpeglib.h>
+#include <jerror.h>
+}
+#define TVP_USE_TURBO_JPEG_API
+#else
+extern "C"
+{
+#include <jpeglib.h>
+}
+#endif
+//---------------------------------------------------------------------------
+// JPEG loading handler
+//---------------------------------------------------------------------------
+
+
+-----------------------------

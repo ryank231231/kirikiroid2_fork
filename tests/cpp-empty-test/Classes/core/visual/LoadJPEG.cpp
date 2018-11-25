@@ -282,11 +282,11 @@ void TVPLoadJPEG(void* formatdata, void *callbackdata, tTVPGraphicSizeCallback s
 	// error handling
 	cinfo.err = jpeg_std_error(&jerr.pub);
 	jerr.pub.error_exit = my_error_exit;
-	/*
 	jerr.pub.emit_message = my_emit_message;
 	jerr.pub.output_message = my_output_message;
 	jerr.pub.format_message = my_format_message;
 	jerr.pub.reset_error_mgr = my_reset_error_mgr;
+	/*
 	*/
 
 	// create decompress object
@@ -306,9 +306,10 @@ void TVPLoadJPEG(void* formatdata, void *callbackdata, tTVPGraphicSizeCallback s
 		cinfo.do_fancy_upsampling = FALSE;
 		break;
 	case jlpMedium:
-		//cinfo.dct_method = JDCT_IFAST;
-		cinfo.dct_method = JDCT_ISLOW;
-		cinfo.do_fancy_upsampling = TRUE;
+		//cinfo.dct_method = JDCT_ISLOW;
+		//cinfo.do_fancy_upsampling = TRUE;
+		cinfo.dct_method = JDCT_IFAST;
+		cinfo.do_fancy_upsampling = FALSE;
 		break;
 	case jlpHigh:
 		cinfo.dct_method = JDCT_FLOAT;
@@ -316,30 +317,96 @@ void TVPLoadJPEG(void* formatdata, void *callbackdata, tTVPGraphicSizeCallback s
 		break;
 	}
 
-	if(mode == glmGrayscale) cinfo.out_color_space =  JCS_GRAYSCALE;
+	if(mode == glmGrayscale) 
+	{
+		cinfo.out_color_space =  JCS_GRAYSCALE;
+	}
 
 	// start decompression
 	jpeg_start_decompress(&cinfo);
 
+	int skip_jpeg_finish = 0;
 	try
 	{
 		sizecallback(callbackdata, cinfo.output_width, cinfo.output_height, gpfRGB);
 
 		if( mode == glmNormal && cinfo.out_color_space == JCS_RGB ) {
-			buffer = new JSAMPROW[cinfo.output_height];
-			for( unsigned int i = 0; i < cinfo.output_height; i++ ) {
-				buffer[i] = (JSAMPLE*)scanlinecallback(callbackdata, i);
+#if 1			
+			if (0)
+			{
+				//FIXME:old implement, not suitable
+				//FIXME:old code, not suitable for 32bit color array
+				buffer = new JSAMPROW[cinfo.output_height];
+				for( unsigned int i = 0; i < cinfo.output_height; i++ ) {
+					buffer[i] = (JSAMPLE*)scanlinecallback(callbackdata, i);
+				}
+
+				while( cinfo.output_scanline < cinfo.output_height ) {
+					jpeg_read_scanlines( &cinfo, buffer + cinfo.output_scanline, cinfo.output_height - cinfo.output_scanline );
+				}
+				delete[] buffer;
 			}
-			while( cinfo.output_scanline < cinfo.output_height ) {
-				jpeg_read_scanlines( &cinfo, buffer + cinfo.output_scanline, cinfo.output_height - cinfo.output_scanline );
+			else
+			{
+				//FIXME:buffer_line added
+				JSAMPARRAY buffer_line = new JSAMPROW[1];
+				buffer_line[0] = new unsigned char[cinfo.output_width*sizeof(tjs_uint32)];
+
+				for( int y = 0; y < cinfo.output_height; y++ ) {
+					//FIXME:buffer_line added
+					memset(buffer_line[0], 0x00, cinfo.output_width*sizeof(tjs_uint32));
+					jpeg_read_scanlines( &cinfo, buffer_line, 1);
+					//if (y > 2) break;
+					void *scanline = scanlinecallback(callbackdata, y);
+					unsigned char *p = (unsigned char*)scanline;//(unsigned char*)(buffer + y);
+					for (int x = 0; x < cinfo.output_width; ++x)
+					{
+						p[x * 4 + 0] = buffer_line[0][x * 3 + 0]; //red
+						p[x * 4 + 1] = buffer_line[0][x * 3 + 1]; //green
+						p[x * 4 + 2] = buffer_line[0][x * 3 + 2]; //blue
+						p[x * 4 + 3] = 0xff; //alpha(no effect)
+					}
+				}
+			
+				//FIXME:buffer_line added
+				delete[] buffer_line[0];
+				delete[] buffer_line;			
+			
+				skip_jpeg_finish = 1;
 			}
-			delete[] buffer;
+			
 			for( unsigned int i = 0; i < cinfo.output_height; i++ ) {
 				scanlinecallback(callbackdata, i);
 				scanlinecallback(callbackdata, -1);
 			}
-		} else
-		{
+#else
+			//FIXME:only test code
+			for( int y = 0; y < cinfo.output_height; y++ ) {
+				void *scanline = scanlinecallback(callbackdata, y);
+				if(!scanline) break;
+				if (0)
+				{
+					memset( scanline, 0xCC, cinfo.output_width*sizeof(tjs_uint32) );
+				}
+				else
+				{
+					unsigned char *p = (unsigned char*)scanline;
+					for (int x = 0; x < cinfo.output_width; ++x)
+					{
+						p[x * 4 + 0] = 0x00; //red
+						p[x * 4 + 1] = 0x00; //green
+						p[x * 4 + 2] = 0x00; //blue
+						p[x * 4 + 3] = 0xff; //alpha(no effect)
+					}
+				}
+				scanlinecallback(callbackdata, -1);
+			}
+			//__debugbreak();
+			skip_jpeg_finish = 1;
+#endif
+		} 
+		else
+	    {
 			buffer = (*cinfo.mem->alloc_sarray)
 				((j_common_ptr) &cinfo, JPOOL_IMAGE,
 					cinfo.output_width * cinfo.output_components + 3,
@@ -396,8 +463,11 @@ void TVPLoadJPEG(void* formatdata, void *callbackdata, tTVPGraphicSizeCallback s
 		__debugbreak(); throw;
 	}
 
-	jpeg_finish_decompress(&cinfo);
-	jpeg_destroy_decompress(&cinfo);
+	if (!skip_jpeg_finish)
+	{
+		jpeg_finish_decompress(&cinfo);
+		jpeg_destroy_decompress(&cinfo);
+	}
 #endif
 }
 //---------------------------------------------------------------------------
