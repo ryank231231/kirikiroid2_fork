@@ -1,0 +1,40 @@
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "public: virtual __thiscall cv::Exception::~Exception(void)" (??1Exception@cv@@UAE@XZ)，该符号在函数 "public: __thiscall cv::Mat::Mat(int,int,int,void *,unsigned int)" (??0Mat@cv@@QAE@HHHPAXI@Z) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "void __cdecl cv::error(class cv::Exception const &)" (?error@cv@@YAXABVException@1@@Z)，该符号在函数 "public: __thiscall cv::Mat::Mat(int,int,int,void *,unsigned int)" (??0Mat@cv@@QAE@HHHPAXI@Z) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "public: __thiscall cv::Exception::Exception(int,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,int)" (??0Exception@cv@@QAE@HABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@00H@Z)，该符号在函数 "public: __thiscall cv::Mat::Mat(int,int,int,void *,unsigned int)" (??0Mat@cv@@QAE@HHHPAXI@Z) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "void __cdecl cv::fastFree(void *)" (?fastFree@cv@@YAXPAX@Z)，该符号在函数 "public: __thiscall cv::Mat::~Mat(void)" (??1Mat@cv@@QAE@XZ) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "public: void __thiscall cv::Mat::copySize(class cv::Mat const &)" (?copySize@Mat@cv@@QAEXABV12@@Z)，该符号在函数 "public: class cv::Mat & __thiscall cv::Mat::operator=(class cv::Mat const &)" (??4Mat@cv@@QAEAAV01@ABV01@@Z) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "int __cdecl cv::_interlockedExchangeAdd(int *,int)" (?_interlockedExchangeAdd@cv@@YAHPAHH@Z)，该符号在函数 "public: class cv::Mat & __thiscall cv::Mat::operator=(class cv::Mat const &)" (??4Mat@cv@@QAEAAV01@ABV01@@Z) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "public: void __thiscall cv::Mat::deallocate(void)" (?deallocate@Mat@cv@@QAEXXZ)，该符号在函数 "public: void __thiscall cv::Mat::release(void)" (?release@Mat@cv@@QAEXXZ) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "void __cdecl cv::resize(class cv::_InputArray const &,class cv::_OutputArray const &,class cv::Size_<int>,double,double,int)" (?resize@cv@@YAXABV_InputArray@1@ABV_OutputArray@1@V?$Size_@H@1@NNH@Z)，该符号在函数 "public: void __thiscall tTVPSoftwareRenderManager::OperateRect(class iTVPRenderMethod *,class iTVPTexture2D *,struct tTVPRect,class iTVPTexture2D *,struct tTVPRect)" (?OperateRect@tTVPSoftwareRenderManager@@QAEXPAViTVPRenderMethod@@PAViTVPTexture2D@@UtTVPRect@@12@Z) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "public: __thiscall cv::_InputArray::_InputArray(class cv::Mat const &)" (??0_InputArray@cv@@QAE@ABVMat@1@@Z)，该符号在函数 "public: void __thiscall tTVPSoftwareRenderManager::OperateRect(class iTVPRenderMethod *,class iTVPTexture2D *,struct tTVPRect,class iTVPTexture2D *,struct tTVPRect)" (?OperateRect@tTVPSoftwareRenderManager@@QAEXPAViTVPRenderMethod@@PAViTVPTexture2D@@UtTVPRect@@12@Z) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "public: __thiscall cv::_OutputArray::_OutputArray(class cv::Mat &)" (??0_OutputArray@cv@@QAE@AAVMat@1@@Z)，该符号在函数 "public: void __thiscall tTVPSoftwareRenderManager::OperateRect(class iTVPRenderMethod *,class iTVPTexture2D *,struct tTVPRect,class iTVPTexture2D *,struct tTVPRect)" (?OperateRect@tTVPSoftwareRenderManager@@QAEXPAViTVPRenderMethod@@PAViTVPTexture2D@@UtTVPRect@@12@Z) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "void __cdecl cv::warpPerspective(class cv::_InputArray const &,class cv::_OutputArray const &,class cv::_InputArray const &,class cv::Size_<int>,int,int,class cv::Scalar_<double> const &)" (?warpPerspective@cv@@YAXABV_InputArray@1@ABV_OutputArray@1@0V?$Size_@H@1@HHABV?$Scalar_@N@1@@Z)，该符号在函数 "public: virtual void __thiscall tTVPSoftwareRenderManager::OperateTriangles(class iTVPRenderMethod *,int,class iTVPTexture2D *,class iTVPTexture2D *,struct tTVPRect const &,struct tTVPPointD const *,class tRenderTextureArray<struct tTVPPointD const *> const &)" (?OperateTriangles@tTVPSoftwareRenderManager@@UAEXPAViTVPRenderMethod@@HPAViTVPTexture2D@@1ABUtTVPRect@@PBUtTVPPointD@@ABV?$tRenderTextureArray@PBUtTVPPointD@@@@@Z) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "class cv::Mat __cdecl cv::getPerspectiveTransform(class cv::Point_<float> const * const,class cv::Point_<float> const * const)" (?getPerspectiveTransform@cv@@YA?AVMat@1@QBV?$Point_@M@1@0@Z)，该符号在函数 "public: virtual void __thiscall tTVPSoftwareRenderManager::OperateTriangles(class iTVPRenderMethod *,int,class iTVPTexture2D *,class iTVPTexture2D *,structtTVPRect const &,struct tTVPPointD const *,class tRenderTextureArray<struct tTVPPointD const *> const &)" (?OperateTriangles@tTVPSoftwareRenderManager@@UAEXPAViTVPRenderMethod@@HPAViTVPTexture2D@@1ABUtTVPRect@@PBUtTVPPointD@@ABV?$tRenderTextureArray@PBUtTVPPointD@@@@@Z) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "void __cdecl cv::warpAffine(class cv::_InputArray const &,class cv::_OutputArray const &,class cv::_InputArray const &,class cv::Size_<int>,int,int,class cv::Scalar_<double> const &)" (?warpAffine@cv@@YAXABV_InputArray@1@ABV_OutputArray@1@0V?$Size_@H@1@HHABV?$Scalar_@N@1@@Z)，该符号在函数 "public: virtual void __thiscall tTVPSoftwareRenderManager::OperateTriangles(class iTVPRenderMethod *,int,class iTVPTexture2D *,class iTVPTexture2D *,struct tTVPRect const &,struct tTVPPointD const *,class tRenderTextureArray<struct tTVPPointD const *> const &)" (?OperateTriangles@tTVPSoftwareRenderManager@@UAEXPAViTVPRenderMethod@@HPAViTVPTexture2D@@1ABUtTVPRect@@PBUtTVPPointD@@ABV?$tRenderTextureArray@PBUtTVPPointD@@@@@Z) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "class cv::Mat __cdecl cv::getAffineTransform(class cv::Point_<float> const * const,class cv::Point_<float> const * const)" (?getAffineTransform@cv@@YA?AVMat@1@QBV?$Point_@M@1@0@Z)，该符号在函数 "public: virtual void __thiscall tTVPSoftwareRenderManager::OperateTriangles(class iTVPRenderMethod *,int,class iTVPTexture2D *,class iTVPTexture2D *,struct tTVPRect const &,struct tTVPPointD const *,class tRenderTextureArray<struct tTVPPointD const *> const &)" (?OperateTriangles@tTVPSoftwareRenderManager@@UAEXPAViTVPRenderMethod@@HPAViTVPTexture2D@@1ABUtTVPRect@@PBUtTVPPointD@@ABV?$tRenderTextureArray@PBUtTVPPointD@@@@@Z) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "void __cdecl cv::boxFilter(class cv::_InputArray const &,class cv::_OutputArray const &,int,class cv::Size_<int>,class cv::Point_<int>,bool,int)" (?boxFilter@cv@@YAXABV_InputArray@1@ABV_OutputArray@1@HV?$Size_@H@1@V?$Point_@H@1@_NH@Z)，该符号在函数 "public: virtual void __thiscall tTVPRenderMethod_DoBoxBlur<struct TDoBoxBlurLoop<struct tTVPARGB<unsigned short> >,struct TDoBoxBlurLoop<struct tTVPARGB<unsigned int> > >::DoRender(class iTVPTexture2D *,struct tTVPRect const &,class iTVPTexture2D *,struct tTVPRect const &,class iTVPTexture2D *,struct tTVPRect const &,class iTVPTexture2D *,struct tTVPRect const &)" (?DoRender@?$tTVPRenderMethod_DoBoxBlur@U?$TDoBoxBlurLoop@U?$tTVPARGB@G@@@@U?$TDoBoxBlurLoop@U?$tTVPARGB@I@@@@@@UAEXPAViTVPTexture2D@@ABUtTVPRect@@010101@Z) 中被引用
+
+
+cv::Exception
+
+cv::error
+cv::fastFree
+cv::Mat
+cv::_InputArray
+cv::_OutputArray
+* cv::resize
+cvResize(src, dst, xxx)
+CV_INTER_NN
+CV_INTER_AREA
+CV_INTER_LINEAR
+CV_INTER_CUBIC
+---
+* cv::warpPerspective
+cvWarpPerspective
+* cv::getPerspectiveTransform
+cvGetPerspectiveTransform
+* cv::warpAffine(
+cvWarpAffine
+* cv::getAffineTransform
+cvGetAffineTransform
+* cv::boxFilter
