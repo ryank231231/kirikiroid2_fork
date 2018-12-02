@@ -15,9 +15,9 @@
 #define M_PI       3.14159265358979323846
 #endif
 
-#ifdef _MSC_VER
-#pragma comment(lib,"freetype.lib")
-#endif
+//#ifdef _MSC_VER
+//#pragma comment(lib,"freetype.lib")
+//#endif
 #include "platform/CCFileUtils.h"
 #include "StorageImpl.h"
 #include "BinaryStream.h"
