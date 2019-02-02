@@ -8,11 +8,19 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "..\external\zlib-1.2.5\zlib.vcxproj", "{8B646469-DA26-B72E-1895-CC4AEBD3EC11}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cpp-empty-test", "..\tests\cpp-empty-test\proj.win32\cpp-empty-test.vcxproj", "{B8BF9E81-35FD-4582-BA1C-B85FA365BABB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2DB57012-F27D-4DBE-B309-A2D4FB7DC6E5} = {2DB57012-F27D-4DBE-B309-A2D4FB7DC6E5}
+		{0D57D97A-9959-4645-9CF9-5E54EED5F70A} = {0D57D97A-9959-4645-9CF9-5E54EED5F70A}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcocos2d", "..\cocos\2d\libcocos2d.vcxproj", "{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D118AC49-9504-9100-BC90-57B4201D6820} = {D118AC49-9504-9100-BC90-57B4201D6820}
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "opencv_core", "..\tests\cpp-empty-test\Classes\core\external\opencv-2.4.13\modules\core\opencv_core.vcxproj", "{2DB57012-F27D-4DBE-B309-A2D4FB7DC6E5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "opencv_imgproc", "..\tests\cpp-empty-test\Classes\core\external\opencv-2.4.13\modules\imgproc\opencv_imgproc.vcxproj", "{0D57D97A-9959-4645-9CF9-5E54EED5F70A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +44,14 @@ Global
 		{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}.Debug|Win32.Build.0 = Debug|Win32
 		{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}.Release|Win32.ActiveCfg = Release|Win32
 		{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}.Release|Win32.Build.0 = Release|Win32
+		{2DB57012-F27D-4DBE-B309-A2D4FB7DC6E5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2DB57012-F27D-4DBE-B309-A2D4FB7DC6E5}.Debug|Win32.Build.0 = Debug|Win32
+		{2DB57012-F27D-4DBE-B309-A2D4FB7DC6E5}.Release|Win32.ActiveCfg = Release|Win32
+		{2DB57012-F27D-4DBE-B309-A2D4FB7DC6E5}.Release|Win32.Build.0 = Release|Win32
+		{0D57D97A-9959-4645-9CF9-5E54EED5F70A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0D57D97A-9959-4645-9CF9-5E54EED5F70A}.Debug|Win32.Build.0 = Debug|Win32
+		{0D57D97A-9959-4645-9CF9-5E54EED5F70A}.Release|Win32.ActiveCfg = Release|Win32
+		{0D57D97A-9959-4645-9CF9-5E54EED5F70A}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

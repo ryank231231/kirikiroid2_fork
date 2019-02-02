@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{421df7e3-3e2c-4676-9804-b4cc00e1de45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\opencv2">
+      <UniqueIdentifier>{a7785f7f-6a0f-4b93-beed-3fb012f88afb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\opencv2\core">
+      <UniqueIdentifier>{e4e85524-c577-4c92-b96a-fdad06380632}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{325ebd07-aadb-45b2-bb4d-c798f654852f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\opencv2\core.hpp">
+      <Filter>include\opencv2</Filter>
+    </ClInclude>
+    <ClInclude Include="include\opencv2\core\affine.hpp">
+      <Filter>include\opencv2\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\opencv2\core\core.hpp">
+      <Filter>include\opencv2\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\opencv2\core\core_c.h">
+      <Filter>include\opencv2\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\opencv2\core\cuda_devptrs.hpp">
+      <Filter>include\opencv2\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\opencv2\core\devmem2d.hpp">
+      <Filter>include\opencv2\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\opencv2\core\eigen.hpp">
+      <Filter>include\opencv2\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\opencv2\core\gpumat.hpp">
+      <Filter>include\opencv2\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\opencv2\core\internal.hpp">
+      <Filter>include\opencv2\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\opencv2\core\mat.hpp">
+      <Filter>include\opencv2\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\opencv2\core\opengl_interop.hpp">
+      <Filter>include\opencv2\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\opencv2\core\opengl_interop_deprecated.hpp">
+      <Filter>include\opencv2\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\opencv2\core\operations.hpp">
+      <Filter>include\opencv2\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\opencv2\core\types_c.h">
+      <Filter>include\opencv2\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\opencv2\core\version.hpp">
+      <Filter>include\opencv2\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\opencv2\core\wimage.hpp">
+      <Filter>include\opencv2\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gl_core_3_1.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\precomp.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\algorithm.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\alloc.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\arithm.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\array.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cmdparser.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\convert.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\copy.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\datastructs.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\drawing.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dxt.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gl_core_3_1.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\glob.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gpumat.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lapack.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mathfuncs.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\matmul.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\matop.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\matrix.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opengl_interop.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opengl_interop_deprecated.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\out.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\parallel.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\persistence.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rand.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stat.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\system.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tables.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -27,11 +27,13 @@ extern "C" {
 //#include "libswscale/swscale.h"
 };
 
-#define USE_OPENCV 0
+#define USE_OPENCV 0  //not important
 #define USE_OPENCV2 1 //important
 
 #if USE_OPENCV2
-#include "opencv2/opencv.hpp"
+//#include "opencv2/opencv.hpp"
+#include "opencv2/core.hpp"
+#include "opencv2/imgproc.hpp"
 #endif
 #include "Application.h"
 #include "Platform.h"
@@ -52,8 +54,8 @@ extern "C" {
 #endif
 #else
 #if USE_OPENCV2
-#pragma comment(lib,"opencv_core2413d.lib")
-#pragma comment(lib,"opencv_imgproc2413d.lib")
+//#pragma comment(lib,"opencv_core2413d.lib")
+//#pragma comment(lib,"opencv_imgproc2413d.lib")
 #endif
 #endif
 #include <map>
