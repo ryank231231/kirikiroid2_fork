@@ -26,7 +26,13 @@ extern "C" {
 #endif
 //#include "libswscale/swscale.h"
 };
+
+#define USE_OPENCV 0
+#define USE_OPENCV2 1 //important
+
+#if USE_OPENCV2
 #include "opencv2/opencv.hpp"
+#endif
 #include "Application.h"
 #include "Platform.h"
 #include "ConfigManager/IndividualConfigManager.h"
@@ -45,8 +51,10 @@ extern "C" {
 #pragma comment(lib,"opencv_world300d.lib")
 #endif
 #else
+#if USE_OPENCV2
 #pragma comment(lib,"opencv_core2413d.lib")
 #pragma comment(lib,"opencv_imgproc2413d.lib")
+#endif
 #endif
 #include <map>
 #include <unordered_map>
@@ -2192,6 +2200,7 @@ public:
 		uint8_t *ddata = (uint8_t *)tar->GetScanLineForWrite(rcdst.top) + rcdst.left * 4;
 		int dpitch = tar->GetPitch();
 		
+#if USE_OPENCV
 		cv::Mat src_img(sh, sw, CV_8UC4, (void*)sdata, spitch);
 		cv::Mat dst_img(dh, dw, CV_8UC4, (void*)ddata, dpitch);
 		cv::Size areasize(area.get_width() + 1, area.get_height() + 1);
@@ -2202,6 +2211,9 @@ public:
 // 			Func32::DoBoxBlurLoop(rctar, area, _tar->GetWidth(), _tar->GetHeight(), (tjs_uint32*)line, pitchBytes);
 // 		else
 // 			TVPThrowExceptionMessage(TVPBoxBlurAreaMustBeSmallerThan16Million);
+#else
+		assert(false);
+#endif
 	}
 };
 
@@ -2419,12 +2431,14 @@ iTVPRenderMethod* iTVPRenderManager::GetOrCompileRenderMethod(const char *name, 
 	return CompileRenderMethod(name, glsl_script, nTex, flags);
 }
 
+#if USE_OPENCV2
 static int cvFlags[4] = {
 	cv::INTER_NEAREST, // stNearest
 	cv::INTER_AREA, // stFastLinear
 	cv::INTER_LINEAR, // stLinear
 	cv::INTER_CUBIC, // stCubic
 };
+#endif
 
 static double tTVPPointD_distQ(const tTVPPointD& p0, const tTVPPointD& p1) {
 	double dx = p0.x - p1.x, dy = p0.y - p1.y;
@@ -2755,9 +2769,13 @@ public:
 		switch (id) {
 		case eParameters::StretchType:
 			StretchType = (tTVPBBStretchType)Value;
+#if USE_OPENCV2
 			if (StretchType > sizeof(cvFlags) / sizeof(cvFlags[0])) {
 				StretchType = (tTVPBBStretchType)(sizeof(cvFlags) / sizeof(cvFlags[0]) - 1);
 			}
+#else
+			assert(false);
+#endif
 			break;
 		default:
 			break;
@@ -2819,10 +2837,14 @@ public:
 			// TODO multithreaded
 			sws_scale(img_convert_ctx, &sdata, &spitch, 0, sh, &ddata, &dpitch);
 #else
+#if USE_OPENCV2
 			cv::Size dsize(dw, dh);
 			cv::Mat src_img(sh, sw, CV_8UC4, (void*)sdata, spitch);
 			cv::Mat dst_img(dh, dw, CV_8UC4, (void*)ddata, dpitch);
 			cv::resize(src_img, dst_img, dsize, 0, 0, cvFlags[StretchType]);
+#else
+			assert(false);
+#endif
 #endif
 			tTVPRect rc(0, 0, dw, dh);
 			((tTVPRenderMethod_Software*)method)->DoRender(
@@ -2843,6 +2865,7 @@ public:
 		iTVPTexture2D *tar, iTVPTexture2D *reftar, const tTVPRect& rctar,
 		const tRenderTexRectArray &textures) {
 #ifdef _DEBUG
+#if USE_OPENCV2
 		static bool check = false;
 		cv::Mat _src[3], _tar;
 		if (check) {
@@ -2855,6 +2878,9 @@ public:
 			_tar = cv::Mat(tar->GetHeight(), tar->GetWidth(), fmt, (void*)tar->GetPixelData(), tar->GetPitch());
 			_tar.type();
 		}
+#else
+		assert(false);
+#endif
 #endif
 
 		for (int i = 0; i < textures.size(); ++i) {
@@ -3171,6 +3197,7 @@ public:
 	virtual void OperateTriangles(iTVPRenderMethod* method, int nTriangles,
 		iTVPTexture2D *target, iTVPTexture2D *reftar, const tTVPRect& rcclip, const tTVPPointD* pttar,
 		const tRenderTexQuadArray &textures) override {
+#if USE_OPENCV
 		++_drawCount;
 		assert(textures.size() == 1);
 		for (int i = 0; i < textures.size(); ++i) {
@@ -3362,6 +3389,9 @@ public:
 				}
 			});
 		}
+#else
+		assert(false);
+#endif
 	}
 
 #endif/*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
@@ -4324,6 +4354,7 @@ public:
 	virtual void OperatePerspective(iTVPRenderMethod* method, int nQuads,
 		iTVPTexture2D *target, iTVPTexture2D *reftar, const tTVPRect& rcclip, const tTVPPointD* pttar/*quad*/,
 		const tRenderTexQuadArray &textures) {
+#if USE_OPENCV
 		assert(textures.size() == 1);
 		for (int i = 0; i < textures.size(); ++i) {
 			textures[i].first->GetScanLineForRead(0); // prepare pixel data for compressed texture
@@ -4419,6 +4450,9 @@ public:
 			dstpt += 4;
 			srcpt += 4;
 		}
+#else
+		assert(false);
+#endif
 	}
 
 

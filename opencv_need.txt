@@ -1,0 +1,39 @@
+﻿cv::Mat
+cv::resize
+cv::_InputArray
+cv::_OutputArray
+
+---------------------------------------------------
+
+#pragma comment(lib,"opencv_core2413d.lib")
+#pragma comment(lib,"opencv_imgproc2413d.lib")
+...
+static int cvFlags[4] = {
+	cv::INTER_NEAREST, // stNearest
+	cv::INTER_AREA, // stFastLinear
+	cv::INTER_LINEAR, // stLinear
+	cv::INTER_CUBIC, // stCubic
+};
+...
+cv::Size dsize(dw, dh);
+cv::Mat src_img(sh, sw, CV_8UC4, (void*)sdata, spitch);
+cv::Mat dst_img(dh, dw, CV_8UC4, (void*)ddata, dpitch);
+cv::resize(src_img, dst_img, dsize, 0, 0, cvFlags[StretchType]);
+
+
+
+
+---------------------------------------------------
+
+
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "public: virtual __thiscall cv::Exception::~Exception(void)" (??1Exception@cv@@UAE@XZ)，该符号在函数 "public: __thiscall cv::Mat::Mat(int,int,int,void *,unsigned int)" (??0Mat@cv@@QAE@HHHPAXI@Z) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "void __cdecl cv::error(class cv::Exception const &)" (?error@cv@@YAXABVException@1@@Z)，该符号在函数 "public: __thiscall cv::Mat::Mat(int,int,int,void *,unsigned int)" (??0Mat@cv@@QAE@HHHPAXI@Z) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "public: __thiscall cv::Exception::Exception(int,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,int)" (??0Exception@cv@@QAE@HABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@00H@Z)，该符号在函数 "public: __thiscall cv::Mat::Mat(int,int,int,void *,unsigned int)" (??0Mat@cv@@QAE@HHHPAXI@Z) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "void __cdecl cv::fastFree(void *)" (?fastFree@cv@@YAXPAX@Z)，该符号在函数 "public: __thiscall cv::Mat::~Mat(void)" (??1Mat@cv@@QAE@XZ) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "public: void __thiscall cv::Mat::copySize(class cv::Mat const &)" (?copySize@Mat@cv@@QAEXABV12@@Z)，该符号在函数 "public: class cv::Mat & __thiscall cv::Mat::operator=(class cv::Mat const &)" (??4Mat@cv@@QAEAAV01@ABV01@@Z) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "int __cdecl cv::_interlockedExchangeAdd(int *,int)" (?_interlockedExchangeAdd@cv@@YAHPAHH@Z)，该符号在函数 "public: class cv::Mat & __thiscall cv::Mat::operator=(class cv::Mat const &)" (??4Mat@cv@@QAEAAV01@ABV01@@Z) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "public: void __thiscall cv::Mat::deallocate(void)" (?deallocate@Mat@cv@@QAEXXZ)，该符号在函数 "public: void __thiscall cv::Mat::release(void)" (?release@Mat@cv@@QAEXXZ) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "void __cdecl cv::resize(class cv::_InputArray const &,class cv::_OutputArray const &,class cv::Size_<int>,double,double,int)" (?resize@cv@@YAXABV_InputArray@1@ABV_OutputArray@1@V?$Size_@H@1@NNH@Z)，该符号在函数 "public: void __thiscall tTVPSoftwareRenderManager::OperateRect(class iTVPRenderMethod *,class iTVPTexture2D *,struct tTVPRect,class iTVPTexture2D *,struct tTVPRect)" (?OperateRect@tTVPSoftwareRenderManager@@QAEXPAViTVPRenderMethod@@PAViTVPTexture2D@@UtTVPRect@@12@Z) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "public: __thiscall cv::_InputArray::_InputArray(class cv::Mat const &)" (??0_InputArray@cv@@QAE@ABVMat@1@@Z)，该符号在函数 "public: void __thiscall tTVPSoftwareRenderManager::OperateRect(class iTVPRenderMethod *,class iTVPTexture2D *,struct tTVPRect,class iTVPTexture2D *,struct tTVPRect)" (?OperateRect@tTVPSoftwareRenderManager@@QAEXPAViTVPRenderMethod@@PAViTVPTexture2D@@UtTVPRect@@12@Z) 中被引用
+1>RenderManager.obj : error LNK2019: 无法解析的外部符号 "public: __thiscall cv::_OutputArray::_OutputArray(class cv::Mat &)" (??0_OutputArray@cv@@QAE@AAVMat@1@@Z)，该符号在函数 "public: void __thiscall tTVPSoftwareRenderManager::OperateRect(class iTVPRenderMethod *,class iTVPTexture2D *,struct tTVPRect,class iTVPTexture2D *,struct tTVPRect)" (?OperateRect@tTVPSoftwareRenderManager@@QAEXPAViTVPRenderMethod@@PAViTVPTexture2D@@UtTVPRect@@12@Z) 中被引用
+
