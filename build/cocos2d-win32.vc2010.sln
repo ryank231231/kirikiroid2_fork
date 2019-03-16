@@ -11,7 +11,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "opencv_core", "..\tests\cpp
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "opencv_imgproc", "..\tests\cpp-empty-test\Classes\core\external\opencv-2.4.13\modules\imgproc\opencv_imgproc.vcxproj", "{0D57D97A-9959-4645-9CF9-5E54EED5F70A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pthread", "..\external\pthreads\pthread.vcxproj", "{2B94E041-F266-0896-9036-90414A968AF8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pthreadVC2", "..\external\pthreads\pthreadVC2.vcxproj", "{060AA48C-D57E-CD8B-733D-4FDA6213EE0B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cpp-empty-test", "..\tests\cpp-empty-test\proj.win32\cpp-empty-test.vcxproj", "{B8BF9E81-35FD-4582-BA1C-B85FA365BABB}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -46,6 +46,10 @@ Global
 		{0D57D97A-9959-4645-9CF9-5E54EED5F70A}.Debug|Win32.Build.0 = Debug|Win32
 		{0D57D97A-9959-4645-9CF9-5E54EED5F70A}.Release|Win32.ActiveCfg = Release|Win32
 		{0D57D97A-9959-4645-9CF9-5E54EED5F70A}.Release|Win32.Build.0 = Release|Win32
+		{060AA48C-D57E-CD8B-733D-4FDA6213EE0B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{060AA48C-D57E-CD8B-733D-4FDA6213EE0B}.Debug|Win32.Build.0 = Debug|Win32
+		{060AA48C-D57E-CD8B-733D-4FDA6213EE0B}.Release|Win32.ActiveCfg = Release|Win32
+		{060AA48C-D57E-CD8B-733D-4FDA6213EE0B}.Release|Win32.Build.0 = Release|Win32
 		{B8BF9E81-35FD-4582-BA1C-B85FA365BABB}.Debug|Win32.ActiveCfg = Debug|Win32
 		{B8BF9E81-35FD-4582-BA1C-B85FA365BABB}.Debug|Win32.Build.0 = Debug|Win32
 		{B8BF9E81-35FD-4582-BA1C-B85FA365BABB}.Release|Win32.ActiveCfg = Release|Win32
@@ -54,10 +58,6 @@ Global
 		{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}.Debug|Win32.Build.0 = Debug|Win32
 		{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}.Release|Win32.ActiveCfg = Release|Win32
 		{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}.Release|Win32.Build.0 = Release|Win32
-		{2B94E041-F266-0896-9036-90414A968AF8}.Debug|Win32.ActiveCfg = Debug|Win32
-		{2B94E041-F266-0896-9036-90414A968AF8}.Debug|Win32.Build.0 = Debug|Win32
-		{2B94E041-F266-0896-9036-90414A968AF8}.Release|Win32.ActiveCfg = Release|Win32
-		{2B94E041-F266-0896-9036-90414A968AF8}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
