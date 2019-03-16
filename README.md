@@ -15,3 +15,9 @@
 
 ## Test Data  
 * test_data\atest3\data.xp3    
+
+## Dependencies    
+* libjpeg.lib  
+* glfw3.lib  
+* freetype250.lib  
+* glew32.lib  
