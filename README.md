@@ -4,9 +4,10 @@
 * https://github.com/zeas2/Kirikiroid2  
 * https://archive.codeplex.com/?p=tvpcn  
 * https://github.com/weimingtom/tvpcn  
-* search tvpcn in baidupan  
+* Search tvpcn in baidupan  
 
 ## Build  
+* Require VS2010  
 * build\build.bat  
 * build\cocos2d-win32.vc2010.sln  
 
