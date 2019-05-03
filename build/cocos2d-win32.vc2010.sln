@@ -10,6 +10,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "opencv_core", "..\tests\cpp-empty-test\Classes\core\external\opencv-2.4.13\modules\core\opencv_core.vcxproj", "{2DB57012-F27D-4DBE-B309-A2D4FB7DC6E5}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "opencv_imgproc", "..\tests\cpp-empty-test\Classes\core\external\opencv-2.4.13\modules\imgproc\opencv_imgproc.vcxproj", "{0D57D97A-9959-4645-9CF9-5E54EED5F70A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2DB57012-F27D-4DBE-B309-A2D4FB7DC6E5} = {2DB57012-F27D-4DBE-B309-A2D4FB7DC6E5}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pthreadVC2", "..\external\pthreads\pthreadVC2.vcxproj", "{060AA48C-D57E-CD8B-733D-4FDA6213EE0B}"
 EndProject
@@ -21,8 +24,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cpp-empty-test", "..\tests\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcocos2d", "..\cocos\2d\libcocos2d.vcxproj", "{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}"
 	ProjectSection(ProjectDependencies) = postProject
+		{EAE1D448-0C1A-4852-8622-9BCB5FDAD668} = {EAE1D448-0C1A-4852-8622-9BCB5FDAD668}
+		{060AA48C-D57E-CD8B-733D-4FDA6213EE0B} = {060AA48C-D57E-CD8B-733D-4FDA6213EE0B}
 		{3276DAAE-2627-4E2A-F751-4A27783FD2BC} = {3276DAAE-2627-4E2A-F751-4A27783FD2BC}
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glfw", "..\external\glfw-3.0.4\glfw.vcxproj", "{EAE1D448-0C1A-4852-8622-9BCB5FDAD668}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +65,10 @@ Global
 		{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}.Debug|Win32.Build.0 = Debug|Win32
 		{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}.Release|Win32.ActiveCfg = Release|Win32
 		{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}.Release|Win32.Build.0 = Release|Win32
+		{EAE1D448-0C1A-4852-8622-9BCB5FDAD668}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EAE1D448-0C1A-4852-8622-9BCB5FDAD668}.Debug|Win32.Build.0 = Debug|Win32
+		{EAE1D448-0C1A-4852-8622-9BCB5FDAD668}.Release|Win32.ActiveCfg = Release|Win32
+		{EAE1D448-0C1A-4852-8622-9BCB5FDAD668}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
