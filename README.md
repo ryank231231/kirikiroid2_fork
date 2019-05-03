@@ -22,3 +22,9 @@
 * glfw3.lib  
 * freetype250.lib  
 * glew32.lib  
+
+## TODO  
+* freetype250.lib  
+* libjpeg.lib  
+* glew32.lib  
+* onig_s.d.lib  

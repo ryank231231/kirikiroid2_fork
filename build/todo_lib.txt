@@ -1,0 +1,4 @@
+freetype250.lib
+libjpeg.lib
+glew32.lib
+onig_s.d.lib
