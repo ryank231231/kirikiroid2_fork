@@ -20,6 +20,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cpp-empty-test", "..\tests\
 	ProjectSection(ProjectDependencies) = postProject
 		{2DB57012-F27D-4DBE-B309-A2D4FB7DC6E5} = {2DB57012-F27D-4DBE-B309-A2D4FB7DC6E5}
 		{0D57D97A-9959-4645-9CF9-5E54EED5F70A} = {0D57D97A-9959-4645-9CF9-5E54EED5F70A}
+		{DBBF98E4-BD0A-4BB8-BB02-E77B003E9A6E} = {DBBF98E4-BD0A-4BB8-BB02-E77B003E9A6E}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcocos2d", "..\cocos\2d\libcocos2d.vcxproj", "{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}"
@@ -33,6 +34,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glfw", "..\external\glfw-3.0.4\glfw.vcxproj", "{EAE1D448-0C1A-4852-8622-9BCB5FDAD668}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "jpeg", "..\external\jpeg-9\jpeg.vcxproj", "{5505BFD4-DA64-53BD-D072-FD018D675A38}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "onig_s", "..\tests\cpp-empty-test\Classes\core\external\onig\onig_s.vcxproj", "{DBBF98E4-BD0A-4BB8-BB02-E77B003E9A6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,6 +79,10 @@ Global
 		{5505BFD4-DA64-53BD-D072-FD018D675A38}.Debug|Win32.Build.0 = Debug|Win32
 		{5505BFD4-DA64-53BD-D072-FD018D675A38}.Release|Win32.ActiveCfg = Release|Win32
 		{5505BFD4-DA64-53BD-D072-FD018D675A38}.Release|Win32.Build.0 = Release|Win32
+		{DBBF98E4-BD0A-4BB8-BB02-E77B003E9A6E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DBBF98E4-BD0A-4BB8-BB02-E77B003E9A6E}.Debug|Win32.Build.0 = Debug|Win32
+		{DBBF98E4-BD0A-4BB8-BB02-E77B003E9A6E}.Release|Win32.ActiveCfg = Release|Win32
+		{DBBF98E4-BD0A-4BB8-BB02-E77B003E9A6E}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

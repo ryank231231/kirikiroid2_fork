@@ -4,6 +4,7 @@
 * https://github.com/zeas2/Kirikiroid2  
 * https://archive.codeplex.com/?p=tvpcn  
 * https://github.com/weimingtom/tvpcn  
+* https://github.com/weimingtom/linnea  
 * Search tvpcn in baidupan  
 
 ## Build  
@@ -17,14 +18,7 @@
 ## Test Data  
 * test_data\atest3\data.xp3    
 
-## Dependencies    
-* libjpeg.lib  
-* glfw3.lib  
+## TODO  
 * freetype250.lib  
 * glew32.lib  
 
-## TODO  
-* freetype250.lib  
-* libjpeg.lib  
-* glew32.lib  
-* onig_s.d.lib  

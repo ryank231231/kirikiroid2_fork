@@ -1,7 +1,7 @@
 freetype250.lib
 (x) libjpeg.lib
 glew32.lib
-onig_s.d.lib
+(x) onig_s.d.lib
 
 -----
 
@@ -25,3 +25,18 @@ clear warning
 ---------
 
 close window crash bug
+
+---------
+
+.gitignore
+
+
+---------
+
+vendor/
+
+---------
+
+cocos2d-x, resource, *.csb   
+
+
