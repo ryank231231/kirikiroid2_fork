@@ -1,4 +1,27 @@
 freetype250.lib
-libjpeg.lib
+(x) libjpeg.lib
 glew32.lib
 onig_s.d.lib
+
+-----
+
+libcmt.lib;
+<IgnoreSpecificDefaultLibraries>libcmtd.lib;
+
+-----
+
+msvcp100d.dll
+
+-----
+
+debug version
+->
+release version
+
+--------
+
+clear warning
+
+---------
+
+close window crash bug

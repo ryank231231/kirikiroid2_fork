@@ -6,6 +6,7 @@
 @rmdir /S /Q ..\external\libpng-1.4.5\Debug
 @rmdir /S /Q ..\external\pthreads\Debug
 @rmdir /S /Q ..\external\glfw-3.0.4\Debug
+@rmdir /S /Q ..\external\jpeg-9\Debug
 @rmdir /S /Q ..\tests\cpp-empty-test\Classes\core\external\opencv-2.4.13\modules\core\Debug
 @rmdir /S /Q ..\tests\cpp-empty-test\Classes\core\external\opencv-2.4.13\modules\imgproc\Debug
 @rmdir /S /Q Debug.win32
