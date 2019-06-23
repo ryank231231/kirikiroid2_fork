@@ -1,6 +1,6 @@
 freetype250.lib
 (x) libjpeg.lib
-glew32.lib
+(x) glew32.lib -> glew.lib
 (x) onig_s.d.lib
 
 -----
@@ -40,3 +40,11 @@ vendor/
 cocos2d-x, resource, *.csb   
 
 
+-------
+
+build release
+
+-------
+
+remove project include/lib not used path
+remove xcopy
