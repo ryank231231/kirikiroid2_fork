@@ -25,6 +25,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cpp-empty-test", "..\tests\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcocos2d", "..\cocos\2d\libcocos2d.vcxproj", "{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}"
 	ProjectSection(ProjectDependencies) = postProject
+		{F7E0812E-F110-4C88-AEBA-BD20A2406E3C} = {F7E0812E-F110-4C88-AEBA-BD20A2406E3C}
 		{EAE1D448-0C1A-4852-8622-9BCB5FDAD668} = {EAE1D448-0C1A-4852-8622-9BCB5FDAD668}
 		{89661F68-5E27-46EF-B96F-BF2C4DE06579} = {89661F68-5E27-46EF-B96F-BF2C4DE06579}
 		{060AA48C-D57E-CD8B-733D-4FDA6213EE0B} = {060AA48C-D57E-CD8B-733D-4FDA6213EE0B}
@@ -39,6 +40,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "onig_s", "..\tests\cpp-empty-test\Classes\core\external\onig\onig_s.vcxproj", "{DBBF98E4-BD0A-4BB8-BB02-E77B003E9A6E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glew", "..\external\glew-1.7.0\glew.vcxproj", "{89661F68-5E27-46EF-B96F-BF2C4DE06579}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "freetype", "..\external\freetype-2.5.0.1\freetype.vcxproj", "{F7E0812E-F110-4C88-AEBA-BD20A2406E3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -90,6 +93,10 @@ Global
 		{89661F68-5E27-46EF-B96F-BF2C4DE06579}.Debug|Win32.Build.0 = Debug|Win32
 		{89661F68-5E27-46EF-B96F-BF2C4DE06579}.Release|Win32.ActiveCfg = Release|Win32
 		{89661F68-5E27-46EF-B96F-BF2C4DE06579}.Release|Win32.Build.0 = Release|Win32
+		{F7E0812E-F110-4C88-AEBA-BD20A2406E3C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F7E0812E-F110-4C88-AEBA-BD20A2406E3C}.Debug|Win32.Build.0 = Debug|Win32
+		{F7E0812E-F110-4C88-AEBA-BD20A2406E3C}.Release|Win32.ActiveCfg = Release|Win32
+		{F7E0812E-F110-4C88-AEBA-BD20A2406E3C}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

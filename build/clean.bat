@@ -8,6 +8,7 @@
 @rmdir /S /Q ..\external\glfw-3.0.4\Debug
 @rmdir /S /Q ..\external\jpeg-9\Debug
 @rmdir /S /Q ..\external\glew-1.7.0\Debug
+@rmdir /S /Q ..\external\freetype-2.5.0.1\Debug
 @rmdir /S /Q ..\tests\cpp-empty-test\Classes\core\external\onig\Debug
 @rmdir /S /Q ..\tests\cpp-empty-test\Classes\core\external\opencv-2.4.13\modules\core\Debug
 @rmdir /S /Q ..\tests\cpp-empty-test\Classes\core\external\opencv-2.4.13\modules\imgproc\Debug

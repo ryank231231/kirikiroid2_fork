@@ -1,4 +1,4 @@
-freetype250.lib
+(x) freetype250.lib -> freetype.lib
 (x) libjpeg.lib
 (x) glew32.lib -> glew.lib
 (x) onig_s.d.lib
@@ -10,13 +10,19 @@ libcmt.lib;
 
 -----
 
-msvcp100d.dll
+MSVCP100D.dll
+MSVCR100D.dll
+
+remove libcocos2d.dll
+remove pthreadVC2.dll
 
 -----
 
 debug version
 ->
 release version
+
+build release
 
 --------
 
@@ -39,12 +45,8 @@ vendor/
 
 cocos2d-x, resource, *.csb   
 
-
--------
-
-build release
-
 -------
 
 remove project include/lib not used path
 remove xcopy
+
