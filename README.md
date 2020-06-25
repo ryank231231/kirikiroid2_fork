@@ -1,5 +1,6 @@
 ﻿# kirikiroid2_fork  
 
+#**A experminital project,releases on https://github.com/ryank231231/kirikiroid2_fork/releases**
 ## Ref  
 * https://github.com/zeas2/Kirikiroid2  
 * https://archive.codeplex.com/?p=tvpcn  
